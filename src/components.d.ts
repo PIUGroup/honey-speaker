@@ -10,7 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
+  interface HoneySpeech {
     /**
     * The first name
     */
@@ -29,18 +29,18 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLHoneySpeechElement extends Components.HoneySpeech, HTMLStencilElement {}
+  var HTMLHoneySpeechElement: {
+    prototype: HTMLHoneySpeechElement;
+    new (): HTMLHoneySpeechElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'honey-speech': HTMLHoneySpeechElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent {
+  interface HoneySpeech {
     /**
     * The first name
     */
@@ -56,7 +56,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'honey-speech': HoneySpeech;
   }
 }
 
@@ -66,7 +66,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+      'honey-speech': LocalJSX.HoneySpeech & JSXBase.HTMLAttributes<HTMLHoneySpeechElement>;
     }
   }
 }
