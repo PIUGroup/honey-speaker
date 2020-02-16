@@ -99,9 +99,6 @@ export class HoneySpeech {
   }
 
   render() {
-    // return <input type="image" src={"../../assets/img/Speaker_Icon.svg"} name="id-input"
-    //               title={"Vorlesen"}
-    //               height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>;
     return <input type="image"
                   id={this.ident + "-input"}
                   name={this.ident + "-input"}
