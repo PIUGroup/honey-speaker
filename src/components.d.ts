@@ -11,10 +11,24 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface HoneySpeech {
+    'alttext': string;
     /**
-    * An array with ids of DOM elements which inner text should be speech.
+    * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+    */
+    'i18n': object;
+    'iconheight': string;
+    'iconsrc': string;
+    'iconwidth': string;
+    'ident': string;
+    /**
+    * i18n language ident: deDE or en or de ...
+    */
+    'langid': string;
+    /**
+    * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
     'textids': string;
+    'titletext': string;
   }
 }
 
@@ -33,6 +47,19 @@ declare global {
 
 declare namespace LocalJSX {
   interface HoneySpeech {
+    'alttext'?: string;
+    /**
+    * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+    */
+    'i18n'?: object;
+    'iconheight'?: string;
+    'iconsrc'?: string;
+    'iconwidth'?: string;
+    'ident'?: string;
+    /**
+    * i18n language ident: deDE or en or de ...
+    */
+    'langid'?: string;
     /**
     * Fired if the voice has failed to speak.
     */
@@ -50,9 +77,10 @@ declare namespace LocalJSX {
     */
     'onSpeakerStarted'?: (event: CustomEvent<any>) => void;
     /**
-    * An array with ids of DOM elements which inner text should be speech.
+    * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
     'textids'?: string;
+    'titletext'?: string;
   }
 
   interface IntrinsicElements {

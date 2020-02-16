@@ -12,10 +12,29 @@ import {Logger} from "./log-helper";
 export class HoneySpeech {
 
   /**
-   * An array with ids of DOM elements which inner text should be speech.
+   * An comma separated list  with ids of DOM elements which inner text should be speech.
    */
   @Prop() textids: string;
 
+
+  @Prop() ident: string;
+  @Prop() iconwidth: string;
+  @Prop() iconheight: string;
+  @Prop() iconsrc: string;
+  @Prop() alttext: string;
+  @Prop() titletext: string;
+
+  /**
+   * i18n language ident: deDE or en or de ...
+   */
+  @Prop() langid: string;
+
+  /**
+   * An JSON Object with i18n text values separeted by language idents:
+   *
+   * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+   */
+  @Prop() i18n: object;
 
   /**
    * Fired if the voice is speaking.
@@ -27,7 +46,6 @@ export class HoneySpeech {
    */
   @Event() speakerFinished: EventEmitter;
 
-
   /**
    * Fired if the voice is paused with speaking.
    */
@@ -37,6 +55,16 @@ export class HoneySpeech {
    * Fired if the voice has failed to speak.
    */
   @Event() speakerFailed: EventEmitter;
+
+  componentWillLoad() {
+    if (!this.ident) this.ident = "honey-speech1";
+    if (!this.titletext) this.titletext = "Vorlesen";
+    if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
+
+    if (!this.iconheight) this.iconheight = "36";
+    if (!this.iconwidth) this.iconwidth = "36";
+    if (!this.iconsrc) this.iconsrc = "../../assets/img/Speaker_Icon.svg";
+  }
 
 
   private getTexte(): string[] {
@@ -71,8 +99,17 @@ export class HoneySpeech {
   }
 
   render() {
-    return <input type="image" src={"../../assets/img/Speaker_Icon.svg"} name="id-input"
-                  title={"Vorlesen"}
-                  height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>;
+    // return <input type="image" src={"../../assets/img/Speaker_Icon.svg"} name="id-input"
+    //               title={"Vorlesen"}
+    //               height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>;
+    return <input type="image"
+                  id={this.ident + "-input"}
+                  name={this.ident + "-input"}
+                  title={this.titletext}
+                  alt={this.alttext}
+                  src={this.iconsrc}
+                  height={this.iconheight}
+                  width={this.iconwidth}
+    ></input>;
   }
 }
