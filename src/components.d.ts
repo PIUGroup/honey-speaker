@@ -12,17 +12,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface HoneySpeech {
     /**
-    * The first name
+    * The id of text element to speech
     */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+    'textref': string;
   }
 }
 
@@ -42,17 +34,9 @@ declare global {
 declare namespace LocalJSX {
   interface HoneySpeech {
     /**
-    * The first name
+    * The id of text element to speech
     */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+    'textref'?: string;
   }
 
   interface IntrinsicElements {

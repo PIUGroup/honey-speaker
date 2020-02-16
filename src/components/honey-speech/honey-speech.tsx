@@ -1,32 +1,39 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+"use strict";
+
+import {Component, Prop, h, Listen} from "@stencil/core";
+import {Sprachausgabe} from "./speech-output"
 
 @Component({
-  tag: 'honey-speech',
-  styleUrl: 'honey-speech.css',
+  tag: "honey-speech",
+  styleUrl: "honey-speech.css",
   shadow: true
 })
 export class HoneySpeech {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
 
   /**
-   * The middle name
+   * The id of text element to speech
    */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
+  @Prop() textref: string;
 
   private getText(): string {
-    return format(this.first, this.middle, this.last);
+    if (this.textref) {
+      return document.getElementById(this.textref).innerText;
+    } else {
+      return "Kein Text vorhanden, daher keine Ausgabe möglich."
+    }
+  }
+
+
+  @Listen('click', {capture: true})
+  protected handleClick() {
+    const stimme: Sprachausgabe = new Sprachausgabe();
+    stimme.textVorlesen(this.getText());
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    // return <button class="buttonimage" ></button>;
+    return <input type="image" src={"../../assets/img/Speaker_Icon.svg"} name="id-input"
+                  title={"Vorlesen"}
+                  height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>
   }
 }
