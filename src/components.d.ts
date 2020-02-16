@@ -14,7 +14,7 @@ export namespace Components {
     /**
     * An array with ids of DOM elements which inner text should be speech.
     */
-    'textref': string;
+    'textids': string;
   }
 }
 
@@ -52,7 +52,7 @@ declare namespace LocalJSX {
     /**
     * An array with ids of DOM elements which inner text should be speech.
     */
-    'textref'?: string;
+    'textids'?: string;
   }
 
   interface IntrinsicElements {

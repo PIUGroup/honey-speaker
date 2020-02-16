@@ -2,6 +2,7 @@
 
 import {Component, Prop, h, Listen, Event, EventEmitter} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
+import {Logger} from "./log-helper";
 
 @Component({
   tag: "honey-speech",
@@ -13,7 +14,7 @@ export class HoneySpeech {
   /**
    * An array with ids of DOM elements which inner text should be speech.
    */
-  @Prop() textref: string;
+  @Prop() textids: string;
 
 
   /**
@@ -38,16 +39,24 @@ export class HoneySpeech {
   @Event() speakerFailed: EventEmitter;
 
 
-
-
-  private getText(): string {
-    if (this.textref) {
-      return document.getElementById(this.textref).innerText;
+  private getTexte(): string[] {
+    if (this.textids) {
+      const refIds: string[] = this.textids.split(",");
+      const texte: string[] = [];
+      refIds.forEach(elementId => {
+          const element: HTMLElement = document.getElementById(elementId);
+          if (element) {
+            texte.push(element.innerText);
+          } else {
+            Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
+          }
+        }
+      );
+      return texte;
     } else {
-      return "Kein Text vorhanden, daher keine Ausgabe möglich."
+      return ["Kein Text vorhanden, daher keine Ausgabe möglich."];
     }
   }
-
 
   @Listen('click', {capture: true})
   protected handleClick() {
@@ -57,12 +66,13 @@ export class HoneySpeech {
       this.speakerPaused,
       this.speakerFailed
     );
-    stimme.textVorlesen(this.getText());
+    const text = this.getTexte().join("\n");
+    stimme.textVorlesen(text);
   }
 
   render() {
     return <input type="image" src={"../../assets/img/Speaker_Icon.svg"} name="id-input"
                   title={"Vorlesen"}
-                  height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>
+                  height="36" width="113" alt="Symbol eines sprechenden Lautsprechers"></input>;
   }
 }
