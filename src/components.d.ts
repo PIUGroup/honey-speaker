@@ -12,7 +12,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface HoneySpeech {
     /**
-    * The id of text element to speech
+    * An array with ids of DOM elements which inner text should be speech.
     */
     'textref': string;
   }
@@ -34,7 +34,23 @@ declare global {
 declare namespace LocalJSX {
   interface HoneySpeech {
     /**
-    * The id of text element to speech
+    * Fired if the voice has failed to speak.
+    */
+    'onSpeakerFailed'?: (event: CustomEvent<any>) => void;
+    /**
+    * Fired if the voice has finished with speaking.
+    */
+    'onSpeakerFinished'?: (event: CustomEvent<any>) => void;
+    /**
+    * Fired if the voice is paused with speaking.
+    */
+    'onSpeakerPaused'?: (event: CustomEvent<any>) => void;
+    /**
+    * Fired if the voice is speaking.
+    */
+    'onSpeakerStarted'?: (event: CustomEvent<any>) => void;
+    /**
+    * An array with ids of DOM elements which inner text should be speech.
     */
     'textref'?: string;
   }

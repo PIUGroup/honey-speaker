@@ -1,38 +1,68 @@
 "use strict";
 
 import {Logger} from "./log-helper";
+import {EventEmitter} from "@stencil/core";
 
 export class Sprachausgabe {
 
   sprachSynthese: SpeechSynthesis;
 
-  constructor() {
+  speakerStarted: EventEmitter;
+
+  speakerFinished: EventEmitter;
+
+  speakerPaused: EventEmitter;
+
+  speakerFailed: EventEmitter;
+
+
+  constructor(   speakerStarted: EventEmitter
+               , speakerFinished: EventEmitter
+               , speakerPaused: EventEmitter
+               , speakerFailed: EventEmitter
+  ) {
+    this.speakerStarted = speakerStarted;
+    this.speakerFinished = speakerFinished;
+    this.speakerPaused = speakerPaused;
+    this.speakerFailed = speakerFailed;
     this.sprachSynthese = window.speechSynthesis;
-    Logger.logMessage("####constructor called");
+    Logger.debugMessage("####constructor called");
   }
 
   textVorlesen(zuLesenderText) {
     if (this.sprachSynthese.speaking) {
-      Logger.logMessage("Spricht bereits");
+      Logger.debugMessage("Spricht bereits");
       return;
     }
     if (zuLesenderText) {
       var vorleseText = zuLesenderText;
-      Logger.logMessage("Text:" + vorleseText);
+      Logger.debugMessage("Text:" + vorleseText);
       var leserStimmeMitText = new SpeechSynthesisUtterance(vorleseText);
 
       leserStimmeMitText.onend = () => {
-        Logger.logMessage("Vorlesen beendet");
+        this.speakerFinished.emit();
+        Logger.debugMessage("Vorlesen beendet");
+      }
+
+      leserStimmeMitText.onstart = () => {
+        this.speakerStarted.emit();
+        Logger.debugMessage("Vorlesen gestartet");
+      }
+
+      leserStimmeMitText.onpause = () => {
+        this.speakerPaused.emit();
+        Logger.debugMessage("Pause mit Vorlesen");
       }
 
       leserStimmeMitText.onerror = () => {
-        Logger.logMessage("Fehler beim Vorlesen");
+        this.speakerFailed.emit();
+        Logger.errorMessage("Fehler beim Vorlesen");
       }
 
       var voices = this.sprachSynthese.getVoices();
       for (var i = 0; i < voices.length; i++) {
         if (voices[i].default) {
-          Logger.logMessage("Voice:" + voices[i].name + voices[i].lang);
+          Logger.debugMessage("Voice:" + voices[i].name + voices[i].lang);
           leserStimmeMitText.voice = voices[i];
           break;
         }
