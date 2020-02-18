@@ -7,7 +7,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader'
     },
     {
       type: 'docs-readme'
@@ -19,3 +18,4 @@ export const config: Config = {
 //   type: 'www',
 //     serviceWorker: null // disable service workers
 // }
+//esmLoaderPath: '../loader'
