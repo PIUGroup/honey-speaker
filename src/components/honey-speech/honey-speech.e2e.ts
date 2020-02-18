@@ -1,6 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('honey-speech', () => {
+xdescribe('honey-speech', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
