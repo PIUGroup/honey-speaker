@@ -7,6 +7,7 @@ import {Logger} from "./log-helper";
 @Component({
   tag: "honey-speech",
   styleUrl: "honey-speech.css",
+  assetsDirs: ["img"],
   shadow: true
 })
 export class HoneySpeech {
@@ -63,7 +64,7 @@ export class HoneySpeech {
 
     if (!this.iconheight) this.iconheight = "36";
     if (!this.iconwidth) this.iconwidth = "36";
-    if (!this.iconsrc) this.iconsrc = "../../assets/img/Speaker_Icon.svg";
+    if (!this.iconsrc) this.iconsrc = "assets/img/Speaker_Icon.svg";
   }
 
 
