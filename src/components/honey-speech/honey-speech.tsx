@@ -1,13 +1,13 @@
 "use strict";
 
-import {Component, Prop, h, Listen, Event, EventEmitter} from "@stencil/core";
+import {Component, Prop, h, Listen, Event, EventEmitter, getAssetPath} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
 
 @Component({
   tag: "honey-speech",
   styleUrl: "honey-speech.css",
-  assetsDirs: ["img"],
+  assetsDirs: ["assets"],
   shadow: true
 })
 export class HoneySpeech {
@@ -64,7 +64,7 @@ export class HoneySpeech {
 
     if (!this.iconheight) this.iconheight = "36";
     if (!this.iconwidth) this.iconwidth = "36";
-    if (!this.iconsrc) this.iconsrc = "assets/img/Speaker_Icon.svg";
+    if (!this.iconsrc) this.iconsrc = getAssetPath("img/Speaker_Icon.svg");
   }
 
 
