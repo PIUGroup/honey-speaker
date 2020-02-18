@@ -7,7 +7,7 @@ import {Logger} from "./log-helper";
 @Component({
   tag: "honey-speech",
   styleUrl: "honey-speech.css",
-  assetsDirs: ["assets"],
+  assetsDirs: ["collection/assets"],
   shadow: true
 })
 export class HoneySpeech {
