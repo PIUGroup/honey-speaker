@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script src='https://unpkg.com/@huluvu424242/honey-speech@0.0.1/dist/honey-speech.js'></script>
+
+</head>
+<body>
+
+  <honey-speech textids="seitentext,fortsetzung"></honey-speech>
+
+
+  <p id="seitentext">
+    Das ist ein Beispieltext von einem ersten DOM Element der vorzulesen ist.
+
+    <button>Das ist der Buttontext</button>
+
+    Hier folgt weiterer Text.
+  </p>
+
+  <p id="fortsetzung">
+    Das ist der Text eines zweiten DOM Elementes.
+  </p>
+
+  <honey-speech  textids="fortsetzung" titletext="Fortsetzung vorlesen"></honey-speech>
+
+</body>
+</html>
