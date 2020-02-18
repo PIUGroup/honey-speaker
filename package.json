@@ -1,6 +1,6 @@
 {
   "name": "@huluvu424242/honey-speech",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Text to Speech component wich is reading texts from DOM elements.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,7 +12,8 @@
   "unpkg": "dist/honey-speech/honey-speech.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "assets/"
   ],
   "engines": {
     "node": "10.15.3"
