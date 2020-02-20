@@ -36,7 +36,7 @@ To the [demo site](https://funthomas424242.github.io/honey-speech-component/inde
 <p id="text1">fizz fizz fizz fizz</p>
 <p id="text2">buzz buzz buzz buzz</p>
 ```
-To the [live demo](https://funthomas424242.github.io/honey-speech/index.html)
+To the [live demo](https://funthomas424242.github.io/honey-speech-component/index.html)
 
 
 ## become an supporter
