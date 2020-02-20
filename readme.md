@@ -36,7 +36,7 @@ To [demo site](https://funthomas424242.github.io/honey-spech-component/index.htm
 <p id="text1">fizz fizz fizz fizz</p>
 <p id="text2">buzz buzz buzz buzz</p>
 ```
-Zur [Live-Demo](https://funthomas424242.github.io/honey-speech/)
+Zur [live demo](https://funthomas424242.github.io/honey-speech/)
 
 
 ## become an supporter
@@ -48,6 +48,14 @@ Zur [Live-Demo](https://funthomas424242.github.io/honey-speech/)
 5. Submit a pull request :D
 
 ## releaselog
+
+### v0.0.8 (unpublished)
+
+* readme updated
+
+### v0.0.7
+
+* first working version with icon.
 
 ### v0.0.2 - v0.0.6 
 
