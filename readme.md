@@ -17,7 +17,7 @@ npm install --save honey-speech
     src='https://unpkg.com/@huluvu424242/honey-speech@0.0.8/dist/honey-speech/honey-speech.js'>
 </script>
 ```
-To [demo site](https://funthomas424242.github.io/honey-spech-component/index.html)
+To the [demo site](https://funthomas424242.github.io/honey-spech-component/index.html)
 
 ## demo
 
@@ -36,7 +36,7 @@ To [demo site](https://funthomas424242.github.io/honey-spech-component/index.htm
 <p id="text1">fizz fizz fizz fizz</p>
 <p id="text2">buzz buzz buzz buzz</p>
 ```
-Zur [live demo](https://funthomas424242.github.io/honey-speech/)
+To the [live demo](https://funthomas424242.github.io/honey-speech/)
 
 
 ## become an supporter
