@@ -63,7 +63,7 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ### v0.0.1
 
-* setup project based at https://auth0.com/blog/creating-web-components-with-stencil/
+* setup project based at https://github.com/ionic-team/stencil-component-starter rating-stencil-component
 
 ## internet links
 
