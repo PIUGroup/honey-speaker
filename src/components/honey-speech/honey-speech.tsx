@@ -1,6 +1,6 @@
 "use strict";
 
-import {Component, Prop, h, Listen, Event, EventEmitter, getAssetPath} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, getAssetPath, h, Listen, Prop} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
 
@@ -12,17 +12,53 @@ import {Logger} from "./log-helper";
 })
 export class HoneySpeech {
 
+  @Element() htmlElement: HTMLElement;
+
+
   /**
    * An comma separated list  with ids of DOM elements which inner text should be speech.
    */
   @Prop() textids: string;
 
-
+  /**
+   * identifier prefix for input element
+   * default: "honey-speech1"
+   */
   @Prop() ident: string;
+
+  /**
+   * icon width
+   * default: 36
+   */
   @Prop() iconwidth: string;
+
+  /**
+   * icon height
+   * default: 36
+   */
   @Prop() iconheight: string;
+
+  /**
+   * icon source url
+   * default: intern url "./assets/img/Speaker_Icon.svg"
+   */
   @Prop() iconsrc: string;
+
+  /**
+   * iconbackground color
+   */
+  @Prop() iconbackground: string;
+
+  /**
+   * alt text for a11y
+   * default: "Symbol eines sprechenden Lautsprechers"
+   */
   @Prop() alttext: string;
+
+  /**
+   * title text for a11y
+   * default: Vorlesen
+   */
   @Prop() titletext: string;
 
   /**
@@ -57,7 +93,7 @@ export class HoneySpeech {
    */
   @Event() speakerFailed: EventEmitter;
 
-  componentWillLoad() {
+  connectedCallback() {
     if (!this.ident) this.ident = "honey-speech1";
     if (!this.titletext) this.titletext = "Vorlesen";
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
@@ -65,8 +101,15 @@ export class HoneySpeech {
     if (!this.iconheight) this.iconheight = "36";
     if (!this.iconwidth) this.iconwidth = "36";
     if (!this.iconsrc) this.iconsrc = getAssetPath("./assets/img/Speaker_Icon.svg");
+    // if (!this.iconstyle) this.iconstyle = "background-color:red";
   }
 
+  componentDidLoad() {
+    if (this.iconbackground) {
+      const speaker: HTMLElement = this.htmlElement.shadowRoot.getElementById(this.ident + "-input");
+      speaker.style.backgroundColor = this.iconbackground;
+    }
+  }
 
   private getTexte(): string[] {
     if (this.textids) {
@@ -100,14 +143,17 @@ export class HoneySpeech {
   }
 
   render() {
-    return <input type="image"
-                  id={this.ident + "-input"}
-                  name={this.ident + "-input"}
-                  title={this.titletext}
-                  alt={this.alttext}
-                  src={this.iconsrc}
-                  height={this.iconheight}
-                  width={this.iconwidth}
-    ></input>;
+    return (
+      <input type="image"
+             id={this.ident + "-input"}
+             name={this.ident + "-input"}
+             title={this.titletext}
+             alt={this.alttext}
+             src={this.iconsrc}
+             height={this.iconheight}
+             width={this.iconwidth}
+             class={"buttonimage"}
+      ></input>
+    );
   }
 }

@@ -11,14 +11,33 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface HoneySpeech {
+    /**
+    * alt text for a11y default: "Symbol eines sprechenden Lautsprechers"
+    */
     'alttext': string;
     /**
     * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n': object;
+    /**
+    * iconbackground color
+    */
+    'iconbackground': string;
+    /**
+    * icon height default: 36
+    */
     'iconheight': string;
+    /**
+    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
+    */
     'iconsrc': string;
+    /**
+    * icon width default: 36
+    */
     'iconwidth': string;
+    /**
+    * identifier prefix for input element default: "honey-speech1"
+    */
     'ident': string;
     /**
     * i18n language ident: deDE or en or de ...
@@ -28,6 +47,9 @@ export namespace Components {
     * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
     'textids': string;
+    /**
+    * title text for a11y default: Vorlesen
+    */
     'titletext': string;
   }
 }
@@ -47,14 +69,33 @@ declare global {
 
 declare namespace LocalJSX {
   interface HoneySpeech {
+    /**
+    * alt text for a11y default: "Symbol eines sprechenden Lautsprechers"
+    */
     'alttext'?: string;
     /**
     * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n'?: object;
+    /**
+    * iconbackground color
+    */
+    'iconbackground'?: string;
+    /**
+    * icon height default: 36
+    */
     'iconheight'?: string;
+    /**
+    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
+    */
     'iconsrc'?: string;
+    /**
+    * icon width default: 36
+    */
     'iconwidth'?: string;
+    /**
+    * identifier prefix for input element default: "honey-speech1"
+    */
     'ident'?: string;
     /**
     * i18n language ident: deDE or en or de ...
@@ -80,6 +121,9 @@ declare namespace LocalJSX {
     * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
     'textids'?: string;
+    /**
+    * title text for a11y default: Vorlesen
+    */
     'titletext'?: string;
   }
 
