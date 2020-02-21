@@ -50,13 +50,20 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ## releaselog
 
-### v0.0.8 (unpublished)
+### v0.0.9 (unpublished)
+
+* n/a
+
+### v0.0.8
 
 * readme updated
+* icon color blue
+* background color attribute added
 
 ### v0.0.7
 
 * first working version with icon.
+* support of id list of speaker texts.
 
 ### v0.0.2 - v0.0.6 
 
