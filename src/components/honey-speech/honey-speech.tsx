@@ -20,13 +20,45 @@ export class HoneySpeech {
    */
   @Prop() textids: string;
 
-
+  /**
+   * identifier prefix for input element
+   * default: "honey-speech1"
+   */
   @Prop() ident: string;
+
+  /**
+   * icon width
+   * default: 36
+   */
   @Prop() iconwidth: string;
+
+  /**
+   * icon height
+   * default: 36
+   */
   @Prop() iconheight: string;
+
+  /**
+   * icon source url
+   * default: intern url "./assets/img/Speaker_Icon.svg"
+   */
   @Prop() iconsrc: string;
+
+  /**
+   * iconbackground color
+   */
   @Prop() iconbackground: string;
+
+  /**
+   * alt text for a11y
+   * default: "Symbol eines sprechenden Lautsprechers"
+   */
   @Prop() alttext: string;
+
+  /**
+   * title text for a11y
+   * default: Vorlesen
+   */
   @Prop() titletext: string;
 
   /**
