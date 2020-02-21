@@ -18,6 +18,7 @@ npm install --save honey-speech
 </script>
 ```
 To the [demo site](https://funthomas424242.github.io/honey-speech-component/index.html)
+[Vision of API (under construction)](src/components/honey-speech/readme.md)
 
 ## demo
 
@@ -37,7 +38,6 @@ To the [demo site](https://funthomas424242.github.io/honey-speech-component/inde
 <p id="text2">buzz buzz buzz buzz</p>
 ```
 To the [live demo](https://funthomas424242.github.io/honey-speech-component/index.html)
-
 
 ## become an supporter
 
