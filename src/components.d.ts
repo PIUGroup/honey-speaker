@@ -16,6 +16,7 @@ export namespace Components {
     * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n': object;
+    'iconbackground': string;
     'iconheight': string;
     'iconsrc': string;
     'iconwidth': string;
@@ -52,6 +53,7 @@ declare namespace LocalJSX {
     * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n'?: object;
+    'iconbackground'?: string;
     'iconheight'?: string;
     'iconsrc'?: string;
     'iconwidth'?: string;
