@@ -12,7 +12,7 @@
 | `alttext`        | `alttext`        | alt text for a11y default: "Symbol eines sprechenden Lautsprechers"                                                              | `string` | `undefined` |
 | `i18n`           | --               | An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}} | `object` | `undefined` |
 | `iconbackground` | `iconbackground` | iconbackground color                                                                                                             | `string` | `undefined` |
-| `iconheight`     | `iconheight`     | icon height default: 36                                                                                                          | `string` | `undefined` |
+| `iconheight`     | `iconheight`     | icon height, default: 36                                                                                                         | `string` | `undefined` |
 | `iconsrc`        | `iconsrc`        | icon source url default: intern url "./assets/img/Speaker_Icon.svg"                                                              | `string` | `undefined` |
 | `iconwidth`      | `iconwidth`      | icon width default: 36                                                                                                           | `string` | `undefined` |
 | `ident`          | `ident`          | identifier prefix for input element default: "honey-speech1"                                                                     | `string` | `undefined` |

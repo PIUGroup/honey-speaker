@@ -24,7 +24,9 @@ export namespace Components {
     */
     'iconbackground': string;
     /**
-    * icon height default: 36
+    * icon height, default: 36
+    * @param iconheight
+    * @default 36
     */
     'iconheight': string;
     /**
@@ -82,7 +84,9 @@ declare namespace LocalJSX {
     */
     'iconbackground'?: string;
     /**
-    * icon height default: 36
+    * icon height, default: 36
+    * @param iconheight
+    * @default 36
     */
     'iconheight'?: string;
     /**

@@ -33,8 +33,9 @@ export class HoneySpeech {
   @Prop() iconwidth: string;
 
   /**
-   * icon height
-   * default: 36
+   * icon height, default: 36
+   * @param iconheight
+   * @default 36
    */
   @Prop() iconheight: string;
 
