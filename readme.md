@@ -81,6 +81,8 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 * https://storybook.js.org/docs/guides/guide-html/
 * https://storybook.js.org/docs/basics/exporting-storybook/
 * https://paulcpederson.com/articles/stencil-storybook/
+* https://storybook.js.org/docs/presets/introduction/
+* https://github.com/MadnessLabs/enjin-components
 
 ## warranty
 
