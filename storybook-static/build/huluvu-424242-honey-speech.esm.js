@@ -1,0 +1,1 @@
+import{p as i,b as t}from"./p-1486497b.js";i().then(i=>t([["p-bflw24fz",[[1,"honey-speech",{textids:[1],ident:[1],iconwidth:[1],iconheight:[1],iconsrc:[1],iconbackground:[1],alttext:[1],titletext:[1],langid:[1],i18n:[16]},[[2,"click","handleClick"]]]]]],i));

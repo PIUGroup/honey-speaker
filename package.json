@@ -35,20 +35,46 @@
     "url": "https://github.com/FunThomas424242/honey-speech-component/issues"
   },
   "scripts": {
-    "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate",
+    "build": "npm-run-all clean build:stencil build:storybook post:build",
+    "start": "npm-run-all --parallel stencil storybook",
+    "test": "cross-env STENCIL_ENV=dev stencil test --spec --e2e",
+    "test.watch": "cross-env STENCIL_ENV=dev stencil test --spec --e2e --watchAll",
+    "generate": "plop",
     "prepare": "npm run build",
-    "deliver": "npm publish --access=public"
+    "deliver": "npm publish --access=public",
+    "storybook": "start-storybook -p 6007 -s ./stencil-utilities/public-assets",
+    "build-storybook": "build-storybook",
+    "clean": "del-cli dist storybook-static",
+    "build:stencil": "cross-env STENCIL_ENV=prod stencil build --docs",
+    "build:storybook": "build-storybook",
+    "stencil": "cross-env STENCIL_ENV=dev stencil build --dev --watch --serve --docs",
+    "prestart": "npm run build:stencil",
+    "post:build": "node ./stencil-utilities/post-build.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
     "@stencil/core": "^1.8.4",
-    "@types/jest": "24.0.25",
+    "@storybook/html": "^5.3.13",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.7.4",
     "@types/puppeteer": "1.20.3",
+    "babel-loader": "^8.0.6",
+    "chalk": "^2.4.2",
+    "cross-env": "^5.2.0",
+    "del-cli": "^1.1.0",
+    "fs-extra": "^7.0.1",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
+    "lodash.kebabcase": "^4.1.1",
+    "npm-run-all": "^4.1.5",
+    "plop": "^2.2.0",
     "puppeteer": "1.20.0"
+  },
+  "dependencies": {},
+  "stencil": {
+    "protocol": "http",
+    "host": "localhost",
+    "port": 3333,
+    "buildDir": "build"
   }
 }

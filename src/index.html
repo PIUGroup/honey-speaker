@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>Stencil Component Starter</title>
-
-  <script type="module" src="/build/honey-speech.esm.js"></script>
-  <script nomodule src="/build/honey-speech.js"></script>
-
+    <meta charset="utf-8">
+    <title>Stencil Storybook Wrapper | Component Starter</title>
 </head>
+
 <body>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
 
-  <honey-speech ident="speech1" textids="seitentext,fortsetzung" iconbackground="#E8CD9A"></honey-speech>
-
-
-  <p id="seitentext">
-    Das ist ein Beispieltext der vorzulesen ist.
-
-    <button>test</button>
-
-    Warum auch nicht - sind ja genug Buchstaben zusammengekommen.
-  </p>
-
-  <p id="fortsetzung">
-    Das ist die Fortsetzung des Textes.
-  </p>
-
-  <honey-speech ident="speech2" textids="fortsetzung" titletext="Fortsetzung vorlesen"></honey-speech>
-
+        header {
+            padding: 50px 20px;
+            text-align: center;
+        }
+    </style>
+    <header>
+        <h2>
+            Dev server to be used in-conjunction with Storybook server for testing components.
+        </h2>
+        <p>&copy;Sapient Consulting
+            <script>document.write(new Date().getFullYear())</script>
+        </p>
+    </header>
 </body>
+
 </html>
