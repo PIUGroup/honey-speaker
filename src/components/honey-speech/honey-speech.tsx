@@ -153,7 +153,7 @@ export class HoneySpeech {
              src={this.iconsrc}
              height={this.iconheight}
              width={this.iconwidth}
-             class={"buttonimage"}
+             class={"speakerclass"}
       ></input>
     );
   }
