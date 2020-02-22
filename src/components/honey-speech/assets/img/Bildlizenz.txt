@@ -2,3 +2,6 @@ Speaker_Icon.svg
 Lizenz: gemeinfrei
 Author: Mobius (https://commons.wikimedia.org/wiki/User:Mobius)
 Quelle: https://commons.wikimedia.org/wiki/File:Speaker_Icon.svg
+
+Modifiziert durch Huluvu424242 alias FunThomas424242 alias Thomas Schubert:
+* Fill und Stroke auf Blue gesetzt
