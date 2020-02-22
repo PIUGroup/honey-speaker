@@ -40,9 +40,10 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "prepare": "npm run build",
+    "prepare": "npm run build && npm run storybook-build",
     "deliver": "npm publish --access=public",
-    "storybook": "start-storybook"
+    "storybook-run": "start-storybook",
+    "storybook-build": "build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
