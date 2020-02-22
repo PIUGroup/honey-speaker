@@ -42,18 +42,25 @@
     "generate": "stencil generate",
     "prepare": "npm run build && npm run storybook-build",
     "deliver": "npm publish --access=public",
-    "storybook-run": "start-storybook",
-    "storybook-build": "build-storybook -c .storybook -o docs"
+    "storybook-run": "start-storybook -p 9009 -s www/build/assets",
+    "storybook-run-old": "start-storybook -p 9009 -s dist/collection/components/honey-speech",
+    "storybook-build": "build-storybook -c .storybook -o docs -s dist/collection/components/honey-speech/assets"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@stencil/core": "^1.8.4",
-    "@storybook/html": "^5.3.13",
+    "@babel/core": "7.8.4",
+    "@stencil/core": "1.8.9",
+    "@stencil/webpack": "0.0.6",
+    "@storybook/html": "5.3.13",
+    "@storybook/preset-typescript": "1.2.0",
+    "@storybook/addon-info": "5.3.13",
     "@types/jest": "24.0.25",
     "@types/puppeteer": "1.20.3",
-    "babel-loader": "^8.0.6",
+    "@types/webpack": "4.41.6",
+    "babel-loader": "8.0.6",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
-    "puppeteer": "1.20.0"
+    "puppeteer": "1.20.0",
+    "react-docgen-typescript-loader": "3.6.0",
+    "ts-loader": "6.2.1"
   }
 }

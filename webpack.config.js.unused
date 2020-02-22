@@ -1,0 +1,10 @@
+const stencil = require('@stencil/webpack');
+
+"plugins": [
+  new stencil.StencilPlugin({
+    collections: [
+      'node-modules/accounting-components/dist/accountingcomponents',
+      'node-modules/payroll-components/dist/payrollcomponents',
+      'node-modules/purchasing-components/dist/purchasingcomponents',
+      'node-modules/web-components/dist/webcomponents'
+    ]}),
