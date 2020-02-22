@@ -41,12 +41,16 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "prepare": "npm run build",
-    "deliver": "npm publish --access=public"
+    "deliver": "npm publish --access=public",
+    "storybook": "start-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
     "@stencil/core": "^1.8.4",
+    "@storybook/html": "^5.3.13",
     "@types/jest": "24.0.25",
     "@types/puppeteer": "1.20.3",
+    "babel-loader": "^8.0.6",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
     "puppeteer": "1.20.0"
