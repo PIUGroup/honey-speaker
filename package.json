@@ -1,6 +1,6 @@
 {
   "name": "@huluvu424242/honey-speech",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Text to Speech component wich is reading texts from DOM elements.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -40,11 +40,13 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "prepare": "npm run build",
+    "prepare-deliver": "npm run build",
     "deliver": "npm publish --access=public"
   },
+  "dependencies": {
+    "@stencil/core": "1.8.9"
+  },
   "devDependencies": {
-    "@stencil/core": "^1.8.4",
     "@types/jest": "24.0.25",
     "@types/puppeteer": "1.20.3",
     "jest": "24.9.0",
