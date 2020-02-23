@@ -14,7 +14,7 @@ npm install --save honey-speech
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-speech@0.0.8/dist/honey-speech/honey-speech.js'>
+    src='https://unpkg.com/@huluvu424242/honey-speech@0.0.9/dist/honey-speech/honey-speech.js'>
 </script>
 ```
 To the [demo site](https://funthomas424242.github.io/honey-speech-component/index.html)
@@ -50,9 +50,13 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ## releaselog
 
-### v0.0.9 (unpublished)
+### v0.0.10 unpublished
 
 * n/a
+ 
+### v0.0.9 published at 2020-02-23
+
+* stencil/core added to bundle
 
 ### v0.0.8
 
