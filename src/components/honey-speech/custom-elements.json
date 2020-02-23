@@ -1,0 +1,233 @@
+{
+  "timestamp": "2020-02-23T21:26:45",
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "1.8.9",
+    "typescriptVersion": "3.7.5"
+  },
+  "components": [
+    {
+      "filePath": "src/components/honey-speech/honey-speech.tsx",
+      "encapsulation": "shadow",
+      "tag": "honey-speech",
+      "readme": "# honey-speech\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "alttext",
+          "type": "string",
+          "mutable": false,
+          "attr": "alttext",
+          "reflectToAttr": false,
+          "docs": "alt text for a11y\ndefault: \"Symbol eines sprechenden Lautsprechers\"",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "i18n",
+          "type": "object",
+          "mutable": false,
+          "reflectToAttr": false,
+          "docs": "An JSON Object with i18n text values separeted by language idents:\n\n{ \"deDE\" : { \"error\": \"Fehler}, \"en\" : { \"error\" : \"Error\"}}",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "object"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "iconbackground",
+          "type": "string",
+          "mutable": false,
+          "attr": "iconbackground",
+          "reflectToAttr": false,
+          "docs": "iconbackground color",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "iconheight",
+          "type": "string",
+          "mutable": false,
+          "attr": "iconheight",
+          "reflectToAttr": false,
+          "docs": "icon height, default: 36",
+          "docsTags": [
+            {
+              "text": "iconheight",
+              "name": "param"
+            },
+            {
+              "text": "36",
+              "name": "default"
+            }
+          ],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "iconsrc",
+          "type": "string",
+          "mutable": false,
+          "attr": "iconsrc",
+          "reflectToAttr": false,
+          "docs": "icon source url\ndefault: intern url \"./assets/img/Speaker_Icon.svg\"",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "iconwidth",
+          "type": "string",
+          "mutable": false,
+          "attr": "iconwidth",
+          "reflectToAttr": false,
+          "docs": "icon width\ndefault: 36",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "ident",
+          "type": "string",
+          "mutable": false,
+          "attr": "ident",
+          "reflectToAttr": false,
+          "docs": "identifier prefix for input element\ndefault: \"honey-speech1\"",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "langid",
+          "type": "string",
+          "mutable": false,
+          "attr": "langid",
+          "reflectToAttr": false,
+          "docs": "i18n language ident: deDE or en or de ...",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "textids",
+          "type": "string",
+          "mutable": false,
+          "attr": "textids",
+          "reflectToAttr": false,
+          "docs": "An comma separated list  with ids of DOM elements which inner text should be speech.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": true
+        },
+        {
+          "name": "titletext",
+          "type": "string",
+          "mutable": false,
+          "attr": "titletext",
+          "reflectToAttr": false,
+          "docs": "title text for a11y\ndefault: Vorlesen",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "speakerFailed",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired if the voice has failed to speak.",
+          "docsTags": []
+        },
+        {
+          "event": "speakerFinished",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired if the voice has finished with speaking.",
+          "docsTags": []
+        },
+        {
+          "event": "speakerPaused",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired if the voice is paused with speaking.",
+          "docsTags": []
+        },
+        {
+          "event": "speakerStarted",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired if the voice is speaking.",
+          "docsTags": []
+        }
+      ],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    }
+  ]
+}

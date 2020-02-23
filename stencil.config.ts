@@ -11,6 +11,10 @@ export const config: Config = {
       type: 'docs-readme'
     },
     {
+      type: 'docs-json',
+      file: 'src/components/honey-speech/custom-elements.json'
+    },
+    {
       type: 'www',
       serviceWorker: null // disable service workers
     }
