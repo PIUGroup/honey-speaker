@@ -18,7 +18,7 @@ export class HoneySpeech {
   /**
    * An comma separated list  with ids of DOM elements which inner text should be speech.
    */
-  @Prop() textids: string;
+  @Prop() textids!: string;
 
   /**
    * identifier prefix for input element

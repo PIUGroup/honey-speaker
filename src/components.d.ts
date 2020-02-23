@@ -124,7 +124,7 @@ declare namespace LocalJSX {
     /**
     * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
-    'textids'?: string;
+    'textids': string;
     /**
     * title text for a11y default: Vorlesen
     */
