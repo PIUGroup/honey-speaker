@@ -5,28 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
 
-  <script type="module" src='https://unpkg.com/@huluvu424242/honey-speech@0.0.9/dist/honey-speech/honey-speech.js'></script>
-<!--  <script type="module" src='../dist/honey-speech/honey-speech.js'></script>-->
+  <script type="module"
+          src='https://unpkg.com/@huluvu424242/honey-speech@0.0.9/dist/honey-speech/honey-speech.js'></script>
+  <!--  <script type="module" src='../dist/honey-speech/honey-speech.js'></script>-->
 
+<style>
+  .textrow {
+    display: inline-block;
+    vertical-align: super;
+  }
+</style>
 </head>
-<body>
+<body id="seite" style="display: block">
 
-  <honey-speech ident="speech1" textids="seitentext,fortsetzung" iconbackground="#E8CD9A"></honey-speech>
+<h1>Stories zur Verwendung der honey-spech Komponente</h1>
+
+<h2 class="textrow">Buttontext Vorlesen</h2>
+<honey-speech ident="speaker1" textids="absenden-button" titletext="Buttontext vorlesen"></honey-speech>
+<br>
+<button id="absenden-button" type="submit">Anfrage absenden</button>
+
+<h2>Newsfeeder Beispiel</h2>
+
+<div>
+  <p id="text1" class="textrow">Das ist der erste Text</p>
+  <span style="display: inline-block">
+    <honey-speech ident="speaker2" textids="text1" titletext="Text1 vorlesen"></honey-speech>
+    <honey-speech ident="speaker3" textids="text1,text2" titletext="Alle vorlessen"></honey-speech>
+  </span>
+</div>
+<div>
+  <p id="text2" class="textrow">Das ist der zweite Text</p>
+  <honey-speech ident="speaker4" textids="text2" titletext="Text2 vorlesen"></honey-speech>
+  <honey-speech ident="speaker5" textids="text1,text2" titletext="Alle vorlessen"></honey-speech>
+</div>
 
 
-  <p id="seitentext">
-    Das ist ein Beispieltext von einem ersten DOM Element der vorzulesen ist.
+<h2 id="nachrichten" style="display: inline-block">Nachrichtentext Beispiel</h2>
+<honey-speech ident="speaker6" ident="speaker nachrichten" textids="ueberschrift1,ueberschrift2,artikel1,artikel2"></honey-speech>
 
-    <button>Das ist der Buttontext</button>
+<h3 id="ueberschrift1">1. Artikel</h3>
 
-    Hier folgt weiterer Text.
-  </p>
+<p id="artikel1">
+  Das ist ein Beispieltext von einem ersten DOM Element der vorzulesen ist.
+  Der Text symbolisiert den ersten Zeitungsartikel.
 
-  <p id="fortsetzung">
-    Das ist der Text eines zweiten DOM Elementes.
-  </p>
+  <button>Das ist der Text eines Buttons welcher sich im Paragraph befindet und auch vorgelesen wird.</button>
 
-  <honey-speech  ident="speech2" textids="fortsetzung" titletext="Fortsetzung vorlesen"></honey-speech>
+  Dies ist der Text welcher nach dem Button im Paragraph folgt.
+</p>
+
+<h3 id="ueberschrift2">2. Artikel</h3>
+<p id="artikel2">
+  Das ist der Text eines zweiten DOM Elementes. Er symbolisiert den 2. Zeitungsartikel.
+</p>
+
+<h2>Speaker Hintergrund verändert</h2>
+
+<honey-speech ident="speaker7" textids="artikel1" titletext="1. Artikel vorlesen"
+              iconbackground="#E8CD9A"></honey-speech>
+<honey-speech ident="speaker8" textids="artikel2" titletext="2. Artikel vorlesen"
+              iconbackground="lightblue"></honey-speech>
+<honey-speech ident="speaker9" textids="seite" titletext="Seite vorlesen"
+              iconbackground="lightblue"></honey-speech>
+
 
 </body>
 </html>
