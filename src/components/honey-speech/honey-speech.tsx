@@ -147,7 +147,6 @@ export class HoneySpeech {
   }
 
   getId(): string {
-    Logger.infoMessage('###'+this.ident);
     return this.ident;
   }
 
