@@ -52,7 +52,9 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ### v0.0.10 unpublished
 
-* n/a
+* ident property computed from id attribute or random if absent 
+* example added
+* stencil/core removed from bundle again (no storybook support at now)
  
 ### v0.0.9 published at 2020-02-23
 

@@ -24,7 +24,10 @@ export class HoneySpeech {
    * identifier prefix for input element
    * default: "honey-speech1"
    */
-  @Prop() ident: string;
+  @Prop({
+    reflect: true,
+    mutable: true
+  }) ident: string;
 
   /**
    * icon width
@@ -95,7 +98,7 @@ export class HoneySpeech {
   @Event() speakerFailed: EventEmitter;
 
   connectedCallback() {
-    if (!this.ident) this.ident = "honey-speech1";
+    this.ident = this.htmlElement.id ? this.htmlElement.id : Math.random().toString(36).substring(7);
     if (!this.titletext) this.titletext = "Vorlesen";
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
 
@@ -107,7 +110,7 @@ export class HoneySpeech {
 
   componentDidLoad() {
     if (this.iconbackground) {
-      const speaker: HTMLElement = this.htmlElement.shadowRoot.getElementById(this.ident + "-input");
+      const speaker: HTMLElement = this.htmlElement.shadowRoot.getElementById(this.getId() + "-input");
       speaker.style.backgroundColor = this.iconbackground;
     }
   }
@@ -143,11 +146,16 @@ export class HoneySpeech {
     stimme.textVorlesen(text);
   }
 
+  getId(): string {
+    Logger.infoMessage('###'+this.ident);
+    return this.ident;
+  }
+
   render() {
     return (
       <input type="image"
-             id={this.ident + "-input"}
-             name={this.ident + "-input"}
+             id={this.getId() + "-input"}
+             name={this.getId() + "-input"}
              title={this.titletext}
              alt={this.alttext}
              src={this.iconsrc}
