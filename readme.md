@@ -84,6 +84,9 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 * https://auth0.com/blog/creating-web-components-with-stencil/
 * https://www.twilio.com/blog/2018/02/creating-and-publishing-web-components-with-stencil.html
 * https://stenciljs.com/docs/introduction
+* https://css-tricks.com/styling-a-web-component/
+* https://meowni.ca/posts/part-theme-explainer/
+
 
 ## warranty
 
