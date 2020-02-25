@@ -10,14 +10,17 @@
 
 <style>
   ::part(buttonimage) {
-    --background: red;
+    --speaker-background: red;
   }
   .textrow {
     display: inline-block;
     vertical-align: super;
   }
-  #speaker2::part(buttonimage) {--background: yellow;height:15px;}
-  #speaker3::part(buttonimage) {--background: green;}
+  #speaker2::part(buttonimage) {background: yellow; height:15px;}
+  #speaker3::part(buttonimage) {background: green;}
+  input {
+    --background: cyan;
+  }
 </style>
 </head>
 <body id="seite" style="display: block">

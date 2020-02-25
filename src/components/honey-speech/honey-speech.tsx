@@ -161,7 +161,8 @@ export class HoneySpeech {
              height={this.iconheight}
              width={this.iconwidth}
              part={"buttonimage"}
-      ></input>
+             value={""}
+      />
     );
   }
 }
