@@ -9,17 +9,19 @@
   <script nomodule src="/build/honey-speech.js"></script>
 
 <style>
-  ::part(buttonimage) {
-    --speaker-background: red;
-  }
+
+  /*::part(speakerpart) {*/
+  /*  --speaker-background: red;*/
+  /*}*/
   .textrow {
     display: inline-block;
     vertical-align: super;
   }
-  #speaker2::part(buttonimage) {background: yellow; height:15px;}
-  #speaker3::part(buttonimage) {background: green;}
-  input {
-    --background: cyan;
+  #speaker2::part(speakerpart) {--speaker-background: cyan; --speaker-height:15px; --speaker-color: red;}
+  /*#speaker2::part(inputpart) {--input-background: gray; }*/
+  /*#speaker3::part(inputpart) {--input-background: green;}*/
+  .speakerimage {
+    --input-background: red;
   }
 </style>
 </head>
@@ -67,24 +69,136 @@
   Das ist der Text eines zweiten DOM Elementes. Er symbolisiert den 2. Zeitungsartikel.
 </p>
 
-<h2>Speaker Hintergrund verändert</h2>
 
-<honey-speech ident="speaker7" textids="artikel1" titletext="1. Artikel vorlesen"
-              iconbackground="#E8CD9A"></honey-speech>
-<honey-speech ident="speaker8" textids="artikel2" titletext="2. Artikel vorlesen"
-              iconbackground="lightblue"></honey-speech>
-<honey-speech ident="speaker9" textids="seite" titletext="Seite vorlesen"
-              iconbackground="lightblue"></honey-speech>
+<h2>Speaker Größe und Farben verändert</h2>
 
+<style>
+  #s10x10::part(speakerpane){
+    --speaker-height: 10px;
+    --speaker-width: 10px;
+  }
+  #s20x20::part(speakerpane){
+    --speaker-height: 20px;
+    --speaker-width: 20px;
+    --speaker-color: red;
+    --speaker-background: LightBlue;
+  }
+  #s30x30::part(speakerpane){
+    --speaker-height: 30px;
+    --speaker-width: 30px;
+    --speaker-color: black;
+    --speaker-background: yellow;
 
-<h2>Speaker Größe verändert</h2>
+  }
+  #s40x50::part(speakerpane){
+    --speaker-height: 40px;
+    --speaker-width: 50px;
+    --speaker-color: yellow;
+    --speaker-background: LightGreen;
+  }
+  #s50x60::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 60px;
+    --speaker-color: cyan;
+  }
+  #s100x100::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-color: gray;
+  }
+  #s100x100transparent::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-background: none;
+    --speaker-color: gray;
+  }
+  #s90x100::part(speakerpane){
+    --speaker-height: 90px;
+    --speaker-width: 100px;
+    --speaker-color: brown;
+  }
+  #s50x100::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 100px;
+    --speaker-color: green;
+  }
+</style>
 
-<honey-speech textids="artikel1" iconwidth="16" iconheight="16"
-              iconbackground="#E8CD9A"></honey-speech>
-<honey-speech textids="artikel2" iconwidth="27" iconheight="27"
-              iconbackground="lightblue"></honey-speech>
-<honey-speech textids="seite" iconwidth="50" iconheight="50"
-              iconbackground="lightblue"></honey-speech>
+<honey-speech id="s10x10" textids="artikel2"       ></honey-speech>
+<honey-speech id="s20x20" textids="artikel2"       ></honey-speech>
+<honey-speech id="s30x30" textids="artikel2"       ></honey-speech>
+<honey-speech id="s40x50" textids="artikel2"       ></honey-speech>
+<honey-speech id="s50x60" textids="artikel2"       ></honey-speech>
+<honey-speech id="s100x100" textids="artikel2"       ></honey-speech>
+<honey-speech id="s100x100transparent" textids="artikel2"       ></honey-speech>
+<honey-speech id="s90x100" textids="artikel2"       ></honey-speech>
+<honey-speech id="s50x100" textids="artikel2"       ></honey-speech>
+
+<pre>
+
+&lt;style>
+ #s10x10::part(speakerpane){
+    --speaker-height: 10px;
+    --speaker-width: 10px;
+  }
+  #s20x20::part(speakerpane){
+    --speaker-height: 20px;
+    --speaker-width: 20px;
+    --speaker-color: red;
+    --speaker-background: LightBlue;
+  }
+  #s30x30::part(speakerpane){
+    --speaker-height: 30px;
+    --speaker-width: 30px;
+    --speaker-color: black;
+    --speaker-background: yellow;
+
+  }
+  #s40x50::part(speakerpane){
+    --speaker-height: 40px;
+    --speaker-width: 50px;
+    --speaker-color: yellow;
+    --speaker-background: LightGreen;
+  }
+  #s50x60::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 60px;
+    --speaker-color: cyan;
+  }
+  #s100x100::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-color: gray;
+  }
+  #s100x100transparent::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-background: none;
+    --speaker-color: gray;
+  }
+  #s90x100::part(speakerpane){
+    --speaker-height: 90px;
+    --speaker-width: 100px;
+    --speaker-color: brown;
+  }
+  #s50x100::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 100px;
+    --speaker-color: green;
+  }
+&lt;/style>
+
+&lt;honey-speech id="s10x10" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s20x20" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s30x30" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s40x50" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s50x60" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s100x100" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s100x100transparent" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s90x100" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s50x100" textids="artikel2"       >&lt;/honey-speech>
+
+</pre>
 
 </body>
 </html>

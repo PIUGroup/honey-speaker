@@ -30,10 +30,6 @@ export namespace Components {
     */
     'iconheight': string;
     /**
-    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
-    */
-    'iconsrc': string;
-    /**
     * icon width default: 36
     */
     'iconwidth': string;
@@ -89,10 +85,6 @@ declare namespace LocalJSX {
     * @default 36
     */
     'iconheight'?: string;
-    /**
-    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
-    */
-    'iconsrc'?: string;
     /**
     * icon width default: 36
     */

@@ -1,9 +1,0 @@
-:root {
-  --global-background: var(--background, #E8CD9A);
-  --global-color: var(--color, blue);
-  --global-padding: var(--padding, 5px);
-  --global-font-size: var(--font-size, medium);
-  --global-border: var(--border, 0);
-  --global-width: var(--width, 36px);
-  --global-height: var(--height, 36px);
-}

@@ -1,6 +1,7 @@
-input {
+.speakerimage {
   background: var(--speaker-background, #E8CD9A);
-  color: var(--speaker-color, blue);
+  stroke: var(--speaker-color, blue);
+  fill: var(--speaker-color, blue);
   padding: var(--speaker-padding, 5px);
   font-size: var(--speaker-font-size, medium);
   border: var(--speaker-border, 0);

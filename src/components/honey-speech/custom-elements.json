@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-02-23T21:26:45",
+  "timestamp": "2020-02-27T21:49:46",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.9",
@@ -79,22 +79,6 @@
               "name": "default"
             }
           ],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": false,
-          "required": false
-        },
-        {
-          "name": "iconsrc",
-          "type": "string",
-          "mutable": false,
-          "attr": "iconsrc",
-          "reflectToAttr": false,
-          "docs": "icon source url\ndefault: intern url \"./assets/img/Speaker_Icon.svg\"",
-          "docsTags": [],
           "values": [
             {
               "type": "string"

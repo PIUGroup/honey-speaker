@@ -52,6 +52,11 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ### v0.0.10 unpublished
 
+* defined css variables supported
+* css ::part supported for speakerpane 
+* svg embed - no extra assets needed
+* sizeable via css
+* color of background, stroke and fill css styleable 
 * ident property computed from id attribute or random if absent 
 * example added
 * stencil/core removed from bundle again (no storybook support at now)
