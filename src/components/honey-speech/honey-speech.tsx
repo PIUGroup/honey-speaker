@@ -102,8 +102,8 @@ export class HoneySpeech {
     if (!this.titletext) this.titletext = "Vorlesen";
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
 
-    if (!this.iconheight) this.iconheight = "36";
-    if (!this.iconwidth) this.iconwidth = "36";
+    // if (!this.iconheight) this.iconheight = "36";
+    // if (!this.iconwidth) this.iconwidth = "36";
     if (!this.iconsrc) this.iconsrc = getAssetPath("./assets/img/Speaker_Icon.svg");
     // if (!this.iconstyle) this.iconstyle = "background-color:red";
   }
@@ -160,7 +160,7 @@ export class HoneySpeech {
              src={this.iconsrc}
              height={this.iconheight}
              width={this.iconwidth}
-             part={"buttonimage"}
+             part={"inputpart"}
              value={""}
       />
     );

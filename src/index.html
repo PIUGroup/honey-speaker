@@ -9,17 +9,19 @@
   <script nomodule src="/build/honey-speech.js"></script>
 
 <style>
-  ::part(buttonimage) {
+
+  ::part(speakerpart) {
     --speaker-background: red;
   }
   .textrow {
     display: inline-block;
     vertical-align: super;
   }
-  #speaker2::part(buttonimage) {background: yellow; height:15px;}
-  #speaker3::part(buttonimage) {background: green;}
+  #speaker2::part(speakerpart) {--speaker-background: cyan; --speaker-height:15px; --speaker-color: red;}
+  #speaker2::part(inputpart) {--input-background: gray; }
+  #speaker3::part(inputpart) {--input-background: green;}
   input {
-    --background: cyan;
+    --input-background: yellow;
   }
 </style>
 </head>
