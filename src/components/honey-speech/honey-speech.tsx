@@ -1,6 +1,6 @@
 "use strict";
 
-import {Component, Element, Event, EventEmitter, getAssetPath, h, Listen, Prop} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Listen, Prop} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
 
@@ -41,12 +41,6 @@ export class HoneySpeech {
    * @default 36
    */
   @Prop() iconheight: string;
-
-  /**
-   * icon source url
-   * default: intern url "./assets/img/Speaker_Icon.svg"
-   */
-  @Prop() iconsrc: string;
 
   /**
    * iconbackground color
@@ -101,18 +95,12 @@ export class HoneySpeech {
     this.ident = this.htmlElement.id ? this.htmlElement.id : Math.random().toString(36).substring(7);
     if (!this.titletext) this.titletext = "Vorlesen";
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
-
-    // if (!this.iconheight) this.iconheight = "36";
-    // if (!this.iconwidth) this.iconwidth = "36";
-    if (!this.iconsrc) this.iconsrc = getAssetPath("./assets/img/Speaker_Icon.svg");
-    // if (!this.iconstyle) this.iconstyle = "background-color:red";
+    if (!this.iconheight) this.iconheight = "500";
+    if (!this.iconwidth) this.iconwidth = "500";
   }
 
   componentDidLoad() {
-    if (this.iconbackground) {
-      const speaker: HTMLElement = this.htmlElement.shadowRoot.getElementById(this.getId() + "-input");
-      speaker.style.backgroundColor = this.iconbackground;
-    }
+    // nixe
   }
 
   private getTexte(): string[] {
@@ -152,17 +140,24 @@ export class HoneySpeech {
 
   render() {
     return (
-      <input type="image"
-             id={this.getId() + "-input"}
-             name={this.getId() + "-input"}
-             title={this.titletext}
-             alt={this.alttext}
-             src={this.iconsrc}
-             height={this.iconheight}
-             width={this.iconwidth}
-             part={"inputpart"}
-             value={""}
-      />
+      <host part={"speakerpane"}
+            title={this.titletext}
+            alt={this.alttext}
+      >
+        <svg id={this.getId() + "-svg"} xmlns="http://www.w3.org/2000/svg"
+             width={this.iconwidth} height={this.iconheight}
+             class="speakerimage"
+             viewBox="0 0 75 75">
+          <path
+            stroke-width="5" stroke-linejoin="round"
+            d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
+          />
+          <path
+            stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+            d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
+          />
+        </svg>
+      </host>
     );
   }
 }

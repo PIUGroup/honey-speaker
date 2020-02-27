@@ -1,17 +1,7 @@
-:root {
-  background-color: var(--input-background, #E8CD9A);
-  color: var(--input-color, blue);
-  padding: var(--input-padding, 5px);
-  font-size: var(--input-font-size, medium);
-  border: var(--input-border, 0);
-  width: var(--input-width, 36px);
-  height: var(--input-height, 36px);
-  --mycolor: yellow;
-}
-
-input {
+.speakerimage {
   background: var(--speaker-background, #E8CD9A);
-  color: var(--speaker-color, blue);
+  stroke: var(--speaker-color, blue);
+  fill: var(--speaker-color, blue);
   padding: var(--speaker-padding, 5px);
   font-size: var(--speaker-font-size, medium);
   border: var(--speaker-border, 0);
