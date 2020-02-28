@@ -1,9 +1,9 @@
 {
-  "timestamp": "2020-02-27T21:49:46",
+  "timestamp": "2020-02-28T22:18:01",
   "compiler": {
     "name": "@stencil/core",
-    "version": "1.8.9",
-    "typescriptVersion": "3.7.5"
+    "version": "1.8.11",
+    "typescriptVersion": "3.8.2"
   },
   "components": [
     {
@@ -106,7 +106,7 @@
         {
           "name": "ident",
           "type": "string",
-          "mutable": false,
+          "mutable": true,
           "attr": "ident",
           "reflectToAttr": false,
           "docs": "identifier prefix for input element\ndefault: \"honey-speech1\"",
@@ -176,7 +176,7 @@
           "bubbles": true,
           "cancelable": true,
           "composed": true,
-          "docs": "Fired if the voice has failed to speak.",
+          "docs": "Fired if the stimme has failed to speak.",
           "docsTags": []
         },
         {
@@ -185,7 +185,7 @@
           "bubbles": true,
           "cancelable": true,
           "composed": true,
-          "docs": "Fired if the voice has finished with speaking.",
+          "docs": "Fired if the stimme has finished with speaking.",
           "docsTags": []
         },
         {
@@ -194,7 +194,7 @@
           "bubbles": true,
           "cancelable": true,
           "composed": true,
-          "docs": "Fired if the voice is paused with speaking.",
+          "docs": "Fired if the stimme is paused with speaking.",
           "docsTags": []
         },
         {
@@ -203,7 +203,7 @@
           "bubbles": true,
           "cancelable": true,
           "composed": true,
-          "docs": "Fired if the voice is speaking.",
+          "docs": "Fired if the stimme is speaking.",
           "docsTags": []
         }
       ],
