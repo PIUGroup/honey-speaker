@@ -41,7 +41,8 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "prepare-deliver": "npm run build",
-    "deliver": "npm publish --access=public"
+    "deliver": "npm publish --access=public",
+    "pruefeVersionen": "npm outdated"
   },
   "dependencies": {},
   "devDependencies": {
