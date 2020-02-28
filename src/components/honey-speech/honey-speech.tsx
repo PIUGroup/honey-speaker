@@ -14,6 +14,8 @@ export class HoneySpeech {
 
   @Element() htmlElement: HTMLElement;
 
+  sprachAusgabe: Sprachausgabe;
+
 
   /**
    * An comma separated list  with ids of DOM elements which inner text should be speech.
@@ -72,22 +74,22 @@ export class HoneySpeech {
   @Prop() i18n: object;
 
   /**
-   * Fired if the voice is speaking.
+   * Fired if the stimme is speaking.
    */
   @Event() speakerStarted: EventEmitter;
 
   /**
-   * Fired if the voice has finished with speaking.
+   * Fired if the stimme has finished with speaking.
    */
   @Event() speakerFinished: EventEmitter;
 
   /**
-   * Fired if the voice is paused with speaking.
+   * Fired if the stimme is paused with speaking.
    */
   @Event() speakerPaused: EventEmitter;
 
   /**
-   * Fired if the voice has failed to speak.
+   * Fired if the stimme has failed to speak.
    */
   @Event() speakerFailed: EventEmitter;
 
@@ -97,6 +99,12 @@ export class HoneySpeech {
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
     if (!this.iconheight) this.iconheight = "500";
     if (!this.iconwidth) this.iconwidth = "500";
+    this.sprachAusgabe = new Sprachausgabe(
+      this.speakerStarted,
+      this.speakerFinished,
+      this.speakerPaused,
+      this.speakerFailed
+    );
   }
 
   componentDidLoad() {
@@ -124,14 +132,11 @@ export class HoneySpeech {
 
   @Listen('click', {capture: true})
   protected handleClick() {
-    const stimme: Sprachausgabe = new Sprachausgabe(
-      this.speakerStarted,
-      this.speakerFinished,
-      this.speakerPaused,
-      this.speakerFailed
+    const texte: string[] = this.getTexte();
+
+    texte.forEach(text =>
+      this.sprachAusgabe.textVorlesen(text+" ")
     );
-    const text = this.getTexte().join("\n");
-    stimme.textVorlesen(text);
   }
 
   getId(): string {

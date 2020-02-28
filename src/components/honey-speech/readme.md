@@ -20,12 +20,12 @@
 
 ## Events
 
-| Event             | Description                                    | Type               |
-| ----------------- | ---------------------------------------------- | ------------------ |
-| `speakerFailed`   | Fired if the voice has failed to speak.        | `CustomEvent<any>` |
-| `speakerFinished` | Fired if the voice has finished with speaking. | `CustomEvent<any>` |
-| `speakerPaused`   | Fired if the voice is paused with speaking.    | `CustomEvent<any>` |
-| `speakerStarted`  | Fired if the voice is speaking.                | `CustomEvent<any>` |
+| Event             | Description                                     | Type               |
+| ----------------- | ----------------------------------------------- | ------------------ |
+| `speakerFailed`   | Fired if the stimme has failed to speak.        | `CustomEvent<any>` |
+| `speakerFinished` | Fired if the stimme has finished with speaking. | `CustomEvent<any>` |
+| `speakerPaused`   | Fired if the stimme is paused with speaking.    | `CustomEvent<any>` |
+| `speakerStarted`  | Fired if the stimme is speaking.                | `CustomEvent<any>` |
 
 
 ----------------------------------------------

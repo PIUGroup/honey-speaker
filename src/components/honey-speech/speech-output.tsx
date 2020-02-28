@@ -7,6 +7,8 @@ export class Sprachausgabe {
 
   sprachSynthese: SpeechSynthesis;
 
+  stimme: SpeechSynthesisVoice;
+
   speakerStarted: EventEmitter;
 
   speakerFinished: EventEmitter;
@@ -26,12 +28,23 @@ export class Sprachausgabe {
     this.speakerPaused = speakerPaused;
     this.speakerFailed = speakerFailed;
     this.sprachSynthese = window.speechSynthesis;
+    this.stimme = this.getDefaultStimme();
     Logger.debugMessage("####constructor called");
   }
 
-  stimmeInitialisieren(vorleseText: string): SpeechSynthesisUtterance {
-    Logger.debugMessage("Text:" + vorleseText);
-    const leserStimmeMitText = new SpeechSynthesisUtterance(vorleseText);
+  getDefaultStimme(): SpeechSynthesisVoice {
+    var voices: SpeechSynthesisVoice[] = this.sprachSynthese.getVoices();
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].default) {
+        Logger.debugMessage("Voice:" + voices[i].name + voices[i].lang);
+        return voices[i];
+      }
+    }
+  }
+
+  erzeugeVorleser(text: string, voice: SpeechSynthesisVoice): SpeechSynthesisUtterance {
+    Logger.debugMessage("erzeugeVorleser started");
+    const leserStimmeMitText: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
     leserStimmeMitText.onend = () => {
       this.speakerFinished.emit();
@@ -53,29 +66,27 @@ export class Sprachausgabe {
       Logger.errorMessage("Fehler beim Vorlesen");
     }
 
-    var voices = this.sprachSynthese.getVoices();
-    for (var i = 0; i < voices.length; i++) {
-      if (voices[i].default) {
-        Logger.debugMessage("Voice:" + voices[i].name + voices[i].lang);
-        leserStimmeMitText.voice = voices[i];
-        break;
-      }
-    }
     leserStimmeMitText.pitch = 1;
     leserStimmeMitText.rate = 1;
     leserStimmeMitText.volume = 1;
+    leserStimmeMitText.voice = voice;
     return leserStimmeMitText;
   }
 
-
-  textVorlesen(zuLesenderText) {
+  textVorlesen(zuLesenderText: string) {
     if (this.sprachSynthese.speaking) {
       Logger.debugMessage("Spricht bereits");
-      return;
+      // return;
     }
     if (zuLesenderText) {
-      const leserStimmeMitText: SpeechSynthesisUtterance = this.stimmeInitialisieren(zuLesenderText);
-      this.sprachSynthese.speak(leserStimmeMitText);
+      const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
+
+      texte.forEach(text => {
+          const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text, this.stimme);
+          this.sprachSynthese.speak(vorleser);
+        }
+      );
+
     }
   }
 
