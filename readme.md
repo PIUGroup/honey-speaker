@@ -50,8 +50,13 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ## releaselog
 
-### v0.0.10 unpublished
+### v0.0.11 unpublished
 
+* n/a
+
+### v0.0.10 published at 2020-02-28
+
+* support for large texts added
 * defined css variables supported
 * css ::part supported for speakerpane 
 * svg embed - no extra assets needed
