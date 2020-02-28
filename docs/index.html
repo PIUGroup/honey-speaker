@@ -122,7 +122,20 @@
 <h2>Styling der Komponente</h2>
 
 <pre>
-    /* &lt;style> set all speaker at page to defaults of component */
+  /* &lt;style> set all speaker at page to defaults of component via :root */
+    :root {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+
+  or via part
+
+    /* &lt;style> set all speaker at page to defaults of component via ::part */
     ::part(speakerpane) {
       --speaker-background: #E8CD9A;
       --speaker-color: blue;
@@ -133,7 +146,9 @@
       --speaker-height: 36px;
     }
 </pre>
-
+<p id="vorwort">Das ist das Vorwort zum Text.</p>
+<honey-speech textids="seite" titletext="Seite vorlesen"></honey-speech>
+<br>
 
 <h2 class="textrow">Buttontext Vorlesen</h2>
 <honey-speech id="speaker1" textids="absenden-button" titletext="Buttontext vorlesen"></honey-speech>
@@ -157,7 +172,7 @@
 
 
 <h2 id="nachrichten" style="display: inline-block">Nachrichtentext Beispiel</h2>
-<honey-speech id="speaker6" ident="speaker nachrichten"
+<honey-speech id="speaker6"
               textids="ueberschrift1,artikel1,ueberschrift2,artikel2"></honey-speech>
 
 <h3 id="ueberschrift1">1. Artikel</h3>
