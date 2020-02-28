@@ -25,7 +25,7 @@ export class HoneySpeech {
    * default: "honey-speech1"
    */
   @Prop({
-    reflect: true,
+    reflect: false,
     mutable: true
   }) ident: string;
 
