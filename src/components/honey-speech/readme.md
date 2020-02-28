@@ -11,7 +11,6 @@
 | `i18n`                 | --               | An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}} | `object` | `undefined` |
 | `iconbackground`       | `iconbackground` | iconbackground color                                                                                                             | `string` | `undefined` |
 | `iconheight`           | `iconheight`     | icon height, default: 36                                                                                                         | `string` | `undefined` |
-| `iconsrc`              | `iconsrc`        | icon source url default: intern url "./assets/img/Speaker_Icon.svg"                                                              | `string` | `undefined` |
 | `iconwidth`            | `iconwidth`      | icon width default: 36                                                                                                           | `string` | `undefined` |
 | `ident`                | `ident`          | identifier prefix for input element default: "honey-speech1"                                                                     | `string` | `undefined` |
 | `langid`               | `langid`         | i18n language ident: deDE or en or de ...                                                                                        | `string` | `undefined` |
@@ -21,12 +20,12 @@
 
 ## Events
 
-| Event             | Description                                    | Type               |
-| ----------------- | ---------------------------------------------- | ------------------ |
-| `speakerFailed`   | Fired if the voice has failed to speak.        | `CustomEvent<any>` |
-| `speakerFinished` | Fired if the voice has finished with speaking. | `CustomEvent<any>` |
-| `speakerPaused`   | Fired if the voice is paused with speaking.    | `CustomEvent<any>` |
-| `speakerStarted`  | Fired if the voice is speaking.                | `CustomEvent<any>` |
+| Event             | Description                                     | Type               |
+| ----------------- | ----------------------------------------------- | ------------------ |
+| `speakerFailed`   | Fired if the stimme has failed to speak.        | `CustomEvent<any>` |
+| `speakerFinished` | Fired if the stimme has finished with speaking. | `CustomEvent<any>` |
+| `speakerPaused`   | Fired if the stimme is paused with speaking.    | `CustomEvent<any>` |
+| `speakerStarted`  | Fired if the stimme is speaking.                | `CustomEvent<any>` |
 
 
 ----------------------------------------------

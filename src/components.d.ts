@@ -30,10 +30,6 @@ export namespace Components {
     */
     'iconheight': string;
     /**
-    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
-    */
-    'iconsrc': string;
-    /**
     * icon width default: 36
     */
     'iconwidth': string;
@@ -90,10 +86,6 @@ declare namespace LocalJSX {
     */
     'iconheight'?: string;
     /**
-    * icon source url default: intern url "./assets/img/Speaker_Icon.svg"
-    */
-    'iconsrc'?: string;
-    /**
     * icon width default: 36
     */
     'iconwidth'?: string;
@@ -106,19 +98,19 @@ declare namespace LocalJSX {
     */
     'langid'?: string;
     /**
-    * Fired if the voice has failed to speak.
+    * Fired if the stimme has failed to speak.
     */
     'onSpeakerFailed'?: (event: CustomEvent<any>) => void;
     /**
-    * Fired if the voice has finished with speaking.
+    * Fired if the stimme has finished with speaking.
     */
     'onSpeakerFinished'?: (event: CustomEvent<any>) => void;
     /**
-    * Fired if the voice is paused with speaking.
+    * Fired if the stimme is paused with speaking.
     */
     'onSpeakerPaused'?: (event: CustomEvent<any>) => void;
     /**
-    * Fired if the voice is speaking.
+    * Fired if the stimme is speaking.
     */
     'onSpeakerStarted'?: (event: CustomEvent<any>) => void;
     /**

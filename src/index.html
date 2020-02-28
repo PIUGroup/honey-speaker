@@ -8,25 +8,268 @@
   <script type="module" src="/build/honey-speech.esm.js"></script>
   <script nomodule src="/build/honey-speech.js"></script>
 
+  <style>
+    .textrow {
+      display: inline-block;
+      vertical-align: super;
+    }
+
+    ::part(speakerpane) {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+
+    #speaker1::part(speakerpane) {
+      --speaker-background: none;
+      --speaker-color: red;
+      --speaker-width: 20px;
+      --speaker-height: 20px;
+    }
+
+    #speaker2::part(speakerpane), #speaker4::part(speakerpane) {
+      --speaker-background: cyan;
+      --speaker-color: darkblue;
+      --speaker-height: 20px;
+      --speaker-width: 20px;
+    }
+
+    #speaker3::part(speakerpane), #speaker5::part(speakerpane) {
+      --speaker-background: lightgreen;
+      --speaker-color: darkblue;
+      --speaker-height: 20px;
+      --speaker-width: 20px;
+    }
+
+    #speaker6::part(speakerpane) {
+      --speaker-background: yellow;
+      --speaker-color: red;
+      --speaker-height: 15px;
+      --speaker-width: 15px;
+    }
+
+
+    /*Größe und Farben ändern*/
+    #s10x10::part(speakerpane) {
+      --speaker-height: 10px;
+      --speaker-width: 10px;
+    }
+
+    #s20x20::part(speakerpane) {
+      --speaker-height: 20px;
+      --speaker-width: 20px;
+      --speaker-color: red;
+      --speaker-background: LightBlue;
+    }
+
+    #s30x30::part(speakerpane) {
+      --speaker-height: 30px;
+      --speaker-width: 30px;
+      --speaker-color: black;
+      --speaker-background: yellow;
+
+    }
+
+    #s40x50::part(speakerpane) {
+      --speaker-height: 40px;
+      --speaker-width: 50px;
+      --speaker-color: yellow;
+      --speaker-background: LightGreen;
+    }
+
+    #s50x60::part(speakerpane) {
+      --speaker-height: 50px;
+      --speaker-width: 60px;
+      --speaker-color: cyan;
+    }
+
+    #s100x100::part(speakerpane) {
+      --speaker-height: 100px;
+      --speaker-width: 100px;
+      --speaker-color: gray;
+    }
+
+    #s100x100transparent::part(speakerpane) {
+      --speaker-height: 100px;
+      --speaker-width: 100px;
+      --speaker-background: none;
+      --speaker-color: gray;
+    }
+
+    #s90x100::part(speakerpane) {
+      --speaker-height: 90px;
+      --speaker-width: 100px;
+      --speaker-color: brown;
+    }
+
+    #s50x100::part(speakerpane) {
+      --speaker-height: 50px;
+      --speaker-width: 100px;
+      --speaker-color: green;
+    }
+  </style>
 </head>
-<body>
+<body id="seite" style="display: block">
 
-  <honey-speech ident="speech1" textids="seitentext,fortsetzung" iconbackground="#E8CD9A"></honey-speech>
+<h1>Stories zur Verwendung der honey-speech Komponente</h1>
 
 
-  <p id="seitentext">
-    Das ist ein Beispieltext der vorzulesen ist.
+<h2>Styling der Komponente</h2>
 
-    <button>test</button>
+<pre>
+  /* &lt;style> set all speaker at page to defaults of component via :root */
+    :root {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
 
-    Warum auch nicht - sind ja genug Buchstaben zusammengekommen.
-  </p>
+  or via part
 
-  <p id="fortsetzung">
-    Das ist die Fortsetzung des Textes.
-  </p>
+    /* &lt;style> set all speaker at page to defaults of component via ::part */
+    ::part(speakerpane) {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+</pre>
+<p id="vorwort">Das ist das Vorwort zum Text.</p>
+<honey-speech textids="seite" titletext="Seite vorlesen"></honey-speech>
+<br>
 
-  <honey-speech ident="speech2" textids="fortsetzung" titletext="Fortsetzung vorlesen"></honey-speech>
+<h2 class="textrow">Buttontext Vorlesen</h2>
+<honey-speech id="speaker1" textids="absenden-button" titletext="Buttontext vorlesen"></honey-speech>
+<br>
+<button id="absenden-button" type="submit">Anfrage absenden</button>
+
+<h2>Newsfeeder Beispiel</h2>
+
+<div>
+  <p id="text1" class="textrow">Das ist der erste Text</p>
+  <span style="display: inline-block">
+    <honey-speech id="speaker2" textids="text1" titletext="Text1 vorlesen"></honey-speech>
+    <honey-speech id="speaker3" textids="text1,text2" titletext="Alle vorlessen"></honey-speech>
+  </span>
+</div>
+<div>
+  <p id="text2" class="textrow">Das ist der zweite Text</p>
+  <honey-speech id="speaker4" textids="text2" titletext="Text2 vorlesen"></honey-speech>
+  <honey-speech id="speaker5" textids="text1,text2" titletext="Alle vorlessen"></honey-speech>
+</div>
+
+
+<h2 id="nachrichten" style="display: inline-block">Nachrichtentext Beispiel</h2>
+<honey-speech id="speaker6"
+              textids="ueberschrift1,artikel1,ueberschrift2,artikel2"></honey-speech>
+
+<h3 id="ueberschrift1">1. Artikel</h3>
+
+<p id="artikel1">
+  Das ist ein Beispieltext von einem ersten DOM Element der vorzulesen ist.
+  Der Text symbolisiert den ersten Zeitungsartikel.
+
+  <button>Das ist der Text eines Buttons welcher sich im Paragraph befindet und auch vorgelesen wird.</button>
+
+  Dies ist der Text welcher nach dem Button im Paragraph folgt.
+</p>
+
+<h3 id="ueberschrift2">2. Artikel</h3>
+<p id="artikel2">
+  Das ist der Text eines zweiten DOM Elementes. Er symbolisiert den 2. Zeitungsartikel.
+</p>
+
+
+<h2>Speaker Größe und Farben verändert</h2>
+
+<honey-speech id="s10x10" textids="artikel2"></honey-speech>
+<honey-speech id="s20x20" textids="artikel2"></honey-speech>
+<honey-speech id="s30x30" textids="artikel2"></honey-speech>
+<honey-speech id="s40x50" textids="artikel2"></honey-speech>
+<honey-speech id="s50x60" textids="artikel2"></honey-speech>
+<honey-speech id="s100x100" textids="artikel2"></honey-speech>
+<honey-speech id="s100x100transparent" textids="artikel2"></honey-speech>
+<honey-speech id="s90x100" textids="artikel2"></honey-speech>
+<honey-speech id="s50x100" textids="artikel2"></honey-speech>
+
+<pre>
+<code>
+&lt;style>
+ #s10x10::part(speakerpane){
+    --speaker-height: 10px;
+    --speaker-width: 10px;
+  }
+  #s20x20::part(speakerpane){
+    --speaker-height: 20px;
+    --speaker-width: 20px;
+    --speaker-color: red;
+    --speaker-background: LightBlue;
+  }
+  #s30x30::part(speakerpane){
+    --speaker-height: 30px;
+    --speaker-width: 30px;
+    --speaker-color: black;
+    --speaker-background: yellow;
+
+  }
+  #s40x50::part(speakerpane){
+    --speaker-height: 40px;
+    --speaker-width: 50px;
+    --speaker-color: yellow;
+    --speaker-background: LightGreen;
+  }
+  #s50x60::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 60px;
+    --speaker-color: cyan;
+  }
+  #s100x100::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-color: gray;
+  }
+  #s100x100transparent::part(speakerpane){
+    --speaker-height: 100px;
+    --speaker-width: 100px;
+    --speaker-background: none;
+    --speaker-color: gray;
+  }
+  #s90x100::part(speakerpane){
+    --speaker-height: 90px;
+    --speaker-width: 100px;
+    --speaker-color: brown;
+  }
+  #s50x100::part(speakerpane){
+    --speaker-height: 50px;
+    --speaker-width: 100px;
+    --speaker-color: green;
+  }
+&lt;/style>
+
+&lt;honey-speech id="s10x10" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s20x20" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s30x30" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s40x50" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s50x60" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s100x100" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s100x100transparent" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s90x100" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speech id="s50x100" textids="artikel2"       >&lt;/honey-speech>
+
+  </code>
+</pre>
+
 
 </body>
 </html>

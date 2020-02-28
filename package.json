@@ -1,6 +1,6 @@
 {
   "name": "@huluvu424242/honey-speech",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Text to Speech component wich is reading texts from DOM elements.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/FunThomas424242/honey-speech-component.git"
+    "url": "https://github.com/FunThomas424242/honey-speech.git"
   },
   "keywords": [
     "honey",
@@ -32,7 +32,7 @@
   "author": "FunThomas424242 alias Huluvu424242 (Thomas Schubert)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FunThomas424242/honey-speech-component/issues"
+    "url": "https://github.com/FunThomas424242/honey-speech/issues"
   },
   "scripts": {
     "build": "stencil build --docs",
@@ -41,13 +41,14 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "prepare-deliver": "npm run build",
-    "deliver": "npm publish --access=public"
+    "deliver": "npm publish --access=public",
+    "pruefeVersionen": "npm outdated"
   },
   "dependencies": {},
   "devDependencies": {
-    "@stencil/core": "1.8.9",
+    "@stencil/core": "1.8.11",
     "@types/jest": "25.1.3",
-    "@types/puppeteer": "2.0.0",
+    "@types/puppeteer": "2.0.1",
     "jest": "25.1.0",
     "jest-cli": "25.1.0",
     "puppeteer": "2.1.1"

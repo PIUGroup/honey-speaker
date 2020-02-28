@@ -50,9 +50,21 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ## releaselog
 
-### v0.0.10 unpublished
+### v0.0.11 unpublished
 
 * n/a
+
+### v0.0.10 published at 2020-02-28
+
+* support for large texts added
+* defined css variables supported
+* css ::part supported for speakerpane 
+* svg embed - no extra assets needed
+* sizeable via css
+* color of background, stroke and fill css styleable 
+* ident property computed from id attribute or random if absent 
+* example added
+* stencil/core removed from bundle again (no storybook support at now)
  
 ### v0.0.9 published at 2020-02-23
 
@@ -82,6 +94,9 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 * https://auth0.com/blog/creating-web-components-with-stencil/
 * https://www.twilio.com/blog/2018/02/creating-and-publishing-web-components-with-stencil.html
 * https://stenciljs.com/docs/introduction
+* https://css-tricks.com/styling-a-web-component/
+* https://meowni.ca/posts/part-theme-explainer/
+
 
 ## warranty
 
