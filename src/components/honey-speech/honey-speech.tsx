@@ -93,7 +93,12 @@ export class HoneySpeech {
       this.speakerStarted,
       this.speakerFinished,
       this.speakerPaused,
-      this.speakerFailed
+      this.speakerFailed,
+      undefined,
+      1,
+      1,
+      1,
+      undefined
     );
   }
 

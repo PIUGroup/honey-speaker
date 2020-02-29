@@ -9,6 +9,13 @@ export class Sprachausgabe {
 
   stimme: SpeechSynthesisVoice;
 
+  audioLang: string;
+  audioPitch: number;
+  audioRate: number;
+  audioVolume: number;
+  voiceName: string;
+
+
   speakerStarted: EventEmitter;
 
   speakerFinished: EventEmitter;
@@ -22,24 +29,70 @@ export class Sprachausgabe {
     , speakerFinished: EventEmitter
     , speakerPaused: EventEmitter
     , speakerFailed: EventEmitter
+    , audioLang: string
+    , audioPitch: number
+    , audioRate: number
+    , audioVolume: number
+    , voiceName: string
   ) {
     this.speakerStarted = speakerStarted;
     this.speakerFinished = speakerFinished;
     this.speakerPaused = speakerPaused;
     this.speakerFailed = speakerFailed;
+    this.audioLang = audioLang;
+    this.audioPitch = audioPitch;
+    this.audioRate = audioRate;
+    this.audioVolume = audioVolume;
+    this.voiceName = voiceName;
+
     this.sprachSynthese = window.speechSynthesis;
     this.stimme = this.getDefaultStimme();
     Logger.debugMessage("####constructor called");
   }
 
   getDefaultStimme(): SpeechSynthesisVoice {
+    var namedMatch: SpeechSynthesisVoice;
+    var langMatches: SpeechSynthesisVoice[] = [];
+    var langDefaultMatch: SpeechSynthesisVoice;
+    var defaultMatch: SpeechSynthesisVoice;
+
     var voices: SpeechSynthesisVoice[] = this.sprachSynthese.getVoices();
     for (var i = 0; i < voices.length; i++) {
-      if (voices[i].default) {
-        Logger.debugMessage("Voice:" + voices[i].name + voices[i].lang);
-        return voices[i];
+      if (voices[i].name === this.voiceName ||
+        voices[i].lang === this.audioLang ||
+        voices[i].default
+      ) {
+        Logger.debugMessage("Voice matched:" + voices[i].name + voices[i].lang);
+        if (voices[i].name === this.voiceName) {
+          namedMatch = voices[i];
+        }
+        if (voices[i].lang === this.audioLang &&
+          voices[i].default
+        ) {
+          langDefaultMatch = voices[i];
+        }
+        if (voices[i].lang === this.audioLang) {
+          langMatches.push(voices[i]);
+        }
+        if (voices[i].default) {
+          defaultMatch = voices[i];
+        }
       }
     }
+    // Auswertung
+    if (namedMatch) {
+      return namedMatch;
+    }
+    if (langDefaultMatch) {
+      return langDefaultMatch;
+    }
+    if (langMatches && langMatches.length>0) {
+      return langMatches[0];
+    }
+    if (defaultMatch) {
+      return defaultMatch;
+    }
+    return voices[0];
   }
 
   erzeugeVorleser(text: string, voice: SpeechSynthesisVoice): SpeechSynthesisUtterance {
@@ -66,9 +119,9 @@ export class Sprachausgabe {
       Logger.errorMessage("Fehler beim Vorlesen");
     }
 
-    leserStimmeMitText.pitch = 1;
-    leserStimmeMitText.rate = 1;
-    leserStimmeMitText.volume = 1;
+    leserStimmeMitText.pitch = this.audioPitch;
+    leserStimmeMitText.rate = this.audioRate;
+    leserStimmeMitText.volume = this.audioVolume;
     leserStimmeMitText.voice = voice;
     return leserStimmeMitText;
   }
@@ -79,9 +132,9 @@ export class Sprachausgabe {
 
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text, this.stimme);
-          Logger.infoMessage("speaker lang used:"+vorleser.lang);
-          Logger.infoMessage("speaker voice used:"+vorleser.voice.name);
-          Logger.infoMessage("speaker voice lang:"+vorleser.voice.lang);
+          Logger.infoMessage("speaker lang used:" + vorleser.lang);
+          Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
+          Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
           this.sprachSynthese.speak(vorleser);
         }
       );
