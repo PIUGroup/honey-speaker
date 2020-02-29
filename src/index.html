@@ -203,6 +203,41 @@
     }
 </pre>
 
+
+<h2>Styling über css class und costum properties verändert</h2>
+
+<honey-speech id="css1" textids="artikel2" titletext="css1"></honey-speech>
+<honey-speech textids="artikel2" class="css2class" titletext="css2"></honey-speech>
+<honey-speech id="css3" textids="artikel2" class="css3class" titletext="css3"></honey-speech>
+
+<pre>
+  # part of style sheet
+
+    #css1 {
+      --speaker-color: gray;
+    }
+
+    .css2class {
+      --speaker-color: red;
+      --speaker-background: #E8CD9A;
+    }
+
+    #css3 {
+      --speaker-color: green;
+    }
+    .css3class {
+      --speaker-background: #E8CD9A;
+    }
+
+  # part of html
+
+    &lt;honey-speech id="css1" textids="artikel2">&lt;/honey-speech>
+    &lt;honey-speech textids="artikel2" class="css2class">&lt;/honey-speech>
+    &lt;honey-speech id="css3" textids="artikel2" class="css3class">&lt;/honey-speech>
+
+</pre>
+
+
 <h2>Speaker Größe und Farben verändert über ::part</h2>
 
 <honey-speech id="s10x10" textids="artikel2" titletext="s10x10"></honey-speech>
@@ -280,39 +315,6 @@
 &lt;honey-speech id="s100x100transparent" textids="artikel2"       >&lt;/honey-speech>
 &lt;honey-speech id="s90x100" textids="artikel2"       >&lt;/honey-speech>
 &lt;honey-speech id="s50x100" textids="artikel2"       >&lt;/honey-speech>
-
-</pre>
-
-<h2>Styling über css class und costum properties</h2>
-
-<honey-speech id="css1" textids="artikel2" titletext="css1"></honey-speech>
-<honey-speech textids="artikel2" class="css2class" titletext="css2"></honey-speech>
-<honey-speech id="css3" textids="artikel2" class="css3class" titletext="css3"></honey-speech>
-
-<pre>
-  # part of style sheet
-
-    #css1 {
-      --speaker-color: gray;
-    }
-
-    .css2class {
-      --speaker-color: red;
-      --speaker-background: #E8CD9A;
-    }
-
-    #css3 {
-      --speaker-color: green;
-    }
-    .css3class {
-      --speaker-background: #E8CD9A;
-    }
-
-  # part of html
-
-    &lt;honey-speech id="css1" textids="artikel2">&lt;/honey-speech>
-    &lt;honey-speech textids="artikel2" class="css2class">&lt;/honey-speech>
-    &lt;honey-speech id="css3" textids="artikel2" class="css3class">&lt;/honey-speech>
 
 </pre>
 
