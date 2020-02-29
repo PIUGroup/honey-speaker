@@ -50,9 +50,13 @@ To the [live demo](https://funthomas424242.github.io/honey-speech-component/inde
 
 ## releaselog
 
-### v0.0.11 unpublished
+### v0.0.12 unpublished
 
 * n/a
+
+### v0.0.11 published at 2020-02-29
+
+* support of voice parameter
 
 ### v0.0.10 published at 2020-02-28
 
