@@ -142,4 +142,4 @@ Maybe you must via about:config set the layout.css.shadow-parts.enabled to true.
 
 Generell 
 
-* [Can I use with browsers?](layout.css.shadow-parts.enabled to true)
+* [Can I use with browsers?](https://caniuse.com/#feat=mdn-css_selectors_part)
