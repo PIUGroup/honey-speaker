@@ -131,8 +131,12 @@ export class Sprachausgabe {
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
           Logger.infoMessage("speaker lang used:" + vorleser.lang);
-          Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
-          Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
+          if( vorleser.voice ) {
+            Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
+            Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
+          }else{
+            Logger.infoMessage("no voice matched for text: "+text);
+          }
           this.sprachSynthese.speak(vorleser);
         }
       );
