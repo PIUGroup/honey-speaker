@@ -1,5 +1,5 @@
 .speakerimage {
-  background: var(--speaker-background, #E8CD9A);
+  background: var(--speaker-background, transparent);
   stroke: var(--speaker-color, blue);
   fill: var(--speaker-color, blue);
   padding: var(--speaker-padding, 5px);
