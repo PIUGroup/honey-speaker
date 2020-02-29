@@ -123,37 +123,8 @@
 </head>
 <body id="seite" style="display: block">
 
-<h1>Stories zur Verwendung der honey-speech Komponente</h1>
-
-
-<h2>Styling der Komponente</h2>
-<h3>Definition of style for all components identically</h3>
-<pre>
-  /* &lt;style> set all speaker at page to defaults of component via :root */
-    :root {
-      --speaker-background: #E8CD9A;
-      --speaker-color: blue;
-      --speaker-padding: 5px;
-      --speaker-font-size: medium;
-      --speaker-border: 0;
-      --speaker-width: 36px;
-      --speaker-height: 36px;
-    }
-
-  or via part
-
-    /* &lt;style> set all speaker at page to defaults of component via ::part */
-    ::part(speakerpane) {
-      --speaker-background: #E8CD9A;
-      --speaker-color: blue;
-      --speaker-padding: 5px;
-      --speaker-font-size: medium;
-      --speaker-border: 0;
-      --speaker-width: 36px;
-      --speaker-height: 36px;
-    }
-</pre>
-
+<h1>Nutzung der honey-speech Komponente</h1>
+<h2>Beispiele zur Benutzung</h2>
 
 <p id="vorwort">Das ist das Vorwort zum Text.</p>
 <honey-speech textids="seite" titletext="Seite vorlesen"></honey-speech>
@@ -200,6 +171,34 @@
   Das ist der Text eines zweiten DOM Elementes. Er symbolisiert den 2. Zeitungsartikel.
 </p>
 
+
+<h2>Styling der Komponente</h2>
+<h3>Globale Definitionen um alle Komponenten identisch zu stylen</h3>
+<pre>
+  /* &lt;style> set all speaker at page to defaults of component via :root */
+    :root {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+
+  or via part
+
+    /* &lt;style> set all speaker at page to defaults of component via ::part */
+    ::part(speakerpane) {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+</pre>
 
 <h2>Speaker Größe und Farben verändert</h2>
 
@@ -277,7 +276,7 @@
 
 </pre>
 
-<h2>Styling via css class and costum properties</h2>
+<h2>Styling über css class und costum properties</h2>
 
 <honey-speech id="css1" textids="artikel2" titletext="css1"></honey-speech>
 <honey-speech textids="artikel2" class="css2class" titletext="css2"></honey-speech>
