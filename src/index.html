@@ -15,7 +15,6 @@
     }
 
     #speaker1::part(speakerpane) {
-      --speaker-background: none;
       --speaker-color: red;
       --speaker-width: 20px;
       --speaker-height: 20px;
@@ -47,6 +46,7 @@
     #s10x10::part(speakerpane) {
       --speaker-height: 10px;
       --speaker-width: 10px;
+      --speaker-background: #E8CD9A;
     }
 
     #s20x20::part(speakerpane) {
@@ -75,18 +75,19 @@
       --speaker-height: 50px;
       --speaker-width: 60px;
       --speaker-color: cyan;
+      --speaker-background: #E8CD9A;
     }
 
     #s100x100::part(speakerpane) {
       --speaker-height: 100px;
       --speaker-width: 100px;
       --speaker-color: gray;
+      --speaker-background: #E8CD9A;
     }
 
     #s100x100transparent::part(speakerpane) {
       --speaker-height: 100px;
       --speaker-width: 100px;
-      --speaker-background: none;
       --speaker-color: gray;
     }
 
@@ -94,30 +95,32 @@
       --speaker-height: 90px;
       --speaker-width: 100px;
       --speaker-color: brown;
+      --speaker-background: #E8CD9A;
     }
 
     #s50x100::part(speakerpane) {
       --speaker-height: 50px;
       --speaker-width: 100px;
       --speaker-color: green;
+      --speaker-background: #E8CD9A;
     }
 
     /*CSS Style via class*/
 
     #css1 {
-      --speaker-color: yellow;
+      --speaker-color: gray;
     }
 
     .css2class {
       --speaker-color: red;
-      --speaker-background: none;
+      --speaker-background: #E8CD9A;
     }
 
     #css3 {
       --speaker-color: green;
     }
     .css3class {
-      --speaker-background: none;
+      --speaker-background: #E8CD9A;
     }
   </style>
 </head>
@@ -177,7 +180,7 @@
 <pre>
   /* &lt;style> set all speaker at page to defaults of component via :root */
     :root {
-      --speaker-background: #E8CD9A;
+      --speaker-background: transparent;
       --speaker-color: blue;
       --speaker-padding: 5px;
       --speaker-font-size: medium;
@@ -190,7 +193,7 @@
 
     /* &lt;style> set all speaker at page to defaults of component via ::part */
     ::part(speakerpane) {
-      --speaker-background: #E8CD9A;
+      --speaker-background: transparent;
       --speaker-color: blue;
       --speaker-padding: 5px;
       --speaker-font-size: medium;
@@ -217,6 +220,7 @@
  #s10x10::part(speakerpane){
     --speaker-height: 10px;
     --speaker-width: 10px;
+    --speaker-background: #E8CD9A;
   }
   #s20x20::part(speakerpane){
     --speaker-height: 20px;
@@ -241,27 +245,30 @@
     --speaker-height: 50px;
     --speaker-width: 60px;
     --speaker-color: cyan;
+    --speaker-background: #E8CD9A;
   }
   #s100x100::part(speakerpane){
     --speaker-height: 100px;
     --speaker-width: 100px;
     --speaker-color: gray;
+    --speaker-background: #E8CD9A;
   }
   #s100x100transparent::part(speakerpane){
     --speaker-height: 100px;
     --speaker-width: 100px;
-    --speaker-background: none;
     --speaker-color: gray;
   }
   #s90x100::part(speakerpane){
     --speaker-height: 90px;
     --speaker-width: 100px;
     --speaker-color: brown;
+    --speaker-background: #E8CD9A;
   }
   #s50x100::part(speakerpane){
     --speaker-height: 50px;
     --speaker-width: 100px;
     --speaker-color: green;
+    --speaker-background: #E8CD9A;
   }
 
 &lt;honey-speech id="s10x10" textids="artikel2"       >&lt;/honey-speech>
@@ -286,19 +293,19 @@
   # part of style sheet
 
     #css1 {
-      --speaker-color: yellow;
+      --speaker-color: gray;
     }
 
     .css2class {
       --speaker-color: red;
-      --speaker-background: none;
+      --speaker-background: #E8CD9A;
     }
 
     #css3 {
       --speaker-color: green;
     }
     .css3class {
-      --speaker-background: none;
+      --speaker-background: #E8CD9A;
     }
 
   # part of html
