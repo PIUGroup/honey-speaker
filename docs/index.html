@@ -9,20 +9,11 @@
           src='https://unpkg.com/@huluvu424242/honey-speech@0.0.10/dist/honey-speech/honey-speech.js'></script>
   <!--  <script type="module" src='../dist/honey-speech/honey-speech.js'></script>-->
 
+
   <style>
     .textrow {
       display: inline-block;
       vertical-align: super;
-    }
-
-    ::part(speakerpane) {
-      --speaker-background: #E8CD9A;
-      --speaker-color: blue;
-      --speaker-padding: 5px;
-      --speaker-font-size: medium;
-      --speaker-border: 0;
-      --speaker-width: 36px;
-      --speaker-height: 36px;
     }
 
     #speaker1::part(speakerpane) {
@@ -112,40 +103,31 @@
       --speaker-width: 100px;
       --speaker-color: green;
     }
+
+    /*CSS Style via class*/
+
+    #css1 {
+      --speaker-color: yellow;
+    }
+
+    .css2class {
+      --speaker-color: red;
+      --speaker-background: none;
+    }
+
+    #css3 {
+      --speaker-color: green;
+    }
+    .css3class {
+      --speaker-background: none;
+    }
   </style>
 </head>
 <body id="seite" style="display: block">
 
-<h1>Stories zur Verwendung der honey-speech Komponente</h1>
+<h1>Nutzung der honey-speech Komponente</h1>
+<h2>Beispiele zur Benutzung</h2>
 
-
-<h2>Styling der Komponente</h2>
-
-<pre>
-  /* &lt;style> set all speaker at page to defaults of component via :root */
-    :root {
-      --speaker-background: #E8CD9A;
-      --speaker-color: blue;
-      --speaker-padding: 5px;
-      --speaker-font-size: medium;
-      --speaker-border: 0;
-      --speaker-width: 36px;
-      --speaker-height: 36px;
-    }
-
-  or via part
-
-    /* &lt;style> set all speaker at page to defaults of component via ::part */
-    ::part(speakerpane) {
-      --speaker-background: #E8CD9A;
-      --speaker-color: blue;
-      --speaker-padding: 5px;
-      --speaker-font-size: medium;
-      --speaker-border: 0;
-      --speaker-width: 36px;
-      --speaker-height: 36px;
-    }
-</pre>
 <p id="vorwort">Das ist das Vorwort zum Text.</p>
 <honey-speech textids="seite" titletext="Seite vorlesen"></honey-speech>
 <br>
@@ -192,6 +174,34 @@
 </p>
 
 
+<h2>Styling der Komponente</h2>
+<h3>Globale Definitionen um alle Komponenten identisch zu stylen</h3>
+<pre>
+  /* &lt;style> set all speaker at page to defaults of component via :root */
+    :root {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+
+  or via part
+
+    /* &lt;style> set all speaker at page to defaults of component via ::part */
+    ::part(speakerpane) {
+      --speaker-background: #E8CD9A;
+      --speaker-color: blue;
+      --speaker-padding: 5px;
+      --speaker-font-size: medium;
+      --speaker-border: 0;
+      --speaker-width: 36px;
+      --speaker-height: 36px;
+    }
+</pre>
+
 <h2>Speaker Größe und Farben verändert</h2>
 
 <honey-speech id="s10x10" textids="artikel2"></honey-speech>
@@ -205,8 +215,7 @@
 <honey-speech id="s50x100" textids="artikel2"></honey-speech>
 
 <pre>
-<code>
-&lt;style>
+  /* part of css */
  #s10x10::part(speakerpane){
     --speaker-height: 10px;
     --speaker-width: 10px;
@@ -256,7 +265,6 @@
     --speaker-width: 100px;
     --speaker-color: green;
   }
-&lt;/style>
 
 &lt;honey-speech id="s10x10" textids="artikel2"       >&lt;/honey-speech>
 &lt;honey-speech id="s20x20" textids="artikel2"       >&lt;/honey-speech>
@@ -268,9 +276,40 @@
 &lt;honey-speech id="s90x100" textids="artikel2"       >&lt;/honey-speech>
 &lt;honey-speech id="s50x100" textids="artikel2"       >&lt;/honey-speech>
 
-  </code>
 </pre>
 
+<h2>Styling über css class und costum properties</h2>
+
+<honey-speech id="css1" textids="artikel2" titletext="css1"></honey-speech>
+<honey-speech textids="artikel2" class="css2class" titletext="css2"></honey-speech>
+<honey-speech id="css3" textids="artikel2" class="css3class" titletext="css3"></honey-speech>
+
+<pre>
+  # part of style sheet
+
+    #css1 {
+      --speaker-color: yellow;
+    }
+
+    .css2class {
+      --speaker-color: red;
+      --speaker-background: none;
+    }
+
+    #css3 {
+      --speaker-color: green;
+    }
+    .css3class {
+      --speaker-background: none;
+    }
+
+  # part of html
+
+    &lt;honey-speech id="css1" textids="artikel2">&lt;/honey-speech>
+    &lt;honey-speech textids="artikel2" class="css2class">&lt;/honey-speech>
+    &lt;honey-speech id="css3" textids="artikel2" class="css3class">&lt;/honey-speech>
+
+</pre>
 
 </body>
 </html>
