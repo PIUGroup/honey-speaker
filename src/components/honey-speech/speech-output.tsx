@@ -74,15 +74,14 @@ export class Sprachausgabe {
   }
 
   textVorlesen(zuLesenderText: string) {
-    if (this.sprachSynthese.speaking) {
-      Logger.debugMessage("Spricht bereits");
-      // return;
-    }
     if (zuLesenderText) {
       const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
 
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text, this.stimme);
+          Logger.infoMessage("speaker lang used:"+vorleser.lang);
+          Logger.infoMessage("speaker voice used:"+vorleser.voice.name);
+          Logger.infoMessage("speaker voice lang:"+vorleser.voice.lang);
           this.sprachSynthese.speak(vorleser);
         }
       );
