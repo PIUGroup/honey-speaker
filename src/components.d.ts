@@ -20,6 +20,18 @@ export namespace Components {
     */
     'audiolang': string;
     /**
+    * pitch for Web Speech API: default: 1
+    */
+    'audiopitch': number;
+    /**
+    * rate for Web Speech API: default 1
+    */
+    'audiorate': number;
+    /**
+    * volume for Web Speech API: default 1
+    */
+    'audiovolume': number;
+    /**
     * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n': object;
@@ -41,6 +53,10 @@ export namespace Components {
     * title text for a11y = tooltip default: Vorlesen
     */
     'titletext': string;
+    /**
+    * voice name used of Web Speech API: default undefined
+    */
+    'voicename': string;
   }
 }
 
@@ -67,6 +83,18 @@ declare namespace LocalJSX {
     * i18n language ident for Web Speech API: de-DE or en or de ...
     */
     'audiolang'?: string;
+    /**
+    * pitch for Web Speech API: default: 1
+    */
+    'audiopitch'?: number;
+    /**
+    * rate for Web Speech API: default 1
+    */
+    'audiorate'?: number;
+    /**
+    * volume for Web Speech API: default 1
+    */
+    'audiovolume'?: number;
     /**
     * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
@@ -105,6 +133,10 @@ declare namespace LocalJSX {
     * title text for a11y = tooltip default: Vorlesen
     */
     'titletext'?: string;
+    /**
+    * voice name used of Web Speech API: default undefined
+    */
+    'voicename'?: string;
   }
 
   interface IntrinsicElements {

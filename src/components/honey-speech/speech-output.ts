@@ -1,7 +1,5 @@
-"use strict";
-
-import {Logger} from "./log-helper";
 import {EventEmitter} from "@stencil/core";
+import {Logger} from "./log-helper";
 
 export class Sprachausgabe {
 
@@ -35,6 +33,7 @@ export class Sprachausgabe {
     , audioVolume: number
     , voiceName: string
   ) {
+    this.sprachSynthese =  window.speechSynthesis;
     this.speakerStarted = speakerStarted;
     this.speakerFinished = speakerFinished;
     this.speakerPaused = speakerPaused;
@@ -44,8 +43,6 @@ export class Sprachausgabe {
     this.audioRate = audioRate;
     this.audioVolume = audioVolume;
     this.voiceName = voiceName;
-
-    this.sprachSynthese = window.speechSynthesis;
     this.stimme = this.getDefaultStimme();
     Logger.debugMessage("####constructor called");
   }

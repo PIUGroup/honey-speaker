@@ -1,5 +1,3 @@
-"use strict";
-
 export class Logger {
 
     static logMessage(message) {

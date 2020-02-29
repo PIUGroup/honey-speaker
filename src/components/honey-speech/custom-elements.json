@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-02-29T16:24:09",
+  "timestamp": "2020-02-29T19:12:14",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.11",
@@ -42,6 +42,54 @@
           "values": [
             {
               "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "audiopitch",
+          "type": "number",
+          "mutable": false,
+          "attr": "audiopitch",
+          "reflectToAttr": false,
+          "docs": "pitch for Web Speech API: default: 1",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "audiorate",
+          "type": "number",
+          "mutable": false,
+          "attr": "audiorate",
+          "reflectToAttr": false,
+          "docs": "rate for Web Speech API: default 1",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "audiovolume",
+          "type": "number",
+          "mutable": false,
+          "attr": "audiovolume",
+          "reflectToAttr": false,
+          "docs": "volume for Web Speech API: default 1",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
             }
           ],
           "optional": false,
@@ -126,6 +174,22 @@
           "attr": "titletext",
           "reflectToAttr": false,
           "docs": "title text for a11y = tooltip\ndefault: Vorlesen",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "voicename",
+          "type": "string",
+          "mutable": false,
+          "attr": "voicename",
+          "reflectToAttr": false,
+          "docs": "voice name used of Web Speech API: default undefined",
           "docsTags": [],
           "values": [
             {

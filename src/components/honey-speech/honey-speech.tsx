@@ -1,5 +1,3 @@
-"use strict";
-
 import {Component, Element, Event, EventEmitter, h, Listen, Prop} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
@@ -56,6 +54,26 @@ export class HoneySpeech {
   @Prop() audiolang: string;
 
   /**
+   * pitch for Web Speech API: default: 1
+   */
+  @Prop() audiopitch: number;
+
+  /**
+   * rate for Web Speech API: default 1
+   */
+  @Prop() audiorate: number;
+
+  /**
+   * volume for Web Speech API: default 1
+   */
+  @Prop() audiovolume: number;
+
+  /**
+   * voice name used of Web Speech API: default undefined
+   */
+  @Prop() voicename: string;
+
+  /**
    * An JSON Object with i18n text values separeted by language idents:
    * currently unused
    *
@@ -89,16 +107,20 @@ export class HoneySpeech {
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
     if (!this.iconheight) this.iconheight = "500";
     if (!this.iconwidth) this.iconwidth = "500";
+    if (!this.audiopitch) this.audiopitch = 1;
+    if (!this.audiorate) this.audiorate = 1;
+    if (!this.audiovolume) this.audiovolume = 1;
+
     this.sprachAusgabe = new Sprachausgabe(
       this.speakerStarted,
       this.speakerFinished,
       this.speakerPaused,
       this.speakerFailed,
-      undefined,
-      1,
-      1,
-      1,
-      undefined
+      this.audiolang,
+      this.audiopitch,
+      this.audiorate,
+      this.audiovolume,
+      this.voicename
     );
   }
 
@@ -124,6 +146,7 @@ export class HoneySpeech {
   @Listen('click', {capture: true})
   protected handleClick() {
     const texte: string[] = this.getTexte();
+
     texte.forEach(text =>
       this.sprachAusgabe.textVorlesen(text+" ")
     );
