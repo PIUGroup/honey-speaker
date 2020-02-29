@@ -124,6 +124,37 @@
     .css3class {
       --speaker-background: #E8CD9A;
     }
+
+    #pitch0 {
+      --speaker-color: green;
+    }
+    #pitch2 {
+      --speaker-color: red;
+    }
+    #rate0 {
+      --speaker-color: gray;
+    }
+    #rate2 {
+      --speaker-color: red;
+    }
+    #vol0 {
+      --speaker-color: gray;
+    }
+    #vol1 {
+      --speaker-color: green;
+    }
+    #lang1 {
+      --speaker-color: green;
+    }
+    #lang2 {
+      --speaker-color: gray;
+    }
+    #name1 {
+      --speaker-color: green;
+    }
+    #name2 {
+      --speaker-color: gray;
+    }
   </style>
 </head>
 <body id="seite" style="display: block">
@@ -176,6 +207,104 @@
   Das ist der Text eines zweiten DOM Elementes. Er symbolisiert den 2. Zeitungsartikel.
 </p>
 
+<h2>Ändern der Audio Parameter</h2>
+<h3>Tonhöhe</h3>
+<honey-speech id="pitch0"  textids="vorwort" titletext="pitch0 (Höhe 0.1)"
+              audiopitch="0.1"
+></honey-speech>
+<honey-speech id="pitch1"  textids="vorwort" titletext="pitch1 (Höhe 1 = default)"
+              audiopitch="1"
+></honey-speech>
+<honey-speech id="pitch2"  textids="vorwort" titletext="pitch2 (Höhe 2 :-) )"
+              audiopitch="2"
+></honey-speech>
+
+<pre>
+  &lt;honey-speech id="pitch0"  textids="vorwort" titletext="pitch0 (Höhe 0.1)"
+                audiopitch="0.1">&lt;/honey-speech>
+  &lt;honey-speech id="pitch1"  textids="vorwort" titletext="pitch1 (Höhe 1 = default)"
+                audiopitch="1">&lt;/honey-speech>
+  &lt;honey-speech id="pitch2"  textids="vorwort" titletext="pitch2 (Höhe 2 :-) )"
+                audiopitch="2">&lt;/honey-speech>
+</pre>
+
+<h3>Geschwindigkeit</h3>
+<honey-speech id="rate0"  textids="vorwort" titletext="rate0 (Rate 0.1)"
+              audiorate="0.1"
+></honey-speech>
+<honey-speech id="rate1"  textids="vorwort" titletext="rate1 (Rate 1 = default)"
+              audiorate="1"
+></honey-speech>
+<honey-speech id="rate2"  textids="vorwort" titletext="rate2 (Rate 2 :-) )"
+              audiorate="2"
+></honey-speech>
+<pre>
+  &lt;honey-speech id="rate0"  textids="vorwort" titletext="rate0 (Rate 0.1)"
+                audiorate="0.1">&lt;/honey-speech>
+  &lt;honey-speech id="rate1"  textids="vorwort" titletext="rate1 (Rate 1 = default)"
+                audiorate="1">&lt;/honey-speech>
+  &lt;honey-speech id="rate2"  textids="vorwort" titletext="rate2 (Rate 2 :-) )"
+                audiorate="2">&lt;/honey-speech>
+</pre>
+
+<h3>Lautstärke</h3>
+<honey-speech id="vol0"  textids="vorwort" titletext="vol0 (Volume 0.1)"
+              audiovolume="0.1"
+></honey-speech>
+<honey-speech id="vol1"  textids="vorwort" titletext="vol1 (Volume 0.5)"
+              audiovolume="0.5"
+></honey-speech>
+<honey-speech id="vol2"  textids="vorwort" titletext="vol2 (Volume 1 = default)"
+              audiovolume="1"
+></honey-speech>
+<pre>
+  &lt;honey-speech id="vol0"  textids="vorwort" titletext="vol0 (Volume 0.1)"
+                audiovolume="0.1">&lt;/honey-speech>
+  &lt;honey-speech id="vol1"  textids="vorwort" titletext="vol1 (Volume 0.5)"
+                audiovolume="0.5">&lt;/honey-speech>
+  &lt;honey-speech id="vol2"  textids="vorwort" titletext="vol2 (Volume 1 = default)"
+                audiovolume="1">&lt;/honey-speech>
+</pre>
+
+<h3>Stimme nach Sprache</h3>
+<honey-speech id="lang0"  textids="vorwort" titletext="lang0 (Lang de-DE)"
+              audiolang="de-DE"
+></honey-speech>
+<honey-speech id="lang1"  textids="vorwort" titletext="lang1 (Lang en-US)"
+              audiolang="en-US"
+></honey-speech>
+<honey-speech id="lang2"  textids="vorwort" titletext="lang2 (Lang ru-RU)"
+              audiolang="ru-RU"
+></honey-speech>
+
+<pre>
+  &lt;honey-speech id="lang0"  textids="vorwort" titletext="lang0 (Lang de-DE)"
+                audiolang="de-DE">&lt;/honey-speech>
+  &lt;honey-speech id="lang1"  textids="vorwort" titletext="lang1 (Lang en-US)"
+                audiolang="en-US">&lt;/honey-speech>
+  &lt;honey-speech id="lang2"  textids="vorwort" titletext="lang2 (Lang ru-RU)"
+                audiolang="ru-RU">&lt;/honey-speech>
+</pre>
+
+<h3>Stimme nach Namen</h3>
+<honey-speech id="name0"  textids="vorwort" titletext="name0 (Voice Google Deutsch)"
+              voicename="Google Deutsch"
+></honey-speech>
+<honey-speech id="name1"  textids="vorwort" titletext="name1 (Voice Google US English)"
+              voicename="Google US English"
+></honey-speech>
+<honey-speech id="name2"  textids="vorwort" titletext="name2 (Voice Google русский)"
+              voicename="Google русский"
+></honey-speech>
+
+<pre>
+  &lt;honey-speech id="name0"  textids="vorwort" titletext="name0 (Voice Google Deutsch)"
+                voicename="Google Deutsch">&lt;/honey-speech>
+  &lt;honey-speech id="name1"  textids="vorwort" titletext="name1 (Voice Google US English)"
+                voicename="Google US English">&lt;/honey-speech>
+  &lt;honey-speech id="name2"  textids="vorwort" titletext="name2 (Voice Google русский)"
+                voicename="Google русский">&lt;/honey-speech>
+</pre>
 
 <h2>Styling der Komponente</h2>
 <h3>Globale Definitionen um alle Komponenten identisch zu stylen</h3>
