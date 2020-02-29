@@ -43,7 +43,7 @@ export class Sprachausgabe {
     this.audioRate = audioRate;
     this.audioVolume = audioVolume;
     this.voiceName = voiceName;
-    this.stimme = this.getDefaultStimme();
+    this.stimme = undefined;
     Logger.debugMessage("####constructor called");
   }
 
@@ -125,6 +125,10 @@ export class Sprachausgabe {
   }
 
   textVorlesen(zuLesenderText: string) {
+    if( !this.stimme){
+      Logger.infoMessage("set default voice");
+      this.stimme = this.getDefaultStimme();
+    }
     if (zuLesenderText) {
       const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
 
