@@ -12,24 +12,18 @@ import {Logger} from "./log-helper";
 })
 export class HoneySpeech {
 
-  @Element() htmlElement: HTMLElement;
-
   sprachAusgabe: Sprachausgabe;
 
+  ident: string;
+
+  @Element() htmlElement: HTMLElement;
+
 
   /**
-   * An comma separated list  with ids of DOM elements which inner text should be speech.
+   * An comma separated list  with ids of DOM elements
+   * which inner text should be speech.
    */
   @Prop() textids!: string;
-
-  /**
-   * identifier prefix for input element
-   * default: "honey-speech1"
-   */
-  @Prop({
-    reflect: false,
-    mutable: true
-  }) ident: string;
 
   /**
    * icon width
@@ -45,29 +39,25 @@ export class HoneySpeech {
   @Prop() iconheight: string;
 
   /**
-   * iconbackground color
-   */
-  @Prop() iconbackground: string;
-
-  /**
    * alt text for a11y
    * default: "Symbol eines sprechenden Lautsprechers"
    */
   @Prop() alttext: string;
 
   /**
-   * title text for a11y
+   * title text for a11y = tooltip
    * default: Vorlesen
    */
   @Prop() titletext: string;
 
   /**
-   * i18n language ident: deDE or en or de ...
+   * i18n language ident for Web Speech API: de-DE or en or de ...
    */
-  @Prop() langid: string;
+  @Prop() audiolang: string;
 
   /**
    * An JSON Object with i18n text values separeted by language idents:
+   * currently unused
    *
    * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
    */
@@ -107,10 +97,6 @@ export class HoneySpeech {
     );
   }
 
-  componentDidLoad() {
-    // nixe
-  }
-
   private getTexte(): string[] {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
@@ -133,7 +119,6 @@ export class HoneySpeech {
   @Listen('click', {capture: true})
   protected handleClick() {
     const texte: string[] = this.getTexte();
-
     texte.forEach(text =>
       this.sprachAusgabe.textVorlesen(text+" ")
     );

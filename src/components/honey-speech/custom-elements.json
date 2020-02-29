@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-02-29T14:09:13",
+  "timestamp": "2020-02-29T15:35:21",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.11",
@@ -32,31 +32,31 @@
           "required": false
         },
         {
-          "name": "i18n",
-          "type": "object",
+          "name": "audiolang",
+          "type": "string",
           "mutable": false,
+          "attr": "audiolang",
           "reflectToAttr": false,
-          "docs": "An JSON Object with i18n text values separeted by language idents:\n\n{ \"deDE\" : { \"error\": \"Fehler}, \"en\" : { \"error\" : \"Error\"}}",
+          "docs": "i18n language ident for Web Speech API: de-DE or en or de ...",
           "docsTags": [],
           "values": [
             {
-              "type": "object"
+              "type": "string"
             }
           ],
           "optional": false,
           "required": false
         },
         {
-          "name": "iconbackground",
-          "type": "string",
+          "name": "i18n",
+          "type": "object",
           "mutable": false,
-          "attr": "iconbackground",
           "reflectToAttr": false,
-          "docs": "iconbackground color",
+          "docs": "An JSON Object with i18n text values separeted by language idents:\ncurrently unused\n\n{ \"deDE\" : { \"error\": \"Fehler}, \"en\" : { \"error\" : \"Error\"}}",
           "docsTags": [],
           "values": [
             {
-              "type": "string"
+              "type": "object"
             }
           ],
           "optional": false,
@@ -104,44 +104,12 @@
           "required": false
         },
         {
-          "name": "ident",
-          "type": "string",
-          "mutable": true,
-          "attr": "ident",
-          "reflectToAttr": false,
-          "docs": "identifier prefix for input element\ndefault: \"honey-speech1\"",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": false,
-          "required": false
-        },
-        {
-          "name": "langid",
-          "type": "string",
-          "mutable": false,
-          "attr": "langid",
-          "reflectToAttr": false,
-          "docs": "i18n language ident: deDE or en or de ...",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": false,
-          "required": false
-        },
-        {
           "name": "textids",
           "type": "string",
           "mutable": false,
           "attr": "textids",
           "reflectToAttr": false,
-          "docs": "An comma separated list  with ids of DOM elements which inner text should be speech.",
+          "docs": "An comma separated list  with ids of DOM elements\nwhich inner text should be speech.",
           "docsTags": [],
           "values": [
             {
@@ -157,7 +125,7 @@
           "mutable": false,
           "attr": "titletext",
           "reflectToAttr": false,
-          "docs": "title text for a11y\ndefault: Vorlesen",
+          "docs": "title text for a11y = tooltip\ndefault: Vorlesen",
           "docsTags": [],
           "values": [
             {

@@ -16,13 +16,13 @@ export namespace Components {
     */
     'alttext': string;
     /**
-    * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+    * i18n language ident for Web Speech API: de-DE or en or de ...
+    */
+    'audiolang': string;
+    /**
+    * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n': object;
-    /**
-    * iconbackground color
-    */
-    'iconbackground': string;
     /**
     * icon height, default: 36
     * @param iconheight
@@ -34,19 +34,11 @@ export namespace Components {
     */
     'iconwidth': string;
     /**
-    * identifier prefix for input element default: "honey-speech1"
-    */
-    'ident': string;
-    /**
-    * i18n language ident: deDE or en or de ...
-    */
-    'langid': string;
-    /**
     * An comma separated list  with ids of DOM elements which inner text should be speech.
     */
     'textids': string;
     /**
-    * title text for a11y default: Vorlesen
+    * title text for a11y = tooltip default: Vorlesen
     */
     'titletext': string;
   }
@@ -72,13 +64,13 @@ declare namespace LocalJSX {
     */
     'alttext'?: string;
     /**
-    * An JSON Object with i18n text values separeted by language idents:  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+    * i18n language ident for Web Speech API: de-DE or en or de ...
+    */
+    'audiolang'?: string;
+    /**
+    * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
     */
     'i18n'?: object;
-    /**
-    * iconbackground color
-    */
-    'iconbackground'?: string;
     /**
     * icon height, default: 36
     * @param iconheight
@@ -89,14 +81,6 @@ declare namespace LocalJSX {
     * icon width default: 36
     */
     'iconwidth'?: string;
-    /**
-    * identifier prefix for input element default: "honey-speech1"
-    */
-    'ident'?: string;
-    /**
-    * i18n language ident: deDE or en or de ...
-    */
-    'langid'?: string;
     /**
     * Fired if the stimme has failed to speak.
     */
@@ -118,7 +102,7 @@ declare namespace LocalJSX {
     */
     'textids': string;
     /**
-    * title text for a11y default: Vorlesen
+    * title text for a11y = tooltip default: Vorlesen
     */
     'titletext'?: string;
   }
