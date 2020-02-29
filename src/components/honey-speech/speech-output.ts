@@ -86,7 +86,7 @@ export class Sprachausgabe {
     if (langDefaultMatch) {
       return langDefaultMatch;
     }
-    if (langMatches && langMatches.length>0) {
+    if (langMatches && langMatches.length > 0) {
       return langMatches[0];
     }
     if (defaultMatch) {
@@ -95,35 +95,36 @@ export class Sprachausgabe {
     return voices[0];
   }
 
-  erzeugeVorleser(text: string, voice: SpeechSynthesisVoice): SpeechSynthesisUtterance {
+  erzeugeVorleser(text: string): SpeechSynthesisUtterance {
     Logger.debugMessage("erzeugeVorleser started");
-    const leserStimmeMitText: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
+    const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
-    leserStimmeMitText.onend = () => {
+    vorleser.onend = () => {
       this.speakerFinished.emit();
       Logger.debugMessage("Vorlesen beendet");
     }
 
-    leserStimmeMitText.onstart = () => {
+    vorleser.onstart = () => {
       this.speakerStarted.emit();
       Logger.debugMessage("Vorlesen gestartet");
     }
 
-    leserStimmeMitText.onpause = () => {
+    vorleser.onpause = () => {
       this.speakerPaused.emit();
       Logger.debugMessage("Pause mit Vorlesen");
     }
 
-    leserStimmeMitText.onerror = () => {
+    vorleser.onerror = () => {
       this.speakerFailed.emit();
       Logger.errorMessage("Fehler beim Vorlesen");
     }
 
-    leserStimmeMitText.pitch = this.audioPitch;
-    leserStimmeMitText.rate = this.audioRate;
-    leserStimmeMitText.volume = this.audioVolume;
-    leserStimmeMitText.voice = voice;
-    return leserStimmeMitText;
+    vorleser.pitch = this.audioPitch;
+    vorleser.rate = this.audioRate;
+    vorleser.volume = this.audioVolume;
+    vorleser.voice = this.stimme;
+    vorleser.lang = this.audioLang;
+    return vorleser;
   }
 
   textVorlesen(zuLesenderText: string) {
@@ -131,7 +132,7 @@ export class Sprachausgabe {
       const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
 
       texte.forEach(text => {
-          const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text, this.stimme);
+          const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
           Logger.infoMessage("speaker lang used:" + vorleser.lang);
           Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
           Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
