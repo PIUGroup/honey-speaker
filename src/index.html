@@ -14,27 +14,27 @@
       vertical-align: super;
     }
 
-    #speaker1::part(speakerpane) {
+    #speaker1 {
       --speaker-color: red;
       --speaker-width: 20px;
       --speaker-height: 20px;
     }
 
-    #speaker2::part(speakerpane), #speaker4::part(speakerpane) {
+    #speaker2, #speaker4 {
       --speaker-background: cyan;
       --speaker-color: darkblue;
       --speaker-height: 20px;
       --speaker-width: 20px;
     }
 
-    #speaker3::part(speakerpane), #speaker5::part(speakerpane) {
+    #speaker3, #speaker5 {
       --speaker-background: lightgreen;
       --speaker-color: darkblue;
       --speaker-height: 20px;
       --speaker-width: 20px;
     }
 
-    #speaker6::part(speakerpane) {
+    #speaker6 {
       --speaker-background: yellow;
       --speaker-color: red;
       --speaker-height: 15px;
@@ -203,17 +203,17 @@
     }
 </pre>
 
-<h2>Speaker Größe und Farben verändert</h2>
+<h2>Speaker Größe und Farben verändert über ::part</h2>
 
-<honey-speech id="s10x10" textids="artikel2"></honey-speech>
-<honey-speech id="s20x20" textids="artikel2"></honey-speech>
-<honey-speech id="s30x30" textids="artikel2"></honey-speech>
-<honey-speech id="s40x50" textids="artikel2"></honey-speech>
-<honey-speech id="s50x60" textids="artikel2"></honey-speech>
-<honey-speech id="s100x100" textids="artikel2"></honey-speech>
-<honey-speech id="s100x100transparent" textids="artikel2"></honey-speech>
-<honey-speech id="s90x100" textids="artikel2"></honey-speech>
-<honey-speech id="s50x100" textids="artikel2"></honey-speech>
+<honey-speech id="s10x10" textids="artikel2" titletext="s10x10"></honey-speech>
+<honey-speech id="s20x20" textids="artikel2" titletext="s20x20"></honey-speech>
+<honey-speech id="s30x30" textids="artikel2" titletext="s30x30"></honey-speech>
+<honey-speech id="s40x50" textids="artikel2" titletext="s40x50"></honey-speech>
+<honey-speech id="s50x60" textids="artikel2" titletext="s50x60"></honey-speech>
+<honey-speech id="s100x100" textids="artikel2" titletext="s100x100"></honey-speech>
+<honey-speech id="s100x100transparent" textids="artikel2" titletext="s100x100transparent"></honey-speech>
+<honey-speech id="s90x100" textids="artikel2" titletext="s90x100"></honey-speech>
+<honey-speech id="s50x100" textids="artikel2" titletext="s50x100"></honey-speech>
 
 <pre>
   /* part of css */
