@@ -105,3 +105,41 @@ no warranty
 ## license
 
 MIT License
+
+## technology used
+
+* [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+* [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements)
+* [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
+* [Shadow Parts](https://developer.mozilla.org/de/docs/Web/CSS/::part)
+
+
+## browser support
+
+### Web Speech API
+
+Firefox
+
+Maybe you must via about:config set media.webspeech.synth.enabled to true 
+
+Generell
+
+* [Can I use with browsers?](https://caniuse.com/#feat=speech-synthesis)
+
+### Custom Elements
+
+* [Can I use with browsers?](https://caniuse.com/#feat=mdn-api_window_customelements)
+
+### CSS Custom Properties
+
+* [Can I use with browsers?](https://caniuse.com/#search=css%20custom%20properties)
+
+### Shadow Parts
+
+Firefox
+
+Maybe you must via about:config set the layout.css.shadow-parts.enabled to true.
+
+Generell 
+
+* [Can I use with browsers?](layout.css.shadow-parts.enabled to true)
