@@ -52,7 +52,7 @@ To the [live demo](https://funthomas424242.github.io/honey-speech/index.html)
 
 ### v0.0.13 unpublished
 
-* n/a
+* initializing of voices fixed
 
 ### v0.0.12 published at 2020-02-29
 
