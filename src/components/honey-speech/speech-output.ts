@@ -1,9 +1,33 @@
 import {EventEmitter} from "@stencil/core";
 import {Logger} from "./log-helper";
 
+class Synthese {
+  sprachSynthese: SpeechSynthesis;
+  voices: SpeechSynthesisVoice[];
+
+  constructor() {
+    this.sprachSynthese = window.speechSynthesis;
+    this.sprachSynthese.onvoiceschanged = () => {
+      if (!this.voices || this.voices.length < 1) {
+        this.voices = this.sprachSynthese.getVoices();
+        Logger.infoMessage("voices changed to: " + this.voices.join(","));
+      } else {
+        Logger.infoMessage("voices alraedy initialized");
+      }
+    };
+    Logger.infoMessage("call getVoices()");
+    this.sprachSynthese.getVoices();
+  }
+
+  public getVoices(): SpeechSynthesisVoice[] {
+    return this.voices;
+  }
+}
+
+
 export class Sprachausgabe {
 
-  sprachSynthese: SpeechSynthesis;
+  static synthese: Synthese = new Synthese();
 
   stimme: SpeechSynthesisVoice;
 
@@ -22,7 +46,6 @@ export class Sprachausgabe {
 
   speakerFailed: EventEmitter;
 
-
   constructor(speakerStarted: EventEmitter
     , speakerFinished: EventEmitter
     , speakerPaused: EventEmitter
@@ -33,7 +56,6 @@ export class Sprachausgabe {
     , audioVolume: number
     , voiceName: string
   ) {
-    this.sprachSynthese =  window.speechSynthesis;
     this.speakerStarted = speakerStarted;
     this.speakerFinished = speakerFinished;
     this.speakerPaused = speakerPaused;
@@ -44,7 +66,7 @@ export class Sprachausgabe {
     this.audioVolume = audioVolume;
     this.voiceName = voiceName;
     this.stimme = undefined;
-    Logger.debugMessage("####constructor called");
+    Logger.infoMessage("####constructor finished");
   }
 
   getDefaultStimme(): SpeechSynthesisVoice {
@@ -53,13 +75,14 @@ export class Sprachausgabe {
     var langDefaultMatch: SpeechSynthesisVoice;
     var defaultMatch: SpeechSynthesisVoice;
 
-    var voices: SpeechSynthesisVoice[] = this.sprachSynthese.getVoices();
+    const voices = Sprachausgabe.synthese.getVoices();
+    if(!voices) return null;
     for (var i = 0; i < voices.length; i++) {
       if (voices[i].name === this.voiceName ||
         voices[i].lang === this.audioLang ||
         voices[i].default
       ) {
-        Logger.debugMessage("Voice matched:" + voices[i].name + voices[i].lang);
+        Logger.debugMessage("voice matched:" + voices[i].name + voices[i].lang);
         if (voices[i].name === this.voiceName) {
           namedMatch = voices[i];
         }
@@ -93,7 +116,7 @@ export class Sprachausgabe {
   }
 
   erzeugeVorleser(text: string): SpeechSynthesisUtterance {
-    Logger.debugMessage("erzeugeVorleser started");
+    Logger.infoMessage("erzeugeVorleser started");
     const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
     vorleser.onend = () => {
@@ -125,9 +148,9 @@ export class Sprachausgabe {
   }
 
   textVorlesen(zuLesenderText: string) {
-    if( !this.stimme){
-      Logger.infoMessage("set default voice");
+    if (!this.stimme) {
       this.stimme = this.getDefaultStimme();
+      Logger.infoMessage("set default voice to " + this.stimme);
     }
     if (zuLesenderText) {
       const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
@@ -135,13 +158,13 @@ export class Sprachausgabe {
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
           Logger.infoMessage("speaker lang used:" + vorleser.lang);
-          if( vorleser.voice ) {
+          if (vorleser.voice) {
             Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
             Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
-          }else{
-            Logger.infoMessage("no voice matched for text: "+text);
+          } else {
+            Logger.infoMessage("no voice matched for text: " + zuLesenderText);
           }
-          this.sprachSynthese.speak(vorleser);
+          Sprachausgabe.synthese.sprachSynthese.speak(vorleser);
         }
       );
 
