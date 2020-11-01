@@ -14,9 +14,6 @@
     "dist/",
     "loader/"
   ],
-  "engines": {
-    "node": "14.5.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/FunThomas424242/honey-speech.git"
@@ -43,6 +40,9 @@
     "prepare-deliver": "npm run build",
     "deliver": "npm publish --access=public",
     "pruefeVersionen": "npm outdated"
+  },
+  "engines": {
+    "node": "14.5.0"
   },
   "dependencies": {
     "@stencil/core": "2.2.0"
