@@ -1,6 +1,6 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
-import {Sprachausgabe} from "./speech-output"
-import {Logger} from "./log-helper";
+import {Sprachausgabe} from "../../libs/speech-output"
+import {Logger} from "../../libs/log-helper";
 
 @Component({
   tag: "honey-speech",
