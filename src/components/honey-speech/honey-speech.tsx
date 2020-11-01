@@ -12,9 +12,28 @@ export class HoneySpeech {
 
   sprachAusgabe: Sprachausgabe;
 
+
+  /**
+   * Host Element
+   */
+  @Element() hostElement: HTMLElement;
+
+  /**
+   * Id des Host Elements, falls nicht verfügbar wird diese generiert
+   */
   @State() ident: string;
 
-  @Element() hostElement: HTMLElement;
+  /**
+   * alt text for a11y
+   * default: "Lautsprechersymbol zur Sprachausgabe"
+   */
+  @State() alttext: string;
+
+  /**
+   * title text for a11y = tooltip
+   * default: Vorlesen
+   */
+  @State() titletext: string;
 
 
   /**
@@ -22,6 +41,7 @@ export class HoneySpeech {
    * which inner text should be speech.
    */
   @Prop() textids!: string;
+
 
   /**
    * icon width
@@ -35,18 +55,6 @@ export class HoneySpeech {
    * @default 36
    */
   @Prop() iconheight: string;
-
-  /**
-   * alt text for a11y
-   * default: "Symbol eines sprechenden Lautsprechers"
-   */
-  @Prop() alttext: string;
-
-  /**
-   * title text for a11y = tooltip
-   * default: Vorlesen
-   */
-  @Prop() titletext: string;
 
   /**
    * i18n language ident for Web Speech API: de-DE or en or de ...
@@ -73,38 +81,38 @@ export class HoneySpeech {
    */
   @Prop() voicename: string;
 
-  /**
-   * An JSON Object with i18n text values separeted by language idents:
-   * currently unused
-   *
-   * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
-   */
-  @Prop() i18n: object;
+  // /**
+  //  * An JSON Object with i18n text values separeted by language idents:
+  //  * currently unused
+  //  *
+  //  * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
+  //  */
+  // @Prop() i18n: object;
 
   /**
    * Fired if the stimme is speaking.
    */
-  @Event() speakerStarted: EventEmitter;
+  @Event() onSpeakerStarted: EventEmitter<string>;
 
   /**
    * Fired if the stimme has finished with speaking.
    */
-  @Event() speakerFinished: EventEmitter;
+  @Event() onSpeakerFinished: EventEmitter<string>;
 
   /**
    * Fired if the stimme is paused with speaking.
    */
-  @Event() speakerPaused: EventEmitter;
+  @Event() onSpeakerPaused: EventEmitter<string>;
 
   /**
    * Fired if the stimme has failed to speak.
    */
-  @Event() speakerFailed: EventEmitter;
+  @Event() onSpeakerFailed: EventEmitter<string>;
 
   connectedCallback() {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
-    if (!this.titletext) this.titletext = "Vorlesen";
-    if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
+    this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
+    this.alttext  = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
     if (!this.iconheight) this.iconheight = "500";
     if (!this.iconwidth) this.iconwidth = "500";
     if (!this.audiopitch) this.audiopitch = 1;
@@ -112,10 +120,10 @@ export class HoneySpeech {
     if (!this.audiovolume) this.audiovolume = 1;
 
     this.sprachAusgabe = new Sprachausgabe(
-      this.speakerStarted,
-      this.speakerFinished,
-      this.speakerPaused,
-      this.speakerFailed,
+      this.onSpeakerStarted,
+      this.onSpeakerFinished,
+      this.onSpeakerPaused,
+      this.onSpeakerFailed,
       this.audiolang,
       this.audiopitch,
       this.audiorate,
@@ -158,7 +166,10 @@ export class HoneySpeech {
 
   render() {
     return (
-      <Host>
+      <Host
+        title={this.titletext}
+        alt={this.alttext}
+      >
         <svg id={this.getId() + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
              class="speakerimage"

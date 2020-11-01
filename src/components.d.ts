@@ -8,10 +8,6 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface HoneySpeech {
         /**
-          * alt text for a11y default: "Symbol eines sprechenden Lautsprechers"
-         */
-        "alttext": string;
-        /**
           * i18n language ident for Web Speech API: de-DE or en or de ...
          */
         "audiolang": string;
@@ -28,10 +24,6 @@ export namespace Components {
          */
         "audiovolume": number;
         /**
-          * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
-         */
-        "i18n": object;
-        /**
           * icon height, default: 36
           * @param iconheight
           * @default 36
@@ -45,10 +37,6 @@ export namespace Components {
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
-        /**
-          * title text for a11y = tooltip default: Vorlesen
-         */
-        "titletext": string;
         /**
           * voice name used of Web Speech API: default undefined
          */
@@ -69,10 +57,6 @@ declare global {
 declare namespace LocalJSX {
     interface HoneySpeech {
         /**
-          * alt text for a11y default: "Symbol eines sprechenden Lautsprechers"
-         */
-        "alttext"?: string;
-        /**
           * i18n language ident for Web Speech API: de-DE or en or de ...
          */
         "audiolang"?: string;
@@ -89,10 +73,6 @@ declare namespace LocalJSX {
          */
         "audiovolume"?: number;
         /**
-          * An JSON Object with i18n text values separeted by language idents: currently unused  { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
-         */
-        "i18n"?: object;
-        /**
           * icon height, default: 36
           * @param iconheight
           * @default 36
@@ -105,27 +85,23 @@ declare namespace LocalJSX {
         /**
           * Fired if the stimme has failed to speak.
          */
-        "onSpeakerFailed"?: (event: CustomEvent<any>) => void;
+        "onOnSpeakerFailed"?: (event: CustomEvent<string>) => void;
         /**
           * Fired if the stimme has finished with speaking.
          */
-        "onSpeakerFinished"?: (event: CustomEvent<any>) => void;
+        "onOnSpeakerFinished"?: (event: CustomEvent<string>) => void;
         /**
           * Fired if the stimme is paused with speaking.
          */
-        "onSpeakerPaused"?: (event: CustomEvent<any>) => void;
+        "onOnSpeakerPaused"?: (event: CustomEvent<string>) => void;
         /**
           * Fired if the stimme is speaking.
          */
-        "onSpeakerStarted"?: (event: CustomEvent<any>) => void;
+        "onOnSpeakerStarted"?: (event: CustomEvent<string>) => void;
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
-        /**
-          * title text for a11y = tooltip default: Vorlesen
-         */
-        "titletext"?: string;
         /**
           * voice name used of Web Speech API: default undefined
          */
