@@ -1,4 +1,4 @@
-import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
 
@@ -12,9 +12,9 @@ export class HoneySpeech {
 
   sprachAusgabe: Sprachausgabe;
 
-  ident: string;
+  @State() ident: string;
 
-  @Element() htmlElement: HTMLElement;
+  @Element() hostElement: HTMLElement;
 
 
   /**
@@ -102,7 +102,7 @@ export class HoneySpeech {
   @Event() speakerFailed: EventEmitter;
 
   connectedCallback() {
-    this.ident = this.htmlElement.id ? this.htmlElement.id : Math.random().toString(36).substring(7);
+    this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     if (!this.titletext) this.titletext = "Vorlesen";
     if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
     if (!this.iconheight) this.iconheight = "500";
@@ -148,7 +148,7 @@ export class HoneySpeech {
     const texte: string[] = this.getTexte();
 
     texte.forEach(text =>
-      this.sprachAusgabe.textVorlesen(text+" ")
+      this.sprachAusgabe.textVorlesen(text + " ")
     );
   }
 
@@ -158,10 +158,7 @@ export class HoneySpeech {
 
   render() {
     return (
-      <Host
-            title={this.titletext}
-            alt={this.alttext}
-      >
+      <Host>
         <svg id={this.getId() + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
              class="speakerimage"
