@@ -92,22 +92,22 @@ export class HoneySpeech {
   /**
    * Fired if the stimme is speaking.
    */
-  @Event() onSpeakerStarted: EventEmitter<string>;
+  @Event() speakerStarted: EventEmitter<string>;
 
   /**
    * Fired if the stimme has finished with speaking.
    */
-  @Event() onSpeakerFinished: EventEmitter<string>;
+  @Event() speakerFinished: EventEmitter<string>;
 
   /**
    * Fired if the stimme is paused with speaking.
    */
-  @Event() onSpeakerPaused: EventEmitter<string>;
+  @Event() speakerPaused: EventEmitter<string>;
 
   /**
    * Fired if the stimme has failed to speak.
    */
-  @Event() onSpeakerFailed: EventEmitter<string>;
+  @Event() speakerFailed: EventEmitter<string>;
 
   connectedCallback() {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
@@ -120,10 +120,10 @@ export class HoneySpeech {
     if (!this.audiovolume) this.audiovolume = 1;
 
     this.sprachAusgabe = new Sprachausgabe(
-      this.onSpeakerStarted,
-      this.onSpeakerFinished,
-      this.onSpeakerPaused,
-      this.onSpeakerFailed,
+      this.speakerStarted,
+      this.speakerFinished,
+      this.speakerPaused,
+      this.speakerFailed,
       this.audiolang,
       this.audiopitch,
       this.audiorate,
