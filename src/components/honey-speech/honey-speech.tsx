@@ -92,27 +92,27 @@ export class HoneySpeech {
   /**
    * Fired if the stimme is speaking.
    */
-  @Event() speakerStarted: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) speakerStarted: EventEmitter<string>;
 
   /**
    * Fired if the stimme has finished with speaking.
    */
-  @Event() speakerFinished: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) speakerFinished: EventEmitter<string>;
 
   /**
    * Fired if the stimme is paused with speaking.
    */
-  @Event() speakerPaused: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) speakerPaused: EventEmitter<string>;
 
   /**
    * Fired if the stimme has failed to speak.
    */
-  @Event() speakerFailed: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) speakerFailed: EventEmitter<string>;
 
   connectedCallback() {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
-    this.alttext  = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
     if (!this.iconheight) this.iconheight = "500";
     if (!this.iconwidth) this.iconwidth = "500";
     if (!this.audiopitch) this.audiopitch = 1;
