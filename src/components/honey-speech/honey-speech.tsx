@@ -1,4 +1,4 @@
-import {Component, Element, Event, EventEmitter, h, Listen, Prop} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop} from "@stencil/core";
 import {Sprachausgabe} from "./speech-output"
 import {Logger} from "./log-helper";
 
@@ -158,7 +158,7 @@ export class HoneySpeech {
 
   render() {
     return (
-      <host part={"speakerpane"}
+      <Host
             title={this.titletext}
             alt={this.alttext}
       >
@@ -175,7 +175,7 @@ export class HoneySpeech {
             d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
           />
         </svg>
-      </host>
+      </Host>
     );
   }
 }
