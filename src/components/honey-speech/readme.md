@@ -30,6 +30,13 @@
 | `speakerStarted`  | Fired if the stimme is speaking.                | `CustomEvent<any>` |
 
 
+## Shadow Parts
+
+| Part            | Description |
+| --------------- | ----------- |
+| `"speakerpane"` |             |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

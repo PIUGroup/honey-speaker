@@ -1,4 +1,4 @@
-import { Config } from '@stencil/core';
+import {Config} from '@stencil/core';
 
 export const config: Config = {
   namespace: 'honey-speech',
@@ -8,11 +8,15 @@ export const config: Config = {
       esmLoaderPath: '../loader',
     },
     {
-      type: 'docs-readme'
+      type: 'dist-custom-elements-bundle',
+    },
+    {
+      type: 'docs-readme',
+      strict: true,
     },
     {
       type: 'docs-json',
-      file: 'src/components/honey-speech/custom-elements.json'
+      file: 'src/components/custom-elements.json'
     },
     {
       type: 'www',
@@ -20,3 +24,5 @@ export const config: Config = {
     }
   ]
 };
+
+
