@@ -16,19 +16,23 @@ describe('example', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-
-  it('fire events', async () => {
+  it('has a11y attributes', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<honey-speech textids="3"></honey-speech><p id="3">test</p>');
     const element = await page.find('honey-speech');
+    expect(element).toEqualAttribute('title', 'Vorlesen');
+  });
+
+  it('fire events', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<honey-speech id="speaker1" textids="3"></honey-speech><p id="3">test</p>');
+    const element = await page.find('honey-speech');
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
     element.click();
     await page.waitForChanges();
-    expect(startedEvent).toHaveReceivedEventDetail({
-      checked: true,
-      value: 'on'
-    });
+    expect(startedEvent).toHaveReceivedEvent();
   });
 
 });
