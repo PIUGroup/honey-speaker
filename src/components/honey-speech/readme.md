@@ -19,21 +19,14 @@
 
 ## Events
 
-| Event             | Description                                     | Type                  |
-| ----------------- | ----------------------------------------------- | --------------------- |
-| `speakerFailed`   | Fired if the stimme has failed to speak.        | `CustomEvent<string>` |
-| `speakerFinished` | Fired if the stimme has finished with speaking. | `CustomEvent<string>` |
-| `speakerPaused`   | Fired if the stimme is paused with speaking.    | `CustomEvent<string>` |
-| `speakerStarted`  | Fired if the stimme is speaking.                | `CustomEvent<string>` |
-
-
-## Shadow Parts
-
-| Part            | Description |
-| --------------- | ----------- |
-| `"speakerpane"` |             |
+| Event                  | Description                                     | Type                  |
+| ---------------------- | ----------------------------------------------- | --------------------- |
+| `honeySpeakerFailed`   | Fired if the stimme has failed to speak.        | `CustomEvent<string>` |
+| `honeySpeakerFinished` | Fired if the stimme has finished with speaking. | `CustomEvent<string>` |
+| `honeySpeakerPaused`   | Fired if the stimme is paused with speaking.    | `CustomEvent<string>` |
+| `honeySpeakerStarted`  | Fired if the stimme is speaking.                | `CustomEvent<string>` |
 
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+*Built with [StencilJS](https://stenciljs.com/)* by Huluvu424242

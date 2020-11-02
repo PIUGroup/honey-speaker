@@ -13,6 +13,7 @@ export const config: Config = {
     {
       type: 'docs-readme',
       strict: true,
+      footer: '*Built with [StencilJS](https://stenciljs.com/)* by Huluvu424242'
     },
     {
       type: 'docs-json',
