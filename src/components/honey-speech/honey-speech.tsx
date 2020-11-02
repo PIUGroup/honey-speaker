@@ -103,7 +103,8 @@ export class HoneySpeech {
    */
   @Event({bubbles: true, composed: true}) speakerFailed: EventEmitter<string>;
 
-  connectedCallback() {
+  public connectedCallback() {
+    // Properties initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
@@ -115,12 +116,24 @@ export class HoneySpeech {
   }
 
 
-  componentWillLoad() {
+  public componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
-      this.speakerStarted,
-      this.speakerFinished,
-      this.speakerPaused,
-      this.speakerFailed,
+      () => {
+        this.speakerStarted.emit(this.ident);
+        Logger.debugMessage("Vorlesen gestartet");
+      },
+      () => {
+        this.speakerFinished.emit(this.ident);
+        Logger.debugMessage("Vorlesen beendet");
+      },
+      () => {
+        this.speakerPaused.emit(this.ident);
+        Logger.debugMessage("Pause mit Vorlesen");
+      },
+      () => {
+        this.speakerFailed.emit(this.ident);
+        Logger.errorMessage("Fehler beim Vorlesen");
+      },
       this.audiolang,
       this.audiopitch,
       this.audiorate,
@@ -129,7 +142,8 @@ export class HoneySpeech {
     );
   }
 
-  private getTexte(): string[] {
+
+  protected getTexte(): string[] {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
       const texte: string[] = [];
@@ -156,7 +170,7 @@ export class HoneySpeech {
     );
   }
 
-  render() {
+  public render() {
     return (
       <Host
         title={this.titletext}

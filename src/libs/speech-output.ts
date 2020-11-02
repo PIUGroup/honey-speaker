@@ -1,4 +1,3 @@
-import {EventEmitter} from "@stencil/core";
 import {Logger} from "./log-helper";
 
 class Synthese {
@@ -38,28 +37,28 @@ export class Sprachausgabe {
   voiceName: string;
 
 
-  speakerStarted: EventEmitter;
+  onSpeakerStarted: () => void;
 
-  speakerFinished: EventEmitter;
+  onSpeakerFinished: () => void;
 
-  speakerPaused: EventEmitter;
+  onSpeakerPaused: () => void;
 
-  speakerFailed: EventEmitter;
+  onSpeakerFailed: () => void;
 
-  constructor(speakerStarted: EventEmitter
-    , speakerFinished: EventEmitter
-    , speakerPaused: EventEmitter
-    , speakerFailed: EventEmitter
+  constructor(onSpeakerStarted: () => void
+    , onSpeakerFinished: () => void
+    , onSpeakerPaused: () => void
+    , onSpeakerFailed: () => void
     , audioLang: string
     , audioPitch: number
     , audioRate: number
     , audioVolume: number
     , voiceName: string
   ) {
-    this.speakerStarted = speakerStarted;
-    this.speakerFinished = speakerFinished;
-    this.speakerPaused = speakerPaused;
-    this.speakerFailed = speakerFailed;
+    this.onSpeakerStarted = onSpeakerStarted;
+    this.onSpeakerFinished = onSpeakerFinished;
+    this.onSpeakerPaused = onSpeakerPaused;
+    this.onSpeakerFailed = onSpeakerFailed;
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
@@ -76,7 +75,7 @@ export class Sprachausgabe {
     var defaultMatch: SpeechSynthesisVoice;
 
     const voices = Sprachausgabe.synthese.getVoices();
-    if(!voices) return null;
+    if (!voices) return null;
     for (var i = 0; i < voices.length; i++) {
       if (voices[i].name === this.voiceName ||
         voices[i].lang === this.audioLang ||
@@ -119,25 +118,10 @@ export class Sprachausgabe {
     Logger.infoMessage("erzeugeVorleser started");
     const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
-    vorleser.onend = () => {
-      this.speakerFinished.emit();
-      Logger.debugMessage("Vorlesen beendet");
-    }
-
-    vorleser.onstart = () => {
-      this.speakerStarted.emit();
-      Logger.debugMessage("Vorlesen gestartet");
-    }
-
-    vorleser.onpause = () => {
-      this.speakerPaused.emit();
-      Logger.debugMessage("Pause mit Vorlesen");
-    }
-
-    vorleser.onerror = () => {
-      this.speakerFailed.emit();
-      Logger.errorMessage("Fehler beim Vorlesen");
-    }
+    vorleser.onend = this.onSpeakerFinished;
+    vorleser.onstart = this.onSpeakerStarted;
+    vorleser.onpause = this.onSpeakerPaused;
+    vorleser.onerror = this.onSpeakerFailed;
 
     vorleser.pitch = this.audioPitch;
     vorleser.rate = this.audioRate;
