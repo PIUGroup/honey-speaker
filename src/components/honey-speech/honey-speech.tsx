@@ -57,7 +57,7 @@ export class HoneySpeech {
   /**
    * i18n language ident for Web Speech API: de-DE or en or de ...
    */
-  @Prop() audiolang: string;
+  @Prop() audiolang: string ="de-DE";
 
   /**
    * pitch for Web Speech API
@@ -105,11 +105,6 @@ export class HoneySpeech {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
-    // if (!this.iconheight) this.iconheight = "500";
-    // if (!this.iconwidth) this.iconwidth = "500";
-    // if (!this.audiopitch) this.audiopitch = 1;
-    // if (!this.audiorate) this.audiorate = 1;
-    // if (!this.audiovolume) this.audiovolume = 1;
   }
 
 

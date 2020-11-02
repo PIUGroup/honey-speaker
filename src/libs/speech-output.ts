@@ -37,13 +37,13 @@ export class Sprachausgabe {
   voiceName: string;
 
 
-  onSpeakerStarted: () => void;
+  onSpeakerStarted: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFinished: () => void;
+  onSpeakerFinished: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerPaused: () => void;
+  onSpeakerPaused: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFailed: () => void;
+  onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
   constructor(onSpeakerStarted: () => void
     , onSpeakerFinished: () => void
@@ -131,7 +131,7 @@ export class Sprachausgabe {
     return vorleser;
   }
 
-  public async textVorlesen(zuLesenderText: string) {
+  public textVorlesen(zuLesenderText: string) {
     if (!this.stimme) {
       this.stimme = this.getDefaultStimme();
       Logger.infoMessage("set default voice to " + this.stimme);
