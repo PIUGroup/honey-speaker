@@ -7,7 +7,7 @@
 
 | Property               | Attribute     | Description                                                                          | Type     | Default     |
 | ---------------------- | ------------- | ------------------------------------------------------------------------------------ | -------- | ----------- |
-| `audiolang`            | `audiolang`   | i18n language ident for Web Speech API: de-DE or en or de ...                        | `string` | `undefined` |
+| `audiolang`            | `audiolang`   | i18n language ident for Web Speech API: de-DE or en or de ...                        | `string` | `"de-DE"`   |
 | `audiopitch`           | `audiopitch`  | pitch for Web Speech API                                                             | `number` | `1`         |
 | `audiorate`            | `audiorate`   | rate for Web Speech API                                                              | `number` | `1`         |
 | `audiovolume`          | `audiovolume` | volume for Web Speech API                                                            | `number` | `1`         |
