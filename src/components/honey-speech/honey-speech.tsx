@@ -2,6 +2,7 @@ import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} f
 import {Sprachausgabe} from "../../libs/speech-output"
 import {Logger} from "../../libs/log-helper";
 
+
 @Component({
   tag: "honey-speech",
   styleUrl: "honey-speech.css",
@@ -81,13 +82,6 @@ export class HoneySpeech {
    */
   @Prop() voicename: string;
 
-  // /**
-  //  * An JSON Object with i18n text values separeted by language idents:
-  //  * currently unused
-  //  *
-  //  * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
-  //  */
-  // @Prop() i18n: object;
 
   /**
    * Fired if the stimme is speaking.
@@ -152,16 +146,11 @@ export class HoneySpeech {
   }
 
   @Listen('click', {capture: true})
-  protected handleClick() {
+  protected onClick() {
     const texte: string[] = this.getTexte();
-
     texte.forEach(text =>
       this.sprachAusgabe.textVorlesen(text + " ")
     );
-  }
-
-  getId(): string {
-    return this.ident;
   }
 
   render() {
@@ -170,7 +159,7 @@ export class HoneySpeech {
         title={this.titletext}
         alt={this.alttext}
       >
-        <svg id={this.getId() + "-svg"} xmlns="http://www.w3.org/2000/svg"
+        <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
              class="speakerimage"
              viewBox="0 0 75 75">
