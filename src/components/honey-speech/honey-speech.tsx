@@ -86,22 +86,22 @@ export class HoneySpeech {
   /**
    * Fired if the stimme is speaking.
    */
-  @Event({bubbles: true, composed: true}) speakerStarted: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) honeySpeakerStarted: EventEmitter<string>;
 
   /**
    * Fired if the stimme has finished with speaking.
    */
-  @Event({bubbles: true, composed: true}) speakerFinished: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) honeySpeakerFinished: EventEmitter<string>;
 
   /**
    * Fired if the stimme is paused with speaking.
    */
-  @Event({bubbles: true, composed: true}) speakerPaused: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) honeySpeakerPaused: EventEmitter<string>;
 
   /**
    * Fired if the stimme has failed to speak.
    */
-  @Event({bubbles: true, composed: true}) speakerFailed: EventEmitter<string>;
+  @Event({bubbles: true, composed: true}) honeySpeakerFailed: EventEmitter<string>;
 
   public connectedCallback() {
     // Properties initialisieren
@@ -119,19 +119,19 @@ export class HoneySpeech {
   public componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
-        this.speakerStarted.emit(this.ident);
+        this.honeySpeakerStarted.emit(this.ident);
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
-        this.speakerFinished.emit(this.ident);
+        this.honeySpeakerFinished.emit(this.ident);
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
-        this.speakerPaused.emit(this.ident);
+        this.honeySpeakerPaused.emit(this.ident);
         Logger.debugMessage("Pause mit Vorlesen");
       },
       () => {
-        this.speakerFailed.emit(this.ident);
+        this.honeySpeakerFailed.emit(this.ident);
         Logger.errorMessage("Fehler beim Vorlesen");
       },
       this.audiolang,
