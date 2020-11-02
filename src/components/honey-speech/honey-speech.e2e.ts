@@ -8,12 +8,27 @@ describe('example', () => {
     expect(el).not.toBeNull();
   });
 
-  it('renders', async () => {
+  it('renders correct styles', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<honey-speech textids="3"></honey-speech><p id="3">test</p>');
     const element = await page.find('honey-speech');
     expect(element).toHaveClass('hydrated');
+  });
+
+
+  it('fire events', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<honey-speech textids="3"></honey-speech><p id="3">test</p>');
+    const element = await page.find('honey-speech');
+    const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
+    element.click();
+    await page.waitForChanges();
+    expect(startedEvent).toHaveReceivedEventDetail({
+      checked: true,
+      value: 'on'
+    });
   });
 
 });
