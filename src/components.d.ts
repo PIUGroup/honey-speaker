@@ -12,25 +12,23 @@ export namespace Components {
          */
         "audiolang": string;
         /**
-          * pitch for Web Speech API: default: 1
+          * pitch for Web Speech API
          */
         "audiopitch": number;
         /**
-          * rate for Web Speech API: default 1
+          * rate for Web Speech API
          */
         "audiorate": number;
         /**
-          * volume for Web Speech API: default 1
+          * volume for Web Speech API
          */
         "audiovolume": number;
         /**
-          * icon height, default: 36
-          * @param iconheight
-          * @default 36
+          * icon height
          */
         "iconheight": string;
         /**
-          * icon width default: 36
+          * icon width
          */
         "iconwidth": string;
         /**
@@ -38,7 +36,7 @@ export namespace Components {
          */
         "textids": string;
         /**
-          * voice name used of Web Speech API: default undefined
+          * voice name used of Web Speech API
          */
         "voicename": string;
     }
@@ -61,25 +59,23 @@ declare namespace LocalJSX {
          */
         "audiolang"?: string;
         /**
-          * pitch for Web Speech API: default: 1
+          * pitch for Web Speech API
          */
         "audiopitch"?: number;
         /**
-          * rate for Web Speech API: default 1
+          * rate for Web Speech API
          */
         "audiorate"?: number;
         /**
-          * volume for Web Speech API: default 1
+          * volume for Web Speech API
          */
         "audiovolume"?: number;
         /**
-          * icon height, default: 36
-          * @param iconheight
-          * @default 36
+          * icon height
          */
         "iconheight"?: string;
         /**
-          * icon width default: 36
+          * icon width
          */
         "iconwidth"?: string;
         /**
@@ -103,7 +99,7 @@ declare namespace LocalJSX {
          */
         "textids": string;
         /**
-          * voice name used of Web Speech API: default undefined
+          * voice name used of Web Speech API
          */
         "voicename"?: string;
     }

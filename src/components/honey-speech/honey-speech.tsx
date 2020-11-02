@@ -46,16 +46,13 @@ export class HoneySpeech {
 
   /**
    * icon width
-   * default: 36
    */
-  @Prop() iconwidth: string;
+  @Prop() iconwidth: string = "36";
 
   /**
-   * icon height, default: 36
-   * @param iconheight
-   * @default 36
+   * icon height
    */
-  @Prop() iconheight: string;
+  @Prop() iconheight: string = "36";
 
   /**
    * i18n language ident for Web Speech API: de-DE or en or de ...
@@ -63,24 +60,24 @@ export class HoneySpeech {
   @Prop() audiolang: string;
 
   /**
-   * pitch for Web Speech API: default: 1
+   * pitch for Web Speech API
    */
-  @Prop() audiopitch: number;
+  @Prop() audiopitch: number = 1;
 
   /**
-   * rate for Web Speech API: default 1
+   * rate for Web Speech API
    */
-  @Prop() audiorate: number;
+  @Prop() audiorate: number = 1;
 
   /**
-   * volume for Web Speech API: default 1
+   * volume for Web Speech API
    */
-  @Prop() audiovolume: number;
+  @Prop() audiovolume: number = 1;
 
   /**
-   * voice name used of Web Speech API: default undefined
+   * voice name used of Web Speech API
    */
-  @Prop() voicename: string;
+  @Prop() voicename: string = undefined;
 
 
   /**
@@ -108,11 +105,11 @@ export class HoneySpeech {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
-    if (!this.iconheight) this.iconheight = "500";
-    if (!this.iconwidth) this.iconwidth = "500";
-    if (!this.audiopitch) this.audiopitch = 1;
-    if (!this.audiorate) this.audiorate = 1;
-    if (!this.audiovolume) this.audiovolume = 1;
+    // if (!this.iconheight) this.iconheight = "500";
+    // if (!this.iconwidth) this.iconwidth = "500";
+    // if (!this.audiopitch) this.audiopitch = 1;
+    // if (!this.audiorate) this.audiorate = 1;
+    // if (!this.audiovolume) this.audiovolume = 1;
   }
 
 
