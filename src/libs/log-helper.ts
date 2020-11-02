@@ -1,19 +1,37 @@
 export class Logger {
 
-    static logMessage(message) {
-        console.log(message);
-    }
+  protected static isLoggingActive: boolean = true;
 
-    static debugMessage(message) {
-        console.debug(message);
-    }
+  public static disableLogging(): void {
+    this.isLoggingActive = false;
+  }
 
-    static errorMessage(message) {
-        console.error(message);
-    }
+  public static enableLogging(): void {
+    this.isLoggingActive = true;
+  }
 
-    static infoMessage(message) {
-        console.info(message);
+  public static logMessage(message) {
+    if (console && this.isLoggingActive) {
+      console.log(message);
     }
+  }
+
+  public static debugMessage(message) {
+    if (console && this.isLoggingActive) {
+      console.debug(message);
+    }
+  }
+
+  public static errorMessage(message) {
+    if (console && this.isLoggingActive) {
+      console.error(message);
+    }
+  }
+
+  public static infoMessage(message) {
+    if (console && this.isLoggingActive) {
+      console.info(message);
+    }
+  }
 
 }

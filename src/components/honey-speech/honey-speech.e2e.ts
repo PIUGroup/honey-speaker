@@ -1,6 +1,14 @@
 import { newE2EPage } from '@stencil/core/testing';
+import {Logger} from "../../libs/log-helper";
 
 describe('example', () => {
+
+  beforeEach(async () => {
+    // page = await newE2EPage({ html: `<callback-test></callback-test>`});
+    // elm = await page.find('callback-test');
+    Logger.disableLogging();
+  });
+
   it('should render a foo-component', async () => {
     const page = await newE2EPage();
     await page.setContent(`<honey-speech textids="3"></honey-speech><p id="3">test</p>`);
