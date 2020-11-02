@@ -112,7 +112,10 @@ export class HoneySpeech {
     if (!this.audiopitch) this.audiopitch = 1;
     if (!this.audiorate) this.audiorate = 1;
     if (!this.audiovolume) this.audiovolume = 1;
+  }
 
+
+  componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       this.speakerStarted,
       this.speakerFinished,
@@ -146,10 +149,10 @@ export class HoneySpeech {
   }
 
   @Listen('click', {capture: true})
-  protected onClick() {
+  protected onClick(): void {
     const texte: string[] = this.getTexte();
-    texte.forEach(text =>
-      this.sprachAusgabe.textVorlesen(text + " ")
+    texte.forEach(async text =>
+      await this.sprachAusgabe.textVorlesen(text + " ")
     );
   }
 

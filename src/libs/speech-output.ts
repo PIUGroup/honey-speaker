@@ -69,7 +69,7 @@ export class Sprachausgabe {
     Logger.infoMessage("####constructor finished");
   }
 
-  getDefaultStimme(): SpeechSynthesisVoice {
+  protected getDefaultStimme(): SpeechSynthesisVoice {
     var namedMatch: SpeechSynthesisVoice;
     var langMatches: SpeechSynthesisVoice[] = [];
     var langDefaultMatch: SpeechSynthesisVoice;
@@ -115,7 +115,7 @@ export class Sprachausgabe {
     return voices[0];
   }
 
-  erzeugeVorleser(text: string): SpeechSynthesisUtterance {
+  protected erzeugeVorleser(text: string): SpeechSynthesisUtterance {
     Logger.infoMessage("erzeugeVorleser started");
     const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
@@ -147,7 +147,7 @@ export class Sprachausgabe {
     return vorleser;
   }
 
-  textVorlesen(zuLesenderText: string) {
+  public async textVorlesen(zuLesenderText: string) {
     if (!this.stimme) {
       this.stimme = this.getDefaultStimme();
       Logger.infoMessage("set default voice to " + this.stimme);
