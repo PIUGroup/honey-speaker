@@ -40,6 +40,17 @@ describe('example', () => {
   });
 
   it('fire events', async () => {
+
+    // Property Wert lesen
+    const stimmenAnzahl  = await page.$eval('honey-speech', () => {
+     return speechSynthesis.getVoices().length;
+    });
+    if( stimmenAnzahl <1){
+      console.log("Keine Stimmen im Browser verfügbar -> Test übersprungen");
+      return;
+    }else{
+      console.log("Stimmen gefunden - Test wird ausgeführt");
+    }
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
     await element.setProperty('audiolang', 'us');
     await page.waitForChanges();
