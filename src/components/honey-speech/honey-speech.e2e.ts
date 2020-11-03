@@ -36,11 +36,11 @@ describe('example', () => {
     const page = await newE2EPage();
 
     await page.setContent('<honey-speech id="speaker1" textids="3"></honey-speech><p id="3">test</p>');
-    const element = await page.find('honey-speech');
-    const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
-    await element.click();
-    expect(startedEvent).toHaveReceivedEvent();
-    await page.waitForChanges();
+    // const element = await page.find('honey-speech');
+    // const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
+    await page.click('honey-speech');
+    await page.waitForEvent('honeySpeakerStarted');
+    // expect(startedEvent).toHaveReceivedEvent();
   });
 
 });
