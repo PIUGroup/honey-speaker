@@ -24,12 +24,25 @@ describe('example', () => {
     expect(element).toEqualAttribute('alt', 'Lautsprechersymbol zur Sprachausgabe');
   });
 
-  xit('has correct audio properties', async () => {
-    expect(element).toEqual( 'en');
+  it('has correct audio properties', async () => {
+    // Property Wert setzen
+    // await page.$eval('honey-speech', (elm: any) => {
+    //   elm.audiolang = 'us';
+    // });
+    await element.setProperty('audiolang', 'us');
+    await page.waitForChanges();
+    const value = await element.getProperty("audiolang")
+    // Property Wert lesen
+    // const value  = await page.$eval('honey-speech', (elm: any) => {
+    //  return elm.audiolang;
+    // });
+    expect(value).toEqual( 'us');
   });
 
   it('fire events', async () => {
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
+    await element.setProperty('audiolang', 'us');
+    await page.waitForChanges();
     await page.click('honey-speech');
     await page.waitForEvent('honeySpeakerStarted');
     expect(startedEvent).toHaveReceivedEvent();
