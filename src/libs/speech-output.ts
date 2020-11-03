@@ -58,7 +58,10 @@ export class Sprachausgabe {
     this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
     this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
     this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
-    this.onSpeakerFailed = (ev) => onSpeakerFailed(ev);
+    this.onSpeakerFailed = function (ev) {
+      Logger.errorMessage('###' + ev['error']);
+      onSpeakerFailed(ev);
+    };
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
