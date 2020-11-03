@@ -3,11 +3,11 @@ import {Logger} from "../../libs/log-helper";
 
 describe('example', () => {
 
-  beforeEach(async () => {
-    // page = await newE2EPage({ html: `<callback-test></callback-test>`});
-    // elm = await page.find('callback-test');
-    Logger.disableLogging();
-  });
+  // beforeEach(async () => {
+  //   // page = await newE2EPage({ html: `<callback-test></callback-test>`});
+  //   // elm = await page.find('callback-test');
+  //   Logger.disableLogging();
+  // });
 
   it('should render a foo-component', async () => {
     const page = await newE2EPage();
@@ -38,7 +38,7 @@ describe('example', () => {
     await page.setContent('<honey-speech id="speaker1" textids="3"></honey-speech><p id="3">test</p>');
     const element = await page.find('honey-speech');
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
-    element.click();
+    await element.click();
     await page.waitForChanges();
     expect(startedEvent).toHaveReceivedEvent();
   });
