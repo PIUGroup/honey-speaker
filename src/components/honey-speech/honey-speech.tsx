@@ -57,7 +57,7 @@ export class HoneySpeech {
   /**
    * i18n language ident for Web Speech API: de-DE or en or de ...
    */
-  @Prop() audiolang: string ="de-DE";
+  @Prop() audiolang: string = "de-DE";
 
   /**
    * pitch for Web Speech API
@@ -122,9 +122,10 @@ export class HoneySpeech {
         this.honeySpeakerPaused.emit(this.ident);
         Logger.debugMessage("Pause mit Vorlesen");
       },
-      () => {
+      (speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent): any => {
+        speaker = speaker;
         this.honeySpeakerFailed.emit(this.ident);
-        Logger.errorMessage("Fehler beim Vorlesen");
+        Logger.errorMessage("Fehler beim Vorlesen" + ev);
       },
       this.audiolang,
       this.audiopitch,

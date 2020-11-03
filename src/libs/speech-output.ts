@@ -37,18 +37,18 @@ export class Sprachausgabe {
   voiceName: string;
 
 
-  onSpeakerStarted: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerStarted: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFinished: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerFinished: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerPaused: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerPaused: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerFailed: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  constructor(onSpeakerStarted: () => void
-    , onSpeakerFinished: () => void
-    , onSpeakerPaused: () => void
-    , onSpeakerFailed: () => void
+  constructor(onSpeakerStarted: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
+    , onSpeakerFinished: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
+    , onSpeakerPaused: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
+    , onSpeakerFailed: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
     , audioLang: string
     , audioPitch: number
     , audioRate: number
