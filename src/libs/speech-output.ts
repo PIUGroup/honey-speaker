@@ -78,6 +78,9 @@ export class Sprachausgabe {
     var defaultMatch: SpeechSynthesisVoice;
 
     const voices = Sprachausgabe.synthese.getVoices();
+    Logger.infoMessage("Found voices:"+ JSON.stringify(voices));
+
+
     if (!voices) return null;
     for (var i = 0; i < voices.length; i++) {
       if (voices[i].name === this.voiceName ||
