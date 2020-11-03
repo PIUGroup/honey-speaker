@@ -38,7 +38,7 @@ describe('example', () => {
     await page.setContent('<honey-speech id="speaker1" textids="3"></honey-speech><p id="3">test</p>');
     const element = await page.find('honey-speech');
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
-    await element.click();
+    element.click();
     await page.waitForChanges();
     expect(startedEvent).toHaveReceivedEvent();
   });
