@@ -124,7 +124,7 @@ export class HoneySpeech {
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
-        Logger.errorMessage(this + "Fehler beim Vorlesen" + ev);
+        Logger.errorMessage(this + "Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
       this.audiopitch,
