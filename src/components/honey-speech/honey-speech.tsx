@@ -122,10 +122,9 @@ export class HoneySpeech {
         this.honeySpeakerPaused.emit(this.ident);
         Logger.debugMessage("Pause mit Vorlesen");
       },
-      (speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent): any => {
-        speaker = speaker;
+      (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
-        Logger.errorMessage("Fehler beim Vorlesen" + ev);
+        Logger.errorMessage(this + "Fehler beim Vorlesen" + ev);
       },
       this.audiolang,
       this.audiopitch,

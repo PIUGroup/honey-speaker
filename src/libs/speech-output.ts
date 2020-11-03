@@ -37,28 +37,28 @@ export class Sprachausgabe {
   voiceName: string;
 
 
-  onSpeakerStarted: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerStarted: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFinished: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerFinished: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerPaused: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerPaused: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  onSpeakerFailed: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+  onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  constructor(onSpeakerStarted: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
-    , onSpeakerFinished: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
-    , onSpeakerPaused: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
-    , onSpeakerFailed: ((speaker: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null
+  constructor(onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
     , audioLang: string
     , audioPitch: number
     , audioRate: number
     , audioVolume: number
     , voiceName: string
   ) {
-    this.onSpeakerStarted = onSpeakerStarted;
-    this.onSpeakerFinished = onSpeakerFinished;
-    this.onSpeakerPaused = onSpeakerPaused;
-    this.onSpeakerFailed = onSpeakerFailed;
+    this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
+    this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
+    this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
+    this.onSpeakerFailed = (ev) => onSpeakerFailed(ev);
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
