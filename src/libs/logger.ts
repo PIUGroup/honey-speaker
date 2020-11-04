@@ -10,7 +10,15 @@ export class Logger {
     this.isLoggingActive = true;
   }
 
-  constructor( enableLogging:boolean) {
+  public static toggleLogging(enableLogging: boolean) {
+    if (enableLogging) {
+      Logger.enableLogging();
+    } else {
+      Logger.disableLogging();
+    }
+  }
+
+  constructor(enableLogging: boolean) {
     Logger.isLoggingActive = enableLogging;
   }
 

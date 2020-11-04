@@ -1,4 +1,4 @@
-import {Logger} from "./log-helper";
+import {Logger} from "./logger";
 
 class Synthese {
   sprachSynthese: SpeechSynthesis;
@@ -45,7 +45,8 @@ export class Sprachausgabe {
 
   onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  constructor(onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
+  constructor(
+      onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
     , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
