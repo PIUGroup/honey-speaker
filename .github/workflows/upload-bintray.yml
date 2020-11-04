@@ -1,0 +1,23 @@
+name: Upload to Bintray
+
+on:
+  push:
+    branches:
+      - 'release/**'
+      - '!release/**-snapshot'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy to Bintray
+      if: "contains(github.event.head_commit.message, 'Release')"
+      env:
+        BINTRAY_TOKEN: ${{ secrets.BINTRAY_TOKEN }}
+      run: |
+        npm i
+        npm run build
+        curl -ufunthomas424242:${BINTRAY_TOKEN} https://api.bintray.com/npm/funthomas424242/honey-repository/auth/scope/huluvu424242 >> .npmrc
+        npm config set @huluvu424242:registry https://api.bintray.com/npm/funthomas424242/honey-repository
+        npm publish  --access=public

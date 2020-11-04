@@ -1,0 +1,48 @@
+name: Upload to Github
+
+on:
+  push:
+    branches:
+      - 'release/**'
+      - '!release/**-snapshot'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to Github
+        if: "contains(github.event.head_commit.message, 'Release')"
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm i
+          npm run build
+          echo "//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
+          echo "registry=https://npm.pkg.github.com/huluvu424242" >> .npmrc
+          echo "@huluvu424242:registry=https://npm.pkg.github.com" >> .npmrc
+          echo "@huluvu424242:registry=https://npm.pkg.github.com" >> .npmrc
+          npm publish  --access=public
+
+
+
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          npm i
+#          npm run build
+#          npm config set @huluvu424242:registry https://npm.pkg.github.com/
+#          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+#          npm publish  --access=public
+
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: '14.x'
+#          registry-url: 'https://npm.pkg.github.com'
+#          # Defaults to the user or organization that owns the workflow file
+#          scope: '@Huluvu424242'
+#      - run: npm install
+#      - run: npm publish
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
