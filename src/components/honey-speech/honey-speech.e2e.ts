@@ -13,7 +13,7 @@ describe('example', () => {
 
   beforeEach(async () => {
     TestLogger.enableLogging();
-    page = await newE2EPage({html: `<honey-speech enable-logging audiolang="en" textids="3"></honey-speech><p id="3">test</p>`});
+    page = await newE2EPage({html: `<honey-speech verbose audiolang="en" textids="3"></honey-speech><p id="3">test</p>`});
     element = await page.find('honey-speech');
   });
 

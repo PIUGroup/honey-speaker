@@ -24,10 +24,6 @@ export namespace Components {
          */
         "audiovolume": number;
         /**
-          * enable or disable console logging
-         */
-        "enableLogging": boolean;
-        /**
           * icon height
          */
         "iconheight": string;
@@ -39,6 +35,10 @@ export namespace Components {
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
+        /**
+          * enable or disable console logging
+         */
+        "verbose": boolean;
         /**
           * voice name used of Web Speech API
          */
@@ -75,10 +75,6 @@ declare namespace LocalJSX {
          */
         "audiovolume"?: number;
         /**
-          * enable or disable console logging
-         */
-        "enableLogging"?: boolean;
-        /**
           * icon height
          */
         "iconheight"?: string;
@@ -106,6 +102,10 @@ declare namespace LocalJSX {
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
+        /**
+          * enable or disable console logging
+         */
+        "verbose"?: boolean;
         /**
           * voice name used of Web Speech API
          */

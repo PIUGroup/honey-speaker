@@ -46,7 +46,7 @@ export class HoneySpeech {
   /**
    * enable or disable console logging
    */
-  @Prop() enableLogging: boolean = false;
+  @Prop() verbose: boolean = false;
 
 
   /**
@@ -111,7 +111,7 @@ export class HoneySpeech {
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
     // Properties auswerten
-    Logger.toggleLogging(this.enableLogging);
+    Logger.toggleLogging(this.verbose);
   }
 
 
