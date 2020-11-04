@@ -167,13 +167,25 @@ export class HoneySpeech {
     }
   }
 
-  @Listen('click', {capture: true})
-  protected onClick(): void {
+  protected onAction() {
     const texte: string[] = this.getTexte();
     texte.forEach(async text =>
       await this.sprachAusgabe.textVorlesen(text + " ")
     );
   }
+
+  @Listen('click', {capture: true})
+  protected onClick(): void {
+    this.onAction();
+  }
+
+  @Listen('keydown', {capture: true})
+  protected onKeyDown(ev: KeyboardEvent): void {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      this.onAction();
+    }
+  }
+
 
   public render() {
     return (
