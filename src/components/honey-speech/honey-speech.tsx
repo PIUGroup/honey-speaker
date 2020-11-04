@@ -1,6 +1,6 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
-import {Sprachausgabe} from "../../libs/speech-output"
-import {Logger} from "../../libs/log-helper";
+import {Sprachausgabe} from "../../libs/sprachausgabe"
+import {Logger} from "../../libs/logger";
 
 
 @Component({
@@ -42,6 +42,11 @@ export class HoneySpeech {
    * which inner text should be speech.
    */
   @Prop() textids!: string;
+
+  /**
+   * enable console logging
+   */
+  @Prop() verbose: boolean = false;
 
 
   /**
@@ -105,6 +110,8 @@ export class HoneySpeech {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    // Properties auswerten
+    Logger.toggleLogging(this.verbose);
   }
 
 

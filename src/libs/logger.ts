@@ -10,6 +10,18 @@ export class Logger {
     this.isLoggingActive = true;
   }
 
+  public static toggleLogging(enableLogging: boolean) {
+    if (enableLogging) {
+      Logger.enableLogging();
+    } else {
+      Logger.disableLogging();
+    }
+  }
+
+  constructor(enableLogging: boolean) {
+    Logger.isLoggingActive = enableLogging;
+  }
+
   public static logMessage(message) {
     if (console && this.isLoggingActive) {
       console.log(message);

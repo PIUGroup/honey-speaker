@@ -1,5 +1,10 @@
 import {newE2EPage} from '@stencil/core/testing';
 import {E2EElement, E2EPage} from "@stencil/core/testing/puppeteer/puppeteer-declarations";
+import {Logger} from "../../libs/logger";
+
+class TestLogger extends Logger {
+
+}
 
 describe('example', () => {
 
@@ -7,7 +12,8 @@ describe('example', () => {
   let element: E2EElement;
 
   beforeEach(async () => {
-    page = await newE2EPage({html: `<honey-speech audiolang="en" textids="3"></honey-speech><p id="3">test</p>`});
+    TestLogger.enableLogging();
+    page = await newE2EPage({html: `<honey-speech verbose audiolang="en" textids="3"></honey-speech><p id="3">test</p>`});
     element = await page.find('honey-speech');
   });
 
@@ -44,10 +50,10 @@ describe('example', () => {
      return speechSynthesis.getVoices().length;
     });
     if( stimmenAnzahl <1){
-      console.log("Keine Stimmen im Browser verfügbar -> Test übersprungen");
+      TestLogger.logMessage("Keine Stimmen im Browser verfügbar -> Test übersprungen");
       return;
     }else{
-      console.log("Stimmen gefunden - Test wird ausgeführt");
+      TestLogger.logMessage("Stimmen gefunden - Test wird ausgeführt");
     }
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
     await element.setProperty('audiolang', 'us');

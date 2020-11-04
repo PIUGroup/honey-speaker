@@ -36,6 +36,10 @@ export namespace Components {
          */
         "textids": string;
         /**
+          * enable or disable console logging
+         */
+        "verbose": boolean;
+        /**
           * voice name used of Web Speech API
          */
         "voicename": string;
@@ -98,6 +102,10 @@ declare namespace LocalJSX {
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
+        /**
+          * enable or disable console logging
+         */
+        "verbose"?: boolean;
         /**
           * voice name used of Web Speech API
          */

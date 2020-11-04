@@ -5,16 +5,17 @@
 
 ## Properties
 
-| Property               | Attribute     | Description                                                                          | Type     | Default     |
-| ---------------------- | ------------- | ------------------------------------------------------------------------------------ | -------- | ----------- |
-| `audiolang`            | `audiolang`   | i18n language ident for Web Speech API: de-DE or en or de ...                        | `string` | `"de-DE"`   |
-| `audiopitch`           | `audiopitch`  | pitch for Web Speech API                                                             | `number` | `1`         |
-| `audiorate`            | `audiorate`   | rate for Web Speech API                                                              | `number` | `1`         |
-| `audiovolume`          | `audiovolume` | volume for Web Speech API                                                            | `number` | `1`         |
-| `iconheight`           | `iconheight`  | icon height                                                                          | `string` | `"36"`      |
-| `iconwidth`            | `iconwidth`   | icon width                                                                           | `string` | `"36"`      |
-| `textids` _(required)_ | `textids`     | An comma separated list  with ids of DOM elements which inner text should be speech. | `string` | `undefined` |
-| `voicename`            | `voicename`   | voice name used of Web Speech API                                                    | `string` | `undefined` |
+| Property               | Attribute     | Description                                                                          | Type      | Default     |
+| ---------------------- | ------------- | ------------------------------------------------------------------------------------ | --------- | ----------- |
+| `audiolang`            | `audiolang`   | i18n language ident for Web Speech API: de-DE or en or de ...                        | `string`  | `"de-DE"`   |
+| `audiopitch`           | `audiopitch`  | pitch for Web Speech API                                                             | `number`  | `1`         |
+| `audiorate`            | `audiorate`   | rate for Web Speech API                                                              | `number`  | `1`         |
+| `audiovolume`          | `audiovolume` | volume for Web Speech API                                                            | `number`  | `1`         |
+| `iconheight`           | `iconheight`  | icon height                                                                          | `string`  | `"36"`      |
+| `iconwidth`            | `iconwidth`   | icon width                                                                           | `string`  | `"36"`      |
+| `textids` _(required)_ | `textids`     | An comma separated list  with ids of DOM elements which inner text should be speech. | `string`  | `undefined` |
+| `verbose`              | `verbose`     | enable or disable console logging                                                    | `boolean` | `false`     |
+| `voicename`            | `voicename`   | voice name used of Web Speech API                                                    | `string`  | `undefined` |
 
 
 ## Events
