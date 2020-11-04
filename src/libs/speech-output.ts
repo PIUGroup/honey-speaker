@@ -1,20 +1,22 @@
 import {Logger} from "./log-helper";
 
 class Synthese {
-  sprachSynthese: SpeechSynthesis;
-  voices: SpeechSynthesisVoice[];
+  protected logger: Logger;
+  protected sprachSynthese: SpeechSynthesis;
+  protected voices: SpeechSynthesisVoice[];
 
-  constructor() {
+  constructor(logger: Logger) {
+    this.logger = logger
     this.sprachSynthese = window.speechSynthesis;
     this.sprachSynthese.onvoiceschanged = () => {
       if (!this.voices || this.voices.length < 1) {
         this.voices = this.sprachSynthese.getVoices();
-        Logger.infoMessage("voices changed to: " + this.voices.join(","));
+        logger.infoMessage("voices changed to: " + this.voices.join(","));
       } else {
-        Logger.infoMessage("voices alraedy initialized");
+        logger.infoMessage("voices alraedy initialized");
       }
     };
-    Logger.infoMessage("call getVoices()");
+    logger.infoMessage("call getVoices()");
     this.sprachSynthese.getVoices();
   }
 
@@ -26,7 +28,9 @@ class Synthese {
 
 export class Sprachausgabe {
 
-  static synthese: Synthese = new Synthese();
+  logger: Logger;
+
+  synthese: Synthese;
 
   stimme: SpeechSynthesisVoice;
 
@@ -45,7 +49,8 @@ export class Sprachausgabe {
 
   onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  constructor(onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
+  constructor(logger: Logger
+    , onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
     , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
@@ -55,17 +60,19 @@ export class Sprachausgabe {
     , audioVolume: number
     , voiceName: string
   ) {
+    this.logger = logger;
+    this.synthese = new Synthese(logger);
     this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
     this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
     this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
-    this.onSpeakerFailed =  (ev) => onSpeakerFailed(ev);
+    this.onSpeakerFailed = (ev) => onSpeakerFailed(ev);
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
     this.audioVolume = audioVolume;
     this.voiceName = voiceName;
     this.stimme = undefined;
-    Logger.infoMessage("####constructor finished");
+    logger.infoMessage("####constructor finished");
   }
 
   protected getDefaultStimme(): SpeechSynthesisVoice {
@@ -75,7 +82,7 @@ export class Sprachausgabe {
     var defaultMatch: SpeechSynthesisVoice;
 
     const voices = Sprachausgabe.synthese.getVoices();
-    Logger.infoMessage("Found voices:"+ JSON.stringify(voices));
+    this.logger.infoMessage("Found voices:" + JSON.stringify(voices));
 
 
     if (!voices) return null;
@@ -84,7 +91,7 @@ export class Sprachausgabe {
         voices[i].lang === this.audioLang ||
         voices[i].default
       ) {
-        Logger.debugMessage("voice matched:" + voices[i].name + voices[i].lang);
+        this.logger.debugMessage("voice matched:" + voices[i].name + voices[i].lang);
         if (voices[i].name === this.voiceName) {
           namedMatch = voices[i];
         }
@@ -118,7 +125,7 @@ export class Sprachausgabe {
   }
 
   protected erzeugeVorleser(text: string): SpeechSynthesisUtterance {
-    Logger.infoMessage("erzeugeVorleser started");
+    this.logger.infoMessage("erzeugeVorleser started");
     const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
     vorleser.onend = this.onSpeakerFinished;
@@ -137,19 +144,19 @@ export class Sprachausgabe {
   public textVorlesen(zuLesenderText: string) {
     if (!this.stimme) {
       this.stimme = this.getDefaultStimme();
-      Logger.infoMessage("set default voice to " + this.stimme);
+      this.logger.infoMessage("set default voice to " + this.stimme);
     }
     if (zuLesenderText) {
       const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
 
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
-          Logger.infoMessage("speaker lang used:" + vorleser.lang);
+          this.logger.infoMessage("speaker lang used:" + vorleser.lang);
           if (vorleser.voice) {
-            Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
-            Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
+            this.logger.infoMessage("speaker voice used:" + vorleser.voice.name);
+            this.logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
           } else {
-            Logger.infoMessage("no voice matched for text: " + zuLesenderText);
+            this.logger.infoMessage("no voice matched for text: " + zuLesenderText);
           }
           Sprachausgabe.synthese.sprachSynthese.speak(vorleser);
         }

@@ -23,6 +23,7 @@ export namespace Components {
           * volume for Web Speech API
          */
         "audiovolume": number;
+        "enablelogging": boolean;
         /**
           * icon height
          */
@@ -70,6 +71,7 @@ declare namespace LocalJSX {
           * volume for Web Speech API
          */
         "audiovolume"?: number;
+        "enablelogging"?: boolean;
         /**
           * icon height
          */

@@ -32,10 +32,6 @@ describe('example', () => {
     await element.setProperty('audiolang', 'us');
     await page.waitForChanges();
     const value = await element.getProperty("audiolang")
-    // Property Wert lesen
-    // const value  = await page.$eval('honey-speech', (elm: any) => {
-    //  return elm.audiolang;
-    // });
     expect(value).toEqual( 'us');
   });
 

@@ -11,6 +11,8 @@ import {Logger} from "../../libs/log-helper";
 })
 export class HoneySpeech {
 
+  logger: Logger;
+
   sprachAusgabe: Sprachausgabe;
 
 
@@ -35,6 +37,9 @@ export class HoneySpeech {
    * default: Vorlesen
    */
   @State() titletext: string;
+
+
+  @Prop() enablelogging: boolean = false;
 
 
   /**
@@ -105,6 +110,8 @@ export class HoneySpeech {
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    // Logging einschalten
+    this.logger = new Logger(this.enablelogging);
   }
 
 
@@ -112,19 +119,19 @@ export class HoneySpeech {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
-        Logger.debugMessage("Vorlesen gestartet");
+        this.logger.debugMessage("Vorlesen gestartet");
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
-        Logger.debugMessage("Vorlesen beendet");
+        this.logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
-        Logger.debugMessage("Pause mit Vorlesen");
+        this.logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
-        Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
+        this.logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
       this.audiopitch,
@@ -144,7 +151,7 @@ export class HoneySpeech {
           if (element) {
             texte.push(element.innerText);
           } else {
-            Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
+            this.logger.errorMessage("text to speak not found of DOM element with id " + elementId);
           }
         }
       );
