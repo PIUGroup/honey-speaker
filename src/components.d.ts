@@ -36,7 +36,7 @@ export namespace Components {
          */
         "textids": string;
         /**
-          * enable or disable console logging
+          * enable console logging
          */
         "verbose": boolean;
         /**
@@ -103,7 +103,7 @@ declare namespace LocalJSX {
          */
         "textids": string;
         /**
-          * enable or disable console logging
+          * enable console logging
          */
         "verbose"?: boolean;
         /**
