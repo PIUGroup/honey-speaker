@@ -1,28 +1,5 @@
 import {Logger} from "./logger";
-
-class Synthese {
-  sprachSynthese: SpeechSynthesis;
-  voices: SpeechSynthesisVoice[];
-
-  constructor() {
-    this.sprachSynthese = window.speechSynthesis;
-    this.sprachSynthese.onvoiceschanged = () => {
-      if (!this.voices || this.voices.length < 1) {
-        this.voices = this.sprachSynthese.getVoices();
-        Logger.infoMessage("voices changed to: " + this.voices.join(","));
-      } else {
-        Logger.infoMessage("voices alraedy initialized");
-      }
-    };
-    Logger.infoMessage("call getVoices()");
-    this.sprachSynthese.getVoices();
-  }
-
-  public getVoices(): SpeechSynthesisVoice[] {
-    return this.voices;
-  }
-}
-
+import {Synthese} from "./sprachsynthese";
 
 export class Sprachausgabe {
 
@@ -46,7 +23,7 @@ export class Sprachausgabe {
   onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
   constructor(
-      onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
+    onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
     , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
@@ -59,7 +36,7 @@ export class Sprachausgabe {
     this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
     this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
     this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
-    this.onSpeakerFailed =  (ev) => onSpeakerFailed(ev);
+    this.onSpeakerFailed = (ev) => onSpeakerFailed(ev);
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
@@ -76,7 +53,7 @@ export class Sprachausgabe {
     var defaultMatch: SpeechSynthesisVoice;
 
     const voices = Sprachausgabe.synthese.getVoices();
-    Logger.infoMessage("Found voices:"+ JSON.stringify(voices));
+    Logger.infoMessage("Found voices:" + JSON.stringify(voices));
 
 
     if (!voices) return null;

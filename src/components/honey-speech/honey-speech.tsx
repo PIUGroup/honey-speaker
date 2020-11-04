@@ -1,5 +1,5 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
-import {Sprachausgabe} from "../../libs/speech-output"
+import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
 
 
