@@ -44,7 +44,7 @@ export class HoneySpeech {
   @Prop() textids!: string;
 
   /**
-   * enable or disable console logging
+   * enable console logging
    */
   @Prop() verbose: boolean = false;
 
