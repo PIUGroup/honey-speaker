@@ -14,7 +14,7 @@ npm install --save honey-speech
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-speech@0.0.9/dist/honey-speech/honey-speech.js'>
+    src='https://unpkg.com/@huluvu424242/honey-speech@0.0.13/dist/honey-speech/honey-speech.js'>
 </script>
 ```
 To the [demo site](https://funthomas424242.github.io/honey-speech/index.html)
@@ -57,7 +57,8 @@ To the [live demo](https://funthomas424242.github.io/honey-speech/index.html)
 ### v0.0.13 unpublished
 
 * initializing of voices fixed
-* 
+* [issue2](https://github.com/Huluvu424242/honey-speech/issues/2) e2e tests fixed
+* css support of ::part removed (to complex for end user)
 
 ### v0.0.12 published at 2020-02-29
 

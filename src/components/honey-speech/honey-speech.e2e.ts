@@ -29,13 +29,15 @@ describe('example', () => {
     // await page.$eval('honey-speech', (elm: any) => {
     //   elm.audiolang = 'us';
     // });
+    const lang = await element.getProperty('audiolang');
+    expect(lang).toEqual('en');
     await element.setProperty('audiolang', 'us');
     await page.waitForChanges();
     const value = await element.getProperty("audiolang")
     expect(value).toEqual( 'us');
   });
 
-  it('fire events', async () => {
+  it('fire event honeySpeakerStarted', async () => {
 
     // Property Wert lesen
     const stimmenAnzahl  = await page.$eval('honey-speech', () => {
@@ -58,27 +60,4 @@ describe('example', () => {
 });
 
 
-// xdescribe('honey-speech', () => {
-//
-//
-//   it('renders changes to the name data', async () => {
-//     const page = await newE2EPage();
-//
-//     await page.setContent('<honey-speech></honey-speech>');
-//     const component = await page.find('honey-speech');
-//     const element = await page.find('honey-speech >>> div');
-//     expect(element.textContent).toEqual(`Hello, World! I'm `);
-//
-//     component.setProperty('first', 'James');
-//     await page.waitForChanges();
-//     expect(element.textContent).toEqual(`Hello, World! I'm James`);
-//
-//     component.setProperty('last', 'Quincy');
-//     await page.waitForChanges();
-//     expect(element.textContent).toEqual(`Hello, World! I'm James Quincy`);
-//
-//     component.setProperty('middle', 'Earl');
-//     await page.waitForChanges();
-//     expect(element.textContent).toEqual(`Hello, World! I'm James Earl Quincy`);
-//   });
-// });
+
