@@ -1,4 +1,3 @@
-import {EventEmitter} from "@stencil/core";
 import {Logger} from "./log-helper";
 
 class Synthese {
@@ -38,28 +37,28 @@ export class Sprachausgabe {
   voiceName: string;
 
 
-  speakerStarted: EventEmitter;
+  onSpeakerStarted: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  speakerFinished: EventEmitter;
+  onSpeakerFinished: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  speakerPaused: EventEmitter;
+  onSpeakerPaused: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  speakerFailed: EventEmitter;
+  onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
-  constructor(speakerStarted: EventEmitter
-    , speakerFinished: EventEmitter
-    , speakerPaused: EventEmitter
-    , speakerFailed: EventEmitter
+  constructor(onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
     , audioLang: string
     , audioPitch: number
     , audioRate: number
     , audioVolume: number
     , voiceName: string
   ) {
-    this.speakerStarted = speakerStarted;
-    this.speakerFinished = speakerFinished;
-    this.speakerPaused = speakerPaused;
-    this.speakerFailed = speakerFailed;
+    this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
+    this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
+    this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
+    this.onSpeakerFailed =  (ev) => onSpeakerFailed(ev);
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
     this.audioRate = audioRate;
@@ -69,14 +68,17 @@ export class Sprachausgabe {
     Logger.infoMessage("####constructor finished");
   }
 
-  getDefaultStimme(): SpeechSynthesisVoice {
+  protected getDefaultStimme(): SpeechSynthesisVoice {
     var namedMatch: SpeechSynthesisVoice;
     var langMatches: SpeechSynthesisVoice[] = [];
     var langDefaultMatch: SpeechSynthesisVoice;
     var defaultMatch: SpeechSynthesisVoice;
 
     const voices = Sprachausgabe.synthese.getVoices();
-    if(!voices) return null;
+    Logger.infoMessage("Found voices:"+ JSON.stringify(voices));
+
+
+    if (!voices) return null;
     for (var i = 0; i < voices.length; i++) {
       if (voices[i].name === this.voiceName ||
         voices[i].lang === this.audioLang ||
@@ -115,29 +117,14 @@ export class Sprachausgabe {
     return voices[0];
   }
 
-  erzeugeVorleser(text: string): SpeechSynthesisUtterance {
+  protected erzeugeVorleser(text: string): SpeechSynthesisUtterance {
     Logger.infoMessage("erzeugeVorleser started");
     const vorleser: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
 
-    vorleser.onend = () => {
-      this.speakerFinished.emit();
-      Logger.debugMessage("Vorlesen beendet");
-    }
-
-    vorleser.onstart = () => {
-      this.speakerStarted.emit();
-      Logger.debugMessage("Vorlesen gestartet");
-    }
-
-    vorleser.onpause = () => {
-      this.speakerPaused.emit();
-      Logger.debugMessage("Pause mit Vorlesen");
-    }
-
-    vorleser.onerror = () => {
-      this.speakerFailed.emit();
-      Logger.errorMessage("Fehler beim Vorlesen");
-    }
+    vorleser.onend = this.onSpeakerFinished;
+    vorleser.onstart = this.onSpeakerStarted;
+    vorleser.onpause = this.onSpeakerPaused;
+    vorleser.onerror = this.onSpeakerFailed;
 
     vorleser.pitch = this.audioPitch;
     vorleser.rate = this.audioRate;
@@ -147,7 +134,7 @@ export class Sprachausgabe {
     return vorleser;
   }
 
-  textVorlesen(zuLesenderText: string) {
+  public textVorlesen(zuLesenderText: string) {
     if (!this.stimme) {
       this.stimme = this.getDefaultStimme();
       Logger.infoMessage("set default voice to " + this.stimme);

@@ -1,6 +1,7 @@
-import {Component, Element, Event, EventEmitter, h, Listen, Prop} from "@stencil/core";
-import {Sprachausgabe} from "./speech-output"
-import {Logger} from "./log-helper";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
+import {Sprachausgabe} from "../../libs/speech-output"
+import {Logger} from "../../libs/log-helper";
+
 
 @Component({
   tag: "honey-speech",
@@ -12,9 +13,28 @@ export class HoneySpeech {
 
   sprachAusgabe: Sprachausgabe;
 
-  ident: string;
 
-  @Element() htmlElement: HTMLElement;
+  /**
+   * Host Element
+   */
+  @Element() hostElement: HTMLElement;
+
+  /**
+   * Id des Host Elements, falls nicht verfügbar wird diese generiert
+   */
+  @State() ident: string;
+
+  /**
+   * alt text for a11y
+   * default: "Lautsprechersymbol zur Sprachausgabe"
+   */
+  @State() alttext: string;
+
+  /**
+   * title text for a11y = tooltip
+   * default: Vorlesen
+   */
+  @State() titletext: string;
 
 
   /**
@@ -23,99 +43,89 @@ export class HoneySpeech {
    */
   @Prop() textids!: string;
 
+
   /**
    * icon width
-   * default: 36
    */
-  @Prop() iconwidth: string;
+  @Prop() iconwidth: string = "36";
 
   /**
-   * icon height, default: 36
-   * @param iconheight
-   * @default 36
+   * icon height
    */
-  @Prop() iconheight: string;
-
-  /**
-   * alt text for a11y
-   * default: "Symbol eines sprechenden Lautsprechers"
-   */
-  @Prop() alttext: string;
-
-  /**
-   * title text for a11y = tooltip
-   * default: Vorlesen
-   */
-  @Prop() titletext: string;
+  @Prop() iconheight: string = "36";
 
   /**
    * i18n language ident for Web Speech API: de-DE or en or de ...
    */
-  @Prop() audiolang: string;
+  @Prop() audiolang: string = "de-DE";
 
   /**
-   * pitch for Web Speech API: default: 1
+   * pitch for Web Speech API
    */
-  @Prop() audiopitch: number;
+  @Prop() audiopitch: number = 1;
 
   /**
-   * rate for Web Speech API: default 1
+   * rate for Web Speech API
    */
-  @Prop() audiorate: number;
+  @Prop() audiorate: number = 1;
 
   /**
-   * volume for Web Speech API: default 1
+   * volume for Web Speech API
    */
-  @Prop() audiovolume: number;
+  @Prop() audiovolume: number = 1;
 
   /**
-   * voice name used of Web Speech API: default undefined
+   * voice name used of Web Speech API
    */
-  @Prop() voicename: string;
+  @Prop() voicename: string = undefined;
 
-  /**
-   * An JSON Object with i18n text values separeted by language idents:
-   * currently unused
-   *
-   * { "deDE" : { "error": "Fehler}, "en" : { "error" : "Error"}}
-   */
-  @Prop() i18n: object;
 
   /**
    * Fired if the stimme is speaking.
    */
-  @Event() speakerStarted: EventEmitter;
+  @Event({bubbles: true, composed: true}) honeySpeakerStarted: EventEmitter<string>;
 
   /**
    * Fired if the stimme has finished with speaking.
    */
-  @Event() speakerFinished: EventEmitter;
+  @Event({bubbles: true, composed: true}) honeySpeakerFinished: EventEmitter<string>;
 
   /**
    * Fired if the stimme is paused with speaking.
    */
-  @Event() speakerPaused: EventEmitter;
+  @Event({bubbles: true, composed: true}) honeySpeakerPaused: EventEmitter<string>;
 
   /**
    * Fired if the stimme has failed to speak.
    */
-  @Event() speakerFailed: EventEmitter;
+  @Event({bubbles: true, composed: true}) honeySpeakerFailed: EventEmitter<string>;
 
-  connectedCallback() {
-    this.ident = this.htmlElement.id ? this.htmlElement.id : Math.random().toString(36).substring(7);
-    if (!this.titletext) this.titletext = "Vorlesen";
-    if (!this.alttext) this.alttext = "Symbol eines sprechenden Lautsprechers";
-    if (!this.iconheight) this.iconheight = "500";
-    if (!this.iconwidth) this.iconwidth = "500";
-    if (!this.audiopitch) this.audiopitch = 1;
-    if (!this.audiorate) this.audiorate = 1;
-    if (!this.audiovolume) this.audiovolume = 1;
+  public connectedCallback() {
+    // Properties initialisieren
+    this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
+    this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
+    this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+  }
 
+
+  public componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
-      this.speakerStarted,
-      this.speakerFinished,
-      this.speakerPaused,
-      this.speakerFailed,
+      () => {
+        this.honeySpeakerStarted.emit(this.ident);
+        Logger.debugMessage("Vorlesen gestartet");
+      },
+      () => {
+        this.honeySpeakerFinished.emit(this.ident);
+        Logger.debugMessage("Vorlesen beendet");
+      },
+      () => {
+        this.honeySpeakerPaused.emit(this.ident);
+        Logger.debugMessage("Pause mit Vorlesen");
+      },
+      (ev): void => {
+        this.honeySpeakerFailed.emit(this.ident);
+        Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
+      },
       this.audiolang,
       this.audiopitch,
       this.audiorate,
@@ -124,7 +134,8 @@ export class HoneySpeech {
     );
   }
 
-  private getTexte(): string[] {
+
+  protected getTexte(): string[] {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
       const texte: string[] = [];
@@ -144,25 +155,20 @@ export class HoneySpeech {
   }
 
   @Listen('click', {capture: true})
-  protected handleClick() {
+  protected onClick(): void {
     const texte: string[] = this.getTexte();
-
-    texte.forEach(text =>
-      this.sprachAusgabe.textVorlesen(text+" ")
+    texte.forEach(async text =>
+      await this.sprachAusgabe.textVorlesen(text + " ")
     );
   }
 
-  getId(): string {
-    return this.ident;
-  }
-
-  render() {
+  public render() {
     return (
-      <host part={"speakerpane"}
-            title={this.titletext}
-            alt={this.alttext}
+      <Host
+        title={this.titletext}
+        alt={this.alttext}
       >
-        <svg id={this.getId() + "-svg"} xmlns="http://www.w3.org/2000/svg"
+        <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
              class="speakerimage"
              viewBox="0 0 75 75">
@@ -175,7 +181,7 @@ export class HoneySpeech {
             d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
           />
         </svg>
-      </host>
+      </Host>
     );
   }
 }

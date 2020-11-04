@@ -50,9 +50,14 @@ To the [live demo](https://funthomas424242.github.io/honey-speech/index.html)
 
 ## releaselog
 
+### v0.0.14 unpublished
+
+* n/a
+
 ### v0.0.13 unpublished
 
 * initializing of voices fixed
+* 
 
 ### v0.0.12 published at 2020-02-29
 
