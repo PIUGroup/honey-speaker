@@ -36,6 +36,11 @@ export class HoneySpeech {
    */
   @State() titletext: string;
 
+  /**
+   * taborder
+   */
+  @State() taborder: string = "0";
+
 
   /**
    * An comma separated list  with ids of DOM elements
@@ -106,10 +111,11 @@ export class HoneySpeech {
   @Event({bubbles: true, composed: true}) honeySpeakerFailed: EventEmitter<string>;
 
   public connectedCallback() {
-    // Properties initialisieren
+    // States initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
     this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    this.taborder = this.hostElement.getAttribute("tabindex") ? (this.hostElement.tabIndex + "") : "0";
     // Properties auswerten
     Logger.toggleLogging(this.verbose);
   }
@@ -174,9 +180,13 @@ export class HoneySpeech {
       <Host
         title={this.titletext}
         alt={this.alttext}
+        role="button"
+        tabindex={this.taborder}
       >
         <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
+             role="img"
+             aria-label={this.alttext}
              class="speakerimage"
              viewBox="0 0 75 75">
           <path
