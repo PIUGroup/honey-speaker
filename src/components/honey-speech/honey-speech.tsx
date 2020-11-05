@@ -22,29 +22,29 @@ export class HoneySpeech {
   /**
    * Id des Host Elements, falls nicht verfügbar wird diese generiert
    */
-  @State() ident: string;
+  ident: string;
 
   /**
    * alt text for a11y
    * default: "Lautsprechersymbol zur Sprachausgabe"
    */
-  @State() alttext: string;
+  alttext: string;
 
   /**
    * title text for a11y = tooltip
    * default: Vorlesen
    */
-  @State() titletext: string;
+  titletext: string;
 
   /**
    * taborder
    */
-  @State() taborder: string = "0";
+  taborder: string = "0";
 
   /**
    * if the toggle button is pressed
    */
-  @State() isPressed: boolean = true
+  @State() isPressed: boolean = false;
 
 
   /**
@@ -172,7 +172,9 @@ export class HoneySpeech {
     }
   }
 
-  protected onAction() {
+  protected toggleAction() {
+    Logger.infoMessage("###TOGGLE TO"+this.isPressed);
+    this.isPressed = !this.isPressed;
     const texte: string[] = this.getTexte();
     texte.forEach(async text =>
       await this.sprachAusgabe.textVorlesen(text + " ")
@@ -181,24 +183,28 @@ export class HoneySpeech {
 
   @Listen('click', {capture: true})
   protected onClick(): void {
-    this.onAction();
+    this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
   protected onKeyDown(ev: KeyboardEvent): void {
     if (ev.key === 'Enter' || ev.key === ' ') {
-      this.onAction();
+      ev.preventDefault();
+      this.toggleAction();
     }
   }
 
 
   public render() {
+    console.log('##RENDER##');
+    const toValue: string = this.isPressed ? "0" : "1";
     return (
       <Host
         title={this.titletext}
         alt={this.alttext}
         role="button"
         tabindex={this.taborder}
+        aria-pressed={this.isPressed? "true": "false"}
       >
         <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
              width={this.iconwidth} height={this.iconheight}
@@ -209,15 +215,13 @@ export class HoneySpeech {
           <path
             stroke-width="5" stroke-linejoin="round"
             d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
-
-
-
           </path>
           <path
+            id="air"
             stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
             d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
-            <animate attributeType="CSS" attributeName="opacity"  from="1" to={this.isPressed? "0" : "1"} dur="1s" repeatCount="indefinite" />
+            <animate id="airanimation" attributeType="CSS" attributeName="opacity"  from="1" to={toValue} dur="1s" repeatCount="indefinite" />
 
           </path>
         </svg>
