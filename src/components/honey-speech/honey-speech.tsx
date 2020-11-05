@@ -130,18 +130,22 @@ export class HoneySpeech {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
+        this.isPressed=true;
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
+        this.isPressed=false
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
+        this.isPressed=false
         Logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
+        this.isPressed=false;
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -172,13 +176,21 @@ export class HoneySpeech {
     }
   }
 
+  protected async textVorlesen(text: string) {
+    this.isPressed = true;
+    await this.sprachAusgabe.textVorlesen(text + " ")
+  }
+
   protected toggleAction() {
-    Logger.debugMessage("###TOGGLE TO"+this.isPressed);
+    Logger.debugMessage("###TOGGLE TO" + this.isPressed);
     this.isPressed = !this.isPressed;
-    const texte: string[] = this.getTexte();
-    texte.forEach(async text =>
-      await this.sprachAusgabe.textVorlesen(text + " ")
-    );
+    if (this.isPressed) {
+      const texte: string[] = this.getTexte();
+      texte.forEach(async text => {
+          this.textVorlesen(text);
+        }
+      );
+    }
   }
 
   @Listen('click', {capture: true})
@@ -203,9 +215,9 @@ export class HoneySpeech {
         alt={this.alttext}
         role="button"
         tabindex={this.taborder}
-        aria-pressed={this.isPressed? "true": "false"}
+        aria-pressed={this.isPressed ? "true" : "false"}
       >
-        {this.isPressed? (
+        {this.isPressed ? (
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
@@ -221,7 +233,8 @@ export class HoneySpeech {
               stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
-              <animate id="airanimation" attributeType="CSS" attributeName="opacity"  from="1" to="0" dur="1s" repeatCount="indefinite" />
+              <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"
+                       repeatCount="indefinite"/>
 
             </path>
           </svg>
