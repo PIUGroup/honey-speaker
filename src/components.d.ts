@@ -31,6 +31,7 @@ export namespace Components {
           * icon width
          */
         "iconwidth": string;
+        "pure": boolean;
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
@@ -98,6 +99,7 @@ declare namespace LocalJSX {
           * Fired if the stimme is speaking.
          */
         "onHoneySpeakerStarted"?: (event: CustomEvent<string>) => void;
+        "pure"?: boolean;
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
