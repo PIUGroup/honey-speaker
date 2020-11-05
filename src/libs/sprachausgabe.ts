@@ -136,6 +136,10 @@ export class Sprachausgabe {
     }
   }
 
+  public cancel():void{
+    Sprachausgabe.synthese.sprachSynthese.cancel();
+  }
+
 }
 
 

@@ -190,6 +190,8 @@ export class HoneySpeech {
           this.textVorlesen(text);
         }
       );
+    }else{
+      this.sprachAusgabe.cancel();
     }
   }
 
