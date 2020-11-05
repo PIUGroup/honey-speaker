@@ -261,7 +261,7 @@ export class HoneySpeech {
             </path>
             <path
               id="air"
-              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
               <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"

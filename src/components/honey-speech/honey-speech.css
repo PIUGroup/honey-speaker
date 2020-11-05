@@ -1,10 +1,10 @@
 .speakerimage {
-  background: var(--speaker-background, transparent);
-  stroke: var(--speaker-color, blue);
-  fill: var(--speaker-color, blue);
-  padding: var(--speaker-padding, 5px);
-  font-size: var(--speaker-font-size, medium);
-  border: var(--speaker-border, 0);
-  width: var(--speaker-width, 36px);
-  height: var(--speaker-height, 36px);
+  background: var(--honey-speaker-background, transparent);
+  stroke: var(--honey-speaker-color, blue);
+  fill: var(--honey-speaker-color, blue);
+  padding: var(--honey-speaker-padding, 5px);
+  font-size: var(--honey-speaker-font-size, medium);
+  border: var(--honey-speaker-border, 0);
+  width: var(--honey-speaker-width, 36px);
+  height: var(--honey-speaker-height, 36px);
 }
