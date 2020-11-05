@@ -27,7 +27,7 @@ describe('example', () => {
 
   it('has a11y attributes', async () => {
     expect(element).toEqualAttribute('title', 'Vorlesen');
-    expect(element).toEqualAttribute('alt', 'Lautsprechersymbol zur Sprachausgabe');
+    expect(element).toEqualAttribute('alt', 'Symbol eines tönenden Lautsprechers');
   });
 
   it('has correct audio properties', async () => {

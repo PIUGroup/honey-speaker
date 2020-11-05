@@ -25,16 +25,14 @@ export class HoneySpeech {
   ident: string;
 
   /**
-   * alt text for a11y
-   * default: "Lautsprechersymbol zur Sprachausgabe"
+   * true wenn das Tag ohne alt Attribute deklariert wurde
    */
-  alttext: string;
+  createAltText: boolean = false;
 
   /**
-   * title text for a11y = tooltip
-   * default: Vorlesen
+   * true wenn das Tag ohne title Attribut deklariert wurde
    */
-  titletext: string;
+  createTitleText: boolean = false;
 
   /**
    * taborder
@@ -46,6 +44,8 @@ export class HoneySpeech {
    */
   @State() isPressed: boolean = false;
 
+
+  @Prop() pure: boolean =false;
 
   /**
    * An comma separated list  with ids of DOM elements
@@ -118,8 +118,8 @@ export class HoneySpeech {
   public connectedCallback() {
     // States initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
-    this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
-    this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    this.createTitleText = !this.hostElement.title;
+    this.createAltText = !this.hostElement["alt"];
     this.taborder = this.hostElement.getAttribute("tabindex") ? (this.hostElement.tabIndex + "") : "0";
     // Properties auswerten
     Logger.toggleLogging(this.verbose);
@@ -130,22 +130,22 @@ export class HoneySpeech {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
-        this.isPressed=true;
+        this.isPressed = true;
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
-        this.isPressed=false
+        this.isPressed = false;
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
-        this.isPressed=false
+        this.isPressed = false;
         Logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
-        this.isPressed=false;
+        this.isPressed = false;
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -156,6 +156,37 @@ export class HoneySpeech {
     );
   }
 
+  protected createNewTitleText(): string {
+    if (this.isPressed) {
+      return "Liest gerade vor";
+    } else {
+      return "Vorlesen";
+    }
+  }
+
+  protected getTitleText(): string {
+    if (this.createTitleText) {
+      return this.createNewTitleText();
+    } else {
+      return this.hostElement.title;
+    }
+  }
+
+  protected createNewAltText(): string {
+    if (this.isPressed) {
+      return "Symbol eines stummen Lautsprechers";
+    } else {
+      return "Symbol eines tönenden Lautsprechers";
+    }
+  }
+
+  protected getAltText(): string {
+    if (this.createAltText) {
+      return this.createNewAltText();
+    } else {
+      return this.hostElement.getAttribute("alt");
+    }
+  }
 
   protected getTexte(): string[] {
     if (this.textids) {
@@ -190,7 +221,7 @@ export class HoneySpeech {
           this.textVorlesen(text);
         }
       );
-    }else{
+    } else {
       this.sprachAusgabe.cancel();
     }
   }
@@ -213,8 +244,8 @@ export class HoneySpeech {
     Logger.debugMessage('##RENDER##');
     return (
       <Host
-        title={this.titletext}
-        alt={this.alttext}
+        title={this.getTitleText()}
+        alt={this.getAltText()}
         role="button"
         tabindex={this.taborder}
         aria-pressed={this.isPressed ? "true" : "false"}
@@ -223,7 +254,7 @@ export class HoneySpeech {
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
-               aria-label={this.alttext}
+               aria-label={this.getAltText()}
                class="speakerimage"
                viewBox="0 0 75 75">
             <path
@@ -232,7 +263,7 @@ export class HoneySpeech {
             </path>
             <path
               id="air"
-              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
               <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"
@@ -244,18 +275,22 @@ export class HoneySpeech {
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
-               aria-label={this.alttext}
+               aria-label={this.getAltText()}
                class="speakerimage"
                viewBox="0 0 75 75">
             <path
               stroke-width="5" stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
-            <path
-              id="air"
-              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
-              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
-            </path>
+            {this.pure ? (
+              ""
+            ):(
+              <path
+                id="air"
+                stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+                d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+              </path>
+            )}
           </svg>
         )}
       </Host>
