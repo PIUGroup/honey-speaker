@@ -22,24 +22,29 @@ export class HoneySpeech {
   /**
    * Id des Host Elements, falls nicht verfügbar wird diese generiert
    */
-  @State() ident: string;
+  ident: string;
 
   /**
    * alt text for a11y
    * default: "Lautsprechersymbol zur Sprachausgabe"
    */
-  @State() alttext: string;
+  alttext: string;
 
   /**
    * title text for a11y = tooltip
    * default: Vorlesen
    */
-  @State() titletext: string;
+  titletext: string;
 
   /**
    * taborder
    */
-  @State() taborder: string = "0";
+  taborder: string = "0";
+
+  /**
+   * if the toggle button is pressed
+   */
+  @State() isPressed: boolean = false;
 
 
   /**
@@ -125,18 +130,22 @@ export class HoneySpeech {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
+        this.isPressed=true;
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
+        this.isPressed=false
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
+        this.isPressed=false
         Logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
+        this.isPressed=false;
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -167,49 +176,88 @@ export class HoneySpeech {
     }
   }
 
-  protected onAction() {
-    const texte: string[] = this.getTexte();
-    texte.forEach(async text =>
-      await this.sprachAusgabe.textVorlesen(text + " ")
-    );
+  protected async textVorlesen(text: string) {
+    this.isPressed = true;
+    await this.sprachAusgabe.textVorlesen(text + " ")
+  }
+
+  protected toggleAction() {
+    Logger.debugMessage("###TOGGLE TO" + this.isPressed);
+    this.isPressed = !this.isPressed;
+    if (this.isPressed) {
+      const texte: string[] = this.getTexte();
+      texte.forEach(async text => {
+          this.textVorlesen(text);
+        }
+      );
+    }else{
+      this.sprachAusgabe.cancel();
+    }
   }
 
   @Listen('click', {capture: true})
   protected onClick(): void {
-    this.onAction();
+    this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
   protected onKeyDown(ev: KeyboardEvent): void {
     if (ev.key === 'Enter' || ev.key === ' ') {
-      this.onAction();
+      ev.preventDefault();
+      this.toggleAction();
     }
   }
 
 
   public render() {
+    Logger.debugMessage('##RENDER##');
     return (
       <Host
         title={this.titletext}
         alt={this.alttext}
         role="button"
         tabindex={this.taborder}
+        aria-pressed={this.isPressed ? "true" : "false"}
       >
-        <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
-             width={this.iconwidth} height={this.iconheight}
-             role="img"
-             aria-label={this.alttext}
-             class="speakerimage"
-             viewBox="0 0 75 75">
-          <path
-            stroke-width="5" stroke-linejoin="round"
-            d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
-          />
-          <path
-            stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
-            d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
-          />
-        </svg>
+        {this.isPressed ? (
+          <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
+               width={this.iconwidth} height={this.iconheight}
+               role="img"
+               aria-label={this.alttext}
+               class="speakerimage"
+               viewBox="0 0 75 75">
+            <path
+              stroke-width="5" stroke-linejoin="round"
+              d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
+            </path>
+            <path
+              id="air"
+              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+
+              <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"
+                       repeatCount="indefinite"/>
+
+            </path>
+          </svg>
+        ) : (
+          <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
+               width={this.iconwidth} height={this.iconheight}
+               role="img"
+               aria-label={this.alttext}
+               class="speakerimage"
+               viewBox="0 0 75 75">
+            <path
+              stroke-width="5" stroke-linejoin="round"
+              d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
+            </path>
+            <path
+              id="air"
+              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+            </path>
+          </svg>
+        )}
       </Host>
     );
   }
