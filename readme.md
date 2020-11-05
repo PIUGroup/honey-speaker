@@ -1,6 +1,7 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@huluvu424242/honey-speech)
 
-# honey-speech
+# honey-speech 
+(**2020-11-30 honey-speech -> moved to @huluvu/honey-speaker**) 
 
 This component realize an speaker symbol button. Its can read a text of
 DOM elements referenced by an list of ids via voice.
