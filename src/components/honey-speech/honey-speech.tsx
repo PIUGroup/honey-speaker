@@ -133,12 +133,12 @@ export class HoneySpeech {
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
-        this.isPressed = false
+        this.isPressed = false;
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
-        this.isPressed = false
+        this.isPressed = false;
         Logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
