@@ -27,13 +27,12 @@ export class HoneySpeech {
   /**
    * true wenn das Tag ohne alt Attribute deklariert wurde
    */
-  createAltText: boolean;
+  createAltText: boolean = false;
 
   /**
-   * title text for a11y = tooltip
-   * default: Vorlesen
+   * true wenn das Tag ohne title Attribut deklariert wurde
    */
-  titletext: string;
+  createTitleText: boolean = false;
 
   /**
    * taborder
@@ -117,8 +116,8 @@ export class HoneySpeech {
   public connectedCallback() {
     // States initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
-    this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
-    this.createAltText = this.hostElement["alt"];
+    this.createTitleText = !this.hostElement.title;
+    this.createAltText = !this.hostElement["alt"];
     this.taborder = this.hostElement.getAttribute("tabindex") ? (this.hostElement.tabIndex + "") : "0";
     // Properties auswerten
     Logger.toggleLogging(this.verbose);
@@ -155,11 +154,35 @@ export class HoneySpeech {
     );
   }
 
-  protected getAltText() {
+  protected createNewTitleText(): string {
+    if (this.isPressed) {
+      return "Liest gerade vor";
+    } else {
+      return "Vorlesen";
+    }
+  }
+
+  protected getTitleText(): string {
+    if (this.createTitleText) {
+      return this.createNewTitleText();
+    } else {
+      return this.hostElement.title;
+    }
+  }
+
+  protected createNewAltText(): string {
     if (this.isPressed) {
       return "Symbol eines stummen Lautsprechers";
     } else {
       return "Symbol eines tönenden Lautsprechers";
+    }
+  }
+
+  protected getAltText(): string {
+    if (this.createAltText) {
+      return this.createNewAltText();
+    } else {
+      return this.hostElement.getAttribute("alt");
     }
   }
 
@@ -219,7 +242,7 @@ export class HoneySpeech {
     Logger.debugMessage('##RENDER##');
     return (
       <Host
-        title={this.titletext}
+        title={this.getTitleText()}
         alt={this.getAltText()}
         role="button"
         tabindex={this.taborder}
