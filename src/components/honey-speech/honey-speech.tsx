@@ -41,6 +41,11 @@ export class HoneySpeech {
    */
   @State() taborder: string = "0";
 
+  /**
+   * if the toggle button is pressed
+   */
+  @State() isPressed: boolean = true
+
 
   /**
    * An comma separated list  with ids of DOM elements
@@ -203,12 +208,18 @@ export class HoneySpeech {
              viewBox="0 0 75 75">
           <path
             stroke-width="5" stroke-linejoin="round"
-            d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
-          />
+            d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
+
+
+
+          </path>
           <path
             stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
-            d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
-          />
+            d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+
+            <animate attributeType="CSS" attributeName="opacity"  from="1" to={this.isPressed? "0" : "1"} dur="1s" repeatCount="indefinite" />
+
+          </path>
         </svg>
       </Host>
     );
