@@ -173,7 +173,7 @@ export class HoneySpeech {
   }
 
   protected toggleAction() {
-    Logger.infoMessage("###TOGGLE TO"+this.isPressed);
+    Logger.debugMessage("###TOGGLE TO"+this.isPressed);
     this.isPressed = !this.isPressed;
     const texte: string[] = this.getTexte();
     texte.forEach(async text =>
@@ -196,8 +196,7 @@ export class HoneySpeech {
 
 
   public render() {
-    console.log('##RENDER##');
-    const toValue: string = this.isPressed ? "0" : "1";
+    Logger.debugMessage('##RENDER##');
     return (
       <Host
         title={this.titletext}
