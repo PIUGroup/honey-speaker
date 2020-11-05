@@ -25,10 +25,9 @@ export class HoneySpeech {
   ident: string;
 
   /**
-   * alt text for a11y
-   * default: "Lautsprechersymbol zur Sprachausgabe"
+   * true wenn das Tag ohne alt Attribute deklariert wurde
    */
-  alttext: string;
+  createAltText: boolean;
 
   /**
    * title text for a11y = tooltip
@@ -119,7 +118,7 @@ export class HoneySpeech {
     // States initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.titletext = this.hostElement.title ? this.hostElement.title : "Vorlesen";
-    this.alttext = this.hostElement["alt"] ? this.hostElement["alt"] : "Lautsprechersymbol zur Sprachausgabe";
+    this.createAltText = this.hostElement["alt"];
     this.taborder = this.hostElement.getAttribute("tabindex") ? (this.hostElement.tabIndex + "") : "0";
     // Properties auswerten
     Logger.toggleLogging(this.verbose);
@@ -130,22 +129,22 @@ export class HoneySpeech {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
-        this.isPressed=true;
+        this.isPressed = true;
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
         this.honeySpeakerFinished.emit(this.ident);
-        this.isPressed=false
+        this.isPressed = false
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
         this.honeySpeakerPaused.emit(this.ident);
-        this.isPressed=false
+        this.isPressed = false
         Logger.debugMessage("Pause mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
-        this.isPressed=false;
+        this.isPressed = false;
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -156,6 +155,13 @@ export class HoneySpeech {
     );
   }
 
+  protected getAltText() {
+    if (this.isPressed) {
+      return "Symbol eines stummen Lautsprechers";
+    } else {
+      return "Symbol eines tönenden Lautsprechers";
+    }
+  }
 
   protected getTexte(): string[] {
     if (this.textids) {
@@ -190,7 +196,7 @@ export class HoneySpeech {
           this.textVorlesen(text);
         }
       );
-    }else{
+    } else {
       this.sprachAusgabe.cancel();
     }
   }
@@ -214,7 +220,7 @@ export class HoneySpeech {
     return (
       <Host
         title={this.titletext}
-        alt={this.alttext}
+        alt={this.getAltText()}
         role="button"
         tabindex={this.taborder}
         aria-pressed={this.isPressed ? "true" : "false"}
@@ -223,7 +229,7 @@ export class HoneySpeech {
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
-               aria-label={this.alttext}
+               aria-label={this.getAltText()}
                class="speakerimage"
                viewBox="0 0 75 75">
             <path
@@ -244,7 +250,7 @@ export class HoneySpeech {
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
-               aria-label={this.alttext}
+               aria-label={this.getAltText()}
                class="speakerimage"
                viewBox="0 0 75 75">
             <path
