@@ -206,25 +206,44 @@ export class HoneySpeech {
         tabindex={this.taborder}
         aria-pressed={this.isPressed? "true": "false"}
       >
-        <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
-             width={this.iconwidth} height={this.iconheight}
-             role="img"
-             aria-label={this.alttext}
-             class="speakerimage"
-             viewBox="0 0 75 75">
-          <path
-            stroke-width="5" stroke-linejoin="round"
-            d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
-          </path>
-          <path
-            id="air"
-            stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
-            d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+        {this.isPressed? (
+          <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
+               width={this.iconwidth} height={this.iconheight}
+               role="img"
+               aria-label={this.alttext}
+               class="speakerimage"
+               viewBox="0 0 75 75">
+            <path
+              stroke-width="5" stroke-linejoin="round"
+              d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
+            </path>
+            <path
+              id="air"
+              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
-            <animate id="airanimation" attributeType="CSS" attributeName="opacity"  from="1" to={toValue} dur="1s" repeatCount="indefinite" />
+              <animate id="airanimation" attributeType="CSS" attributeName="opacity"  from="1" to="0" dur="1s" repeatCount="indefinite" />
 
-          </path>
-        </svg>
+            </path>
+          </svg>
+        ) : (
+          <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
+               width={this.iconwidth} height={this.iconheight}
+               role="img"
+               aria-label={this.alttext}
+               class="speakerimage"
+               viewBox="0 0 75 75">
+            <path
+              stroke-width="5" stroke-linejoin="round"
+              d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
+            </path>
+            <path
+              id="air"
+              stroke="var(--speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
+            </path>
+          </svg>
+        )}
       </Host>
     );
   }
