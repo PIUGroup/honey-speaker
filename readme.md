@@ -61,6 +61,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speech/index.html)
 * [issue2](https://github.com/Huluvu424242/honey-speech/issues/2) e2e tests fixed
 * css support of ::part removed (to complex for end user)
 * a11y: tabindex=0, keydown: space and enter, role="button", alt text, svg role="img"
+* realized as toggle button
 
 ### v0.0.12 published at 2020-02-29
 
