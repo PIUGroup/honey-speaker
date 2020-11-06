@@ -223,7 +223,8 @@ export class HoneySpeaker {
       const audioLoader: Fileloader = new Fileloader(audioURL);
       await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
         if (audioInfo.status === 200) {
-          this.texts.push(... audioInfo.content);
+          this.texts.push(audioInfo.content);
+          console.info('###Texte###'+this.texts);
         }
       });
     }
@@ -235,7 +236,7 @@ export class HoneySpeaker {
       refIds.forEach(elementId => {
           const element: HTMLElement = document.getElementById(elementId);
           if (element) {
-            this.texts.push(... element.innerText);
+            this.texts.push(element.innerText);
           } else {
             Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
           }
