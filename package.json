@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/FunThomas424242/honey-speech.git"
+    "url": "https://github.com/Huluvu424242/honey-speech.git"
   },
   "keywords": [
     "honey",
@@ -26,10 +26,10 @@
     "webcomponent",
     "custom-element"
   ],
-  "author": "FunThomas424242 alias Huluvu424242 (Thomas Schubert)",
+  "author": "Huluvu424242 alias FunThomas424242 (Thomas Schubert)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FunThomas424242/honey-speech/issues"
+    "url": "https://github.com/Huluvu424242/honey-speech/issues"
   },
   "scripts": {
     "build": "stencil build --docs",
