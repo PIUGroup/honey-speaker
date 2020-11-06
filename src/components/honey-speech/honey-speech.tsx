@@ -96,22 +96,27 @@ export class HoneySpeech {
 
 
   /**
-   * Fired if the stimme is speaking.
+   * Fired if the voice is speaking.
    */
   @Event({bubbles: true, composed: true}) honeySpeakerStarted: EventEmitter<string>;
 
   /**
-   * Fired if the stimme has finished with speaking.
+   * Fired if the voice has finished with speaking.
    */
   @Event({bubbles: true, composed: true}) honeySpeakerFinished: EventEmitter<string>;
 
   /**
-   * Fired if the stimme is paused with speaking.
+   * Fired if the voice is paused with speaking.
    */
   @Event({bubbles: true, composed: true}) honeySpeakerPaused: EventEmitter<string>;
 
   /**
-   * Fired if the stimme has failed to speak.
+   * Fired if the voice is resumed after paused with speaking.
+   */
+  @Event({bubbles: true, composed: true}) honeySpeakerResume: EventEmitter<string>;
+
+  /**
+   * Fired if the voice has failed to speak.
    */
   @Event({bubbles: true, composed: true}) honeySpeakerFailed: EventEmitter<string>;
 
@@ -142,6 +147,11 @@ export class HoneySpeech {
         this.honeySpeakerPaused.emit(this.ident);
         this.isPressed = false;
         Logger.debugMessage("Pause mit Vorlesen");
+      },
+      () => {
+        this.honeySpeakerResume.emit(this.ident);
+        this.isPressed = true;
+        Logger.debugMessage("Fortsetzen mit Vorlesen");
       },
       (ev): void => {
         this.honeySpeakerFailed.emit(this.ident);
@@ -283,7 +293,7 @@ export class HoneySpeech {
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             {this.pure ? (
-              ""
+              <text id="eins" x="60%" y="55%">OFF</text>
             ):(
               <path
                 id="air"

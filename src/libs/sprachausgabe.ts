@@ -20,12 +20,15 @@ export class Sprachausgabe {
 
   onSpeakerPaused: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
+  onSpeakerResume: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onSpeakerFailed: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
 
   constructor(
     onSpeakerStarted: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFinished: (ev: SpeechSynthesisEvent) => void
     , onSpeakerPaused: (ev: SpeechSynthesisEvent) => void
+    , onSpeakerResume: (ev: SpeechSynthesisEvent) => void
     , onSpeakerFailed: (ev: SpeechSynthesisEvent) => void
     , audioLang: string
     , audioPitch: number
@@ -36,6 +39,7 @@ export class Sprachausgabe {
     this.onSpeakerStarted = (ev) => onSpeakerStarted(ev);
     this.onSpeakerFinished = (ev) => onSpeakerFinished(ev);
     this.onSpeakerPaused = (ev) => onSpeakerPaused(ev);
+    this.onSpeakerResume = (ev) => onSpeakerResume(ev);
     this.onSpeakerFailed = (ev) => onSpeakerFailed(ev);
     this.audioLang = audioLang;
     this.audioPitch = audioPitch;
@@ -102,6 +106,7 @@ export class Sprachausgabe {
     vorleser.onend = this.onSpeakerFinished;
     vorleser.onstart = this.onSpeakerStarted;
     vorleser.onpause = this.onSpeakerPaused;
+    vorleser.onresume = this.onSpeakerResume;
     vorleser.onerror = this.onSpeakerFailed;
 
     vorleser.pitch = this.audioPitch;

@@ -84,19 +84,23 @@ declare namespace LocalJSX {
          */
         "iconwidth"?: string;
         /**
-          * Fired if the stimme has failed to speak.
+          * Fired if the voice has failed to speak.
          */
         "onHoneySpeakerFailed"?: (event: CustomEvent<string>) => void;
         /**
-          * Fired if the stimme has finished with speaking.
+          * Fired if the voice has finished with speaking.
          */
         "onHoneySpeakerFinished"?: (event: CustomEvent<string>) => void;
         /**
-          * Fired if the stimme is paused with speaking.
+          * Fired if the voice is paused with speaking.
          */
         "onHoneySpeakerPaused"?: (event: CustomEvent<string>) => void;
         /**
-          * Fired if the stimme is speaking.
+          * Fired if the voice is resumed after paused with speaking.
+         */
+        "onHoneySpeakerResume"?: (event: CustomEvent<string>) => void;
+        /**
+          * Fired if the voice is speaking.
          */
         "onHoneySpeakerStarted"?: (event: CustomEvent<string>) => void;
         "pure"?: boolean;
