@@ -293,7 +293,7 @@ export class HoneySpeech {
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             {this.pure ? (
-              ""
+              <text id="eins" x="60%" y="55%">OFF</text>
             ):(
               <path
                 id="air"
