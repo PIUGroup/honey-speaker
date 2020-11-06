@@ -224,7 +224,7 @@ export class HoneySpeaker {
       await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
         if (audioInfo.status === 200) {
           this.texts.push(audioInfo.content);
-          console.info('###Texte###'+this.texts);
+          Logger.debugMessage('###Texte###'+this.texts);
         }
       });
     }
