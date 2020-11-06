@@ -1,1 +1,5 @@
-Das ist ein Text.
+Das ist ein Text der von einem Beispiel URL aus dem Netz geladen wurde.
+
+Er ist etwas unterteilt, daher die Pausen.
+
+Vielen Dank.
