@@ -51,14 +51,20 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## releaselog
 
-### v0.0.14 unpublished
+### v0.0.15 unpublished
 
 * n/a
+
+
+### v0.0.14 published at 2020-11-06
+
+* [issue 17](https://github.com/Huluvu424242/honey-speaker/issues/17) reading text from url added
+
 
 ### v0.0.13 published at 2020-11-06
 
 * initializing of voices fixed
-* [issue2](https://github.com/Huluvu424242/honey-speaker/issues/2) e2e tests fixed
+* [issue 2](https://github.com/Huluvu424242/honey-speaker/issues/2) e2e tests fixed
 * css support of ::part removed (to complex for end user)
 * a11y: tabindex=0, keydown: space and enter, role="button", alt text, svg role="img"
 * speaker realized as toggle button
