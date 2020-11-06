@@ -55,7 +55,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speech/index.html)
 
 * n/a
 
-### v0.0.13 unpublished
+### v0.0.13 published at 2020-11-06
 
 * initializing of voices fixed
 * [issue2](https://github.com/Huluvu424242/honey-speech/issues/2) e2e tests fixed
