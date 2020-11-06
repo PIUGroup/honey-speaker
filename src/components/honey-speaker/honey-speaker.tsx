@@ -1,6 +1,7 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
+import {Fileloader, ResponseInfo} from "../../libs/fileloader";
 
 
 @Component({
@@ -40,6 +41,12 @@ export class HoneySpeaker {
   taborder: string = "0";
 
   /**
+   * texte to speech out
+   */
+  texts: string[] = [];
+
+
+  /**
    * if the toggle button is pressed
    */
   @State() isPressed: boolean = false;
@@ -53,7 +60,12 @@ export class HoneySpeaker {
    * An comma separated list  with ids of DOM elements
    * which inner text should be speech.
    */
-  @Prop() textids!: string;
+  @Prop() textids: string;
+
+  /**
+   * An url to download an text file to speech.
+   */
+  @Prop() texturl: string;
 
   /**
    * enable console logging
@@ -166,6 +178,9 @@ export class HoneySpeaker {
       this.audiovolume,
       this.voicename
     );
+
+    this.loadDOMElementTexte();
+    this.loadAudioUrlContent();
   }
 
   protected createNewTitleText(): string {
@@ -200,22 +215,40 @@ export class HoneySpeaker {
     }
   }
 
-  protected getTexte(): string[] {
+
+  protected async loadAudioUrlContent() {
+    if(this.texturl) {
+      const audioURL: URL = new URL(this.texturl);
+      Logger.debugMessage("audioURL: " + audioURL);
+      const audioLoader: Fileloader = new Fileloader(audioURL);
+      await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
+        if (audioInfo.status === 200) {
+          this.texts.push(... audioInfo.content);
+        }
+      });
+    }
+  }
+
+  protected loadDOMElementTexte():void{
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
-      const texte: string[] = [];
       refIds.forEach(elementId => {
           const element: HTMLElement = document.getElementById(elementId);
           if (element) {
-            texte.push(element.innerText);
+            this.texts.push(... element.innerText);
           } else {
             Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
           }
         }
       );
-      return texte;
-    } else {
-      return ["Kein Text vorhanden, daher keine Ausgabe möglich."];
+    }
+  }
+
+  protected getTexte(): string[] {
+    if(this.texts) {
+      return this.texts;
+    }else{
+      return [];
     }
   }
 
