@@ -13,7 +13,7 @@
 | `audiovolume`          | `audiovolume` | volume for Web Speech API                                                            | `number`  | `1`         |
 | `iconheight`           | `iconheight`  | icon height                                                                          | `string`  | `"36"`      |
 | `iconwidth`            | `iconwidth`   | icon width                                                                           | `string`  | `"36"`      |
-| `pure`                 | `pure`        |                                                                                      | `boolean` | `false`     |
+| `pure`                 | `pure`        | use pure speaker symbol for silence state                                            | `boolean` | `false`     |
 | `textids` _(required)_ | `textids`     | An comma separated list  with ids of DOM elements which inner text should be speech. | `string`  | `undefined` |
 | `verbose`              | `verbose`     | enable console logging                                                               | `boolean` | `false`     |
 | `voicename`            | `voicename`   | voice name used of Web Speech API                                                    | `string`  | `undefined` |
