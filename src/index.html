@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
 
-  <script type="module" src="/build/honey-speech.esm.js"></script>
-  <script nomodule src="/build/honey-speech.js"></script>
+  <script type="module" src="/build/honey-speaker.esm.js"></script>
+  <script nomodule src="/build/honey-speaker.js"></script>
 
   <style>
     .textrow {
@@ -157,15 +157,15 @@
 </head>
 <body id="seite" style="display: block">
 
-<h1>Nutzung der honey-speech Komponente</h1>
+<h1>Nutzung der honey-speaker Komponente</h1>
 <h2>Beispiele zur Benutzung</h2>
 
 <p id="vorwort">Das ist das Vorwort zum Text. Es folgt ein Lautsprecher in der Ausprägung pure.</p>
-<honey-speech pure textids="seite" title="Seite vorlesen"></honey-speech>
+<honey-speaker pure textids="seite" title="Seite vorlesen"></honey-speaker>
 <br>
 
 <h2 class="textrow">Buttontext Vorlesen</h2>
-<honey-speech id="speaker1"  textids="absenden-button" title="Buttontext vorlesen"></honey-speech>
+<honey-speaker id="speaker1"  textids="absenden-button" title="Buttontext vorlesen"></honey-speaker>
 <br>
 <button id="absenden-button" type="submit">Anfrage absenden</button>
 
@@ -174,20 +174,20 @@
 <div>
   <p id="text1" class="textrow">Das ist der erste Text</p>
   <span style="display: inline-block">
-    <honey-speech id="speaker2" textids="text1" title="Text1 vorlesen"></honey-speech>
-    <honey-speech id="speaker3" textids="text1,text2" title="Alle vorlessen"></honey-speech>
+    <honey-speaker id="speaker2" textids="text1" title="Text1 vorlesen"></honey-speaker>
+    <honey-speaker id="speaker3" textids="text1,text2" title="Alle vorlessen"></honey-speaker>
   </span>
 </div>
 <div>
   <p id="text2" class="textrow">Das ist der zweite Text</p>
-  <honey-speech id="speaker4" textids="text2" title="Text2 vorlesen"></honey-speech>
-  <honey-speech id="speaker5" textids="text1,text2" title="Alle vorlessen"></honey-speech>
+  <honey-speaker id="speaker4" textids="text2" title="Text2 vorlesen"></honey-speaker>
+  <honey-speaker id="speaker5" textids="text1,text2" title="Alle vorlessen"></honey-speaker>
 </div>
 
 
 <h2 id="nachrichten" style="display: inline-block">Nachrichtentext Beispiel</h2>
-<honey-speech id="speaker6" title="Vorlesen der folgenden 2 Artikel"
-              textids="ueberschrift1,artikel1,ueberschrift2,artikel2"></honey-speech>
+<honey-speaker id="speaker6" title="Vorlesen der folgenden 2 Artikel"
+              textids="ueberschrift1,artikel1,ueberschrift2,artikel2"></honey-speaker>
 
 <h3 id="ueberschrift1">1. Artikel</h3>
 
@@ -207,101 +207,101 @@
 
 <h2>Ändern der Audio Parameter</h2>
 <h3>Tonhöhe</h3>
-<honey-speech id="pitch0"  textids="vorwort" title="pitch0 (Höhe 0.1)"
+<honey-speaker id="pitch0"  textids="vorwort" title="pitch0 (Höhe 0.1)"
               audiopitch="0.1"
-></honey-speech>
-<honey-speech id="pitch1"  textids="vorwort" title="pitch1 (Höhe 1 = default)"
+></honey-speaker>
+<honey-speaker id="pitch1"  textids="vorwort" title="pitch1 (Höhe 1 = default)"
               audiopitch="1"
-></honey-speech>
-<honey-speech id="pitch2"  textids="vorwort" title="pitch2 (Höhe 2 :-) )"
+></honey-speaker>
+<honey-speaker id="pitch2"  textids="vorwort" title="pitch2 (Höhe 2 :-) )"
               audiopitch="2"
-></honey-speech>
+></honey-speaker>
 
 <pre>
-  &lt;honey-speech id="pitch0"  textids="vorwort" title="pitch0 (Höhe 0.1)"
-                audiopitch="0.1">&lt;/honey-speech>
-  &lt;honey-speech id="pitch1"  textids="vorwort" title="pitch1 (Höhe 1 = default)"
-                audiopitch="1">&lt;/honey-speech>
-  &lt;honey-speech id="pitch2"  textids="vorwort" title="pitch2 (Höhe 2 :-) )"
-                audiopitch="2">&lt;/honey-speech>
+  &lt;honey-speaker id="pitch0"  textids="vorwort" title="pitch0 (Höhe 0.1)"
+                audiopitch="0.1">&lt;/honey-speaker>
+  &lt;honey-speaker id="pitch1"  textids="vorwort" title="pitch1 (Höhe 1 = default)"
+                audiopitch="1">&lt;/honey-speaker>
+  &lt;honey-speaker id="pitch2"  textids="vorwort" title="pitch2 (Höhe 2 :-) )"
+                audiopitch="2">&lt;/honey-speaker>
 </pre>
 
 <h3>Geschwindigkeit</h3>
-<honey-speech id="rate0" textids="vorwort" title="rate0 (Rate 0.1)"
+<honey-speaker id="rate0" textids="vorwort" title="rate0 (Rate 0.1)"
               audiorate="0.1"
-></honey-speech>
-<honey-speech id="rate1"  textids="vorwort" title="rate1 (Rate 1 = default)"
+></honey-speaker>
+<honey-speaker id="rate1"  textids="vorwort" title="rate1 (Rate 1 = default)"
               audiorate="1"
-></honey-speech>
-<honey-speech id="rate2"  textids="vorwort" title="rate2 (Rate 2 :-) )"
+></honey-speaker>
+<honey-speaker id="rate2"  textids="vorwort" title="rate2 (Rate 2 :-) )"
               audiorate="2"
-></honey-speech>
+></honey-speaker>
 <pre>
-  &lt;honey-speech id="rate0"  textids="vorwort" title="rate0 (Rate 0.1)"
-                audiorate="0.1">&lt;/honey-speech>
-  &lt;honey-speech id="rate1"  textids="vorwort" title="rate1 (Rate 1 = default)"
-                audiorate="1">&lt;/honey-speech>
-  &lt;honey-speech id="rate2"  textids="vorwort" title="rate2 (Rate 2 :-) )"
-                audiorate="2">&lt;/honey-speech>
+  &lt;honey-speaker id="rate0"  textids="vorwort" title="rate0 (Rate 0.1)"
+                audiorate="0.1">&lt;/honey-speaker>
+  &lt;honey-speaker id="rate1"  textids="vorwort" title="rate1 (Rate 1 = default)"
+                audiorate="1">&lt;/honey-speaker>
+  &lt;honey-speaker id="rate2"  textids="vorwort" title="rate2 (Rate 2 :-) )"
+                audiorate="2">&lt;/honey-speaker>
 </pre>
 
 <h3>Lautstärke</h3>
-<honey-speech id="vol0"  textids="vorwort" title="vol0 (Volume 0.1)"
+<honey-speaker id="vol0"  textids="vorwort" title="vol0 (Volume 0.1)"
               audiovolume="0.1"
-></honey-speech>
-<honey-speech id="vol1" textids="vorwort" title="vol1 (Volume 0.5)"
+></honey-speaker>
+<honey-speaker id="vol1" textids="vorwort" title="vol1 (Volume 0.5)"
               audiovolume="0.5"
-></honey-speech>
-<honey-speech id="vol2" textids="vorwort" title="vol2 (Volume 1 = default)"
+></honey-speaker>
+<honey-speaker id="vol2" textids="vorwort" title="vol2 (Volume 1 = default)"
               audiovolume="1"
-></honey-speech>
+></honey-speaker>
 <pre>
-  &lt;honey-speech id="vol0"  textids="vorwort" title="vol0 (Volume 0.1)"
-                audiovolume="0.1">&lt;/honey-speech>
-  &lt;honey-speech id="vol1"  textids="vorwort" title="vol1 (Volume 0.5)"
-                audiovolume="0.5">&lt;/honey-speech>
-  &lt;honey-speech id="vol2"  textids="vorwort" title="vol2 (Volume 1 = default)"
-                audiovolume="1">&lt;/honey-speech>
+  &lt;honey-speaker id="vol0"  textids="vorwort" title="vol0 (Volume 0.1)"
+                audiovolume="0.1">&lt;/honey-speaker>
+  &lt;honey-speaker id="vol1"  textids="vorwort" title="vol1 (Volume 0.5)"
+                audiovolume="0.5">&lt;/honey-speaker>
+  &lt;honey-speaker id="vol2"  textids="vorwort" title="vol2 (Volume 1 = default)"
+                audiovolume="1">&lt;/honey-speaker>
 </pre>
 
 <h3>Stimme nach Sprache</h3>
-<honey-speech id="lang0"  textids="vorwort" title="lang0 (Lang de-DE)"
+<honey-speaker id="lang0"  textids="vorwort" title="lang0 (Lang de-DE)"
               audiolang="de-DE"
-></honey-speech>
-<honey-speech id="lang1" textids="vorwort" title="lang1 (Lang en-US)"
+></honey-speaker>
+<honey-speaker id="lang1" textids="vorwort" title="lang1 (Lang en-US)"
               audiolang="en-US"
-></honey-speech>
-<honey-speech id="lang2" textids="vorwort" title="lang2 (Lang ru-RU)"
+></honey-speaker>
+<honey-speaker id="lang2" textids="vorwort" title="lang2 (Lang ru-RU)"
               audiolang="ru-RU"
-></honey-speech>
+></honey-speaker>
 
 <pre>
-  &lt;honey-speech id="lang0"  textids="vorwort" title="lang0 (Lang de-DE)"
-                audiolang="de-DE">&lt;/honey-speech>
-  &lt;honey-speech id="lang1"  textids="vorwort" title="lang1 (Lang en-US)"
-                audiolang="en-US">&lt;/honey-speech>
-  &lt;honey-speech id="lang2"  textids="vorwort" title="lang2 (Lang ru-RU)"
-                audiolang="ru-RU">&lt;/honey-speech>
+  &lt;honey-speaker id="lang0"  textids="vorwort" title="lang0 (Lang de-DE)"
+                audiolang="de-DE">&lt;/honey-speaker>
+  &lt;honey-speaker id="lang1"  textids="vorwort" title="lang1 (Lang en-US)"
+                audiolang="en-US">&lt;/honey-speaker>
+  &lt;honey-speaker id="lang2"  textids="vorwort" title="lang2 (Lang ru-RU)"
+                audiolang="ru-RU">&lt;/honey-speaker>
 </pre>
 
 <h3>Stimme nach Namen</h3>
-<honey-speech id="name0" textids="vorwort" title="name0 (Voice Google Deutsch)"
+<honey-speaker id="name0" textids="vorwort" title="name0 (Voice Google Deutsch)"
               voicename="Google Deutsch"
-></honey-speech>
-<honey-speech id="name1"  textids="vorwort" title="name1 (Voice Google US English)"
+></honey-speaker>
+<honey-speaker id="name1"  textids="vorwort" title="name1 (Voice Google US English)"
               voicename="Google US English"
-></honey-speech>
-<honey-speech id="name2"  textids="vorwort" title="name2 (Voice Google русский)"
+></honey-speaker>
+<honey-speaker id="name2"  textids="vorwort" title="name2 (Voice Google русский)"
               voicename="Google русский"
-></honey-speech>
+></honey-speaker>
 
 <pre>
-  &lt;honey-speech id="name0"  textids="vorwort" title="name0 (Voice Google Deutsch)"
-                voicename="Google Deutsch">&lt;/honey-speech>
-  &lt;honey-speech id="name1"  textids="vorwort" title="name1 (Voice Google US English)"
-                voicename="Google US English">&lt;/honey-speech>
-  &lt;honey-speech id="name2"  textids="vorwort" title="name2 (Voice Google русский)"
-                voicename="Google русский">&lt;/honey-speech>
+  &lt;honey-speaker id="name0"  textids="vorwort" title="name0 (Voice Google Deutsch)"
+                voicename="Google Deutsch">&lt;/honey-speaker>
+  &lt;honey-speaker id="name1"  textids="vorwort" title="name1 (Voice Google US English)"
+                voicename="Google US English">&lt;/honey-speaker>
+  &lt;honey-speaker id="name2"  textids="vorwort" title="name2 (Voice Google русский)"
+                voicename="Google русский">&lt;/honey-speaker>
 </pre>
 
 <h2>Styling der Komponente</h2>
@@ -322,9 +322,9 @@
 
 <h2>Styling über css class und custom properties verändert</h2>
 
-<honey-speech id="css1"  textids="artikel2" title="css1"></honey-speech>
-<honey-speech textids="artikel2" class="css2class" title="css2"></honey-speech>
-<honey-speech id="css3" textids="artikel2" class="css3class" title="css3"></honey-speech>
+<honey-speaker id="css1"  textids="artikel2" title="css1"></honey-speaker>
+<honey-speaker textids="artikel2" class="css2class" title="css2"></honey-speaker>
+<honey-speaker id="css3" textids="artikel2" class="css3class" title="css3"></honey-speaker>
 
 <pre>
   # part of style sheet
@@ -347,24 +347,24 @@
 
   # part of html
 
-    &lt;honey-speech id="css1" textids="artikel2">&lt;/honey-speech>
-    &lt;honey-speech textids="artikel2" class="css2class">&lt;/honey-speech>
-    &lt;honey-speech id="css3" textids="artikel2" class="css3class">&lt;/honey-speech>
+    &lt;honey-speaker id="css1" textids="artikel2">&lt;/honey-speaker>
+    &lt;honey-speaker textids="artikel2" class="css2class">&lt;/honey-speaker>
+    &lt;honey-speaker id="css3" textids="artikel2" class="css3class">&lt;/honey-speaker>
 
 </pre>
 
 
 <h2>Speaker Größe und Farben verändert</h2>
 
-<honey-speech id="s10x10" textids="artikel2" title="s10x10"></honey-speech>
-<honey-speech id="s20x20" textids="artikel2" title="s20x20"></honey-speech>
-<honey-speech id="s30x30" textids="artikel2" title="s30x30"></honey-speech>
-<honey-speech id="s40x50" textids="artikel2" title="s40x50"></honey-speech>
-<honey-speech id="s50x60" textids="artikel2" title="s50x60"></honey-speech>
-<honey-speech id="s100x100" textids="artikel2" title="s100x100"></honey-speech>
-<honey-speech id="s100x100transparent" textids="artikel2" title="s100x100transparent"></honey-speech>
-<honey-speech id="s90x100" textids="artikel2" title="s90x100"></honey-speech>
-<honey-speech id="s50x100" textids="artikel2" title="s50x100"></honey-speech>
+<honey-speaker id="s10x10" textids="artikel2" title="s10x10"></honey-speaker>
+<honey-speaker id="s20x20" textids="artikel2" title="s20x20"></honey-speaker>
+<honey-speaker id="s30x30" textids="artikel2" title="s30x30"></honey-speaker>
+<honey-speaker id="s40x50" textids="artikel2" title="s40x50"></honey-speaker>
+<honey-speaker id="s50x60" textids="artikel2" title="s50x60"></honey-speaker>
+<honey-speaker id="s100x100" textids="artikel2" title="s100x100"></honey-speaker>
+<honey-speaker id="s100x100transparent" textids="artikel2" title="s100x100transparent"></honey-speaker>
+<honey-speaker id="s90x100" textids="artikel2" title="s90x100"></honey-speaker>
+<honey-speaker id="s50x100" textids="artikel2" title="s50x100"></honey-speaker>
 
 <pre>
   /* part of css */
@@ -422,15 +422,15 @@
     --honey-speaker-background: #E8CD9A;
   }
 
-&lt;honey-speech id="s10x10" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s20x20" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s30x30" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s40x50" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s50x60" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s100x100" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s100x100transparent" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s90x100" textids="artikel2"       >&lt;/honey-speech>
-&lt;honey-speech id="s50x100" textids="artikel2"       >&lt;/honey-speech>
+&lt;honey-speaker id="s10x10" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s20x20" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s30x30" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s40x50" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s50x60" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s100x100" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s100x100transparent" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s90x100" textids="artikel2"       >&lt;/honey-speaker>
+&lt;honey-speaker id="s50x100" textids="artikel2"       >&lt;/honey-speaker>
 
 </pre>
 

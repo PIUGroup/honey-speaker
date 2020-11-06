@@ -4,12 +4,12 @@ import {Logger} from "../../libs/logger";
 
 
 @Component({
-  tag: "honey-speech",
-  styleUrl: "honey-speech.css",
+  tag: "honey-speaker",
+  styleUrl: "honey-speaker.css",
   assetsDirs: ['assets'],
   shadow: true
 })
-export class HoneySpeech {
+export class HoneySpeaker {
 
   sprachAusgabe: Sprachausgabe;
 

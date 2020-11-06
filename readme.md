@@ -1,26 +1,26 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@huluvu424242/honey-speech)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@huluvu424242/honey-speaker)
 
-# honey-speech 
-(**2020-11-30 @huluvu/honey-speech -> moved to [@huluvu/honey-speaker](https://github.com/PIUGroup/honey-speaker)**) 
+# honey-speaker 
+(**2020-11-30 @huluvu/honey-speaker -> moved to [@huluvu/honey-speaker](https://github.com/PIUGroup/honey-speaker)**) 
 
 This component realize an speaker symbol button. Its can read a text of
 DOM elements referenced by an list of ids via voice.
 
 ## installation
 
-npm install --save honey-speech
+npm install --save honey-speaker
 
 ## usage
 
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-speech@0.0.13/dist/honey-speech/honey-speech.js'>
+    src='https://unpkg.com/@huluvu424242/honey-speaker@0.0.13/dist/honey-speaker/honey-speaker.js'>
 </script>
 ```
-To the [demo site](https://huluvu424242.github.io/honey-speech/index.html)
+To the [demo site](https://huluvu424242.github.io/honey-speaker/index.html)
 
-[Vision of API (under construction)](src/components/honey-speech/readme.md)
+[Vision of API (under construction)](src/components/honey-speaker/readme.md)
 
 ## demo
 
@@ -35,11 +35,11 @@ To the [demo site](https://huluvu424242.github.io/honey-speech/index.html)
 ```
 -->
 ```html
-<honey-speech textids="text1,text2"></honey-speech>
+<honey-speaker textids="text1,text2"></honey-speaker>
 <p id="text1">fizz fizz fizz fizz</p>
 <p id="text2">buzz buzz buzz buzz</p>
 ```
-To the [live demo](https://huluvu424242.github.io/honey-speech/index.html)
+To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## become an supporter
 
@@ -58,7 +58,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speech/index.html)
 ### v0.0.13 published at 2020-11-06
 
 * initializing of voices fixed
-* [issue2](https://github.com/Huluvu424242/honey-speech/issues/2) e2e tests fixed
+* [issue2](https://github.com/Huluvu424242/honey-speaker/issues/2) e2e tests fixed
 * css support of ::part removed (to complex for end user)
 * a11y: tabindex=0, keydown: space and enter, role="button", alt text, svg role="img"
 * speaker realized as toggle button

@@ -1,7 +1,7 @@
 import {Config} from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'honey-speech',
+  namespace: 'honey-speaker',
   testing: {
     /**
      * Gitlab CI doesn't allow sandbox, therefor this parameters must be passed to your Headless Chrome
