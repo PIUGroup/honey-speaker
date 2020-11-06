@@ -40,6 +40,10 @@ export namespace Components {
          */
         "textids": string;
         /**
+          * An url to download an text file to speech.
+         */
+        "texturl": string;
+        /**
           * enable console logging
          */
         "verbose": boolean;
@@ -113,7 +117,11 @@ declare namespace LocalJSX {
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
-        "textids": string;
+        "textids"?: string;
+        /**
+          * An url to download an text file to speech.
+         */
+        "texturl"?: string;
         /**
           * enable console logging
          */
