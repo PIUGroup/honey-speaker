@@ -44,7 +44,9 @@ export class HoneySpeech {
    */
   @State() isPressed: boolean = false;
 
-
+  /**
+   * use pure speaker symbol for silence state
+   */
   @Prop() pure: boolean =false;
 
   /**
