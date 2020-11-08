@@ -1,3 +1,5 @@
+import {Logger} from "./logger";
+
 export interface ResponseInfo {
   content: string;
   status: number;
@@ -5,21 +7,31 @@ export interface ResponseInfo {
 
 export class Fileloader {
 
-  static async loadData(dataUrl: string) {
-    return Fileloader.of(dataUrl).loadFileContent();
+  static async loadData(dataUrl: string): Promise<string> {
+    const fileLoader: Fileloader = Fileloader.of(dataUrl);
+    if (fileLoader) {
+      return fileLoader.loadFileContent();
+    } else {
+      return new Promise((resolve)=>{resolve(null);});
+    }
   }
 
-  url: URL;
+  protected url: URL;
 
   constructor(fileURL: URL) {
     this.url = fileURL;
   }
 
-  public static of(fileURL: string) {
-    return new Fileloader(new URL(fileURL));
+  public static of(fileURL: string): Fileloader {
+    try {
+      return new Fileloader(new URL(fileURL));
+    } catch (ex) {
+      Logger.errorMessage("Invalid URL:" + fileURL + "\n" + ex);
+      return null;
+    }
   }
 
-  public async loadFileContent() {
+  public async loadFileContent(): Promise<string> {
     // const headers: Headers = new Headers();
     const response = await fetch(this.url.toString(), {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -29,10 +41,10 @@ export class Fileloader {
       // redirect: 'follow', // manual, *follow, error
       // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
-    if(response.ok){
+    if (response.ok) {
       return response.text();
-    }else{
-      return null;
+    } else {
+      return new Promise((resolve)=>{resolve(null);});
     }
   }
 }
