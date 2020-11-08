@@ -49,7 +49,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## releaselog
 
-### v0.0.15 unpublished
+### v0.0.16 unpublished
 
 * n/a
 
