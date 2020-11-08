@@ -43,7 +43,7 @@ export class HoneySpeaker {
   /**
    * texte to speech out
    */
-  texts: string[] = [];
+  @State() texts: string[] = [];
 
 
   /**
@@ -182,7 +182,17 @@ export class HoneySpeaker {
     await this.updateTexte();
   }
 
+  protected hasNoTexts(): boolean {
+    return (!this.texts
+      || this.texts.length < 1
+      || this.texts.filter(item => item.trim().length > 0).length < 1
+    );
+  }
+
   protected createNewTitleText(): string {
+    if (this.hasNoTexts()) {
+      return "Vorlesen deaktiviert, da keine Texte verfügbar";
+    }
     if (this.isPressed) {
       return "Liest gerade vor";
     } else {
@@ -220,7 +230,7 @@ export class HoneySpeaker {
       refIds.forEach(elementId => {
         const element: HTMLElement = document.getElementById(elementId);
         if (element) {
-          this.texts.push(element.innerText);
+          this.texts=[ ...this.texts,element.innerText];
         } else {
           Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
@@ -232,10 +242,10 @@ export class HoneySpeaker {
     if (this.texturl) {
       Logger.debugMessage("audioURL: " + this.texturl);
       const audioData: string = await Fileloader.loadData(this.texturl);
-      this.texts.push(audioData);
+      if (audioData) {
+        this.texts=[ ...this.texts,audioData];
+      }
       Logger.debugMessage('###Texte###' + this.texts);
-    } else {
-      // TODO disable Button
     }
   }
 
@@ -252,9 +262,10 @@ export class HoneySpeaker {
   }
 
   @Watch('texturl')
-  texturlChanged(newValue: string, oldValue: string) {
+  async texturlChanged(newValue: string, oldValue: string) {
+    this.texturl=newValue;
     Logger.debugMessage("texturl changed from" + oldValue + " to " + newValue);
-    this.updateTexte();
+    await this.updateTexte();
   }
 
   protected getTexte(): string[] {
@@ -286,11 +297,15 @@ export class HoneySpeaker {
 
   @Listen('click', {capture: true})
   protected onClick(): void {
+    if (this.hasNoTexts()) return;
+
     this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
   protected onKeyDown(ev: KeyboardEvent): void {
+    if (this.hasNoTexts()) return;
+
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
       this.toggleAction();
@@ -305,23 +320,24 @@ export class HoneySpeaker {
         title={this.getTitleText()}
         alt={this.getAltText()}
         role="button"
-        tabindex={this.taborder}
+        tabindex={this.hasNoTexts() ? -1 : this.taborder}
         aria-pressed={this.isPressed ? "true" : "false"}
+        disabled={this.hasNoTexts()}
       >
         {this.isPressed ? (
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
-              stroke-width="5" stroke-linejoin="round"
+              stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             <path
               id="air"
-              stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              fill="none" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
               <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"
@@ -334,10 +350,10 @@ export class HoneySpeaker {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
-              stroke-width="5" stroke-linejoin="round"
+              stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             {this.pure ? (
@@ -345,7 +361,7 @@ export class HoneySpeaker {
             ) : (
               <path
                 id="air"
-                stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+                fill="none" stroke-linecap="round"
                 d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
               </path>
             )}
