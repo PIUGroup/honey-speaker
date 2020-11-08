@@ -1,10 +1,22 @@
-.speakerimage {
-  background: var(--honey-speaker-background, transparent);
+:host > .speakerimage {
   stroke: var(--honey-speaker-color, blue);
   fill: var(--honey-speaker-color, blue);
+  background: var(--honey-speaker-background, transparent);
+
   padding: var(--honey-speaker-padding, 5px);
   font-size: var(--honey-speaker-font-size, medium);
   border: var(--honey-speaker-border, 0);
   width: var(--honey-speaker-width, 36px);
   height: var(--honey-speaker-height, 36px);
 }
+
+
+}
+:host:disabled > .speakerimage{
+  stroke: gray;
+  fill: gray;
+  background: var(--honey-disabled-background, lightgrey);
+}
+
+
+
