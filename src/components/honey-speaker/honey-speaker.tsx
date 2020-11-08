@@ -328,10 +328,10 @@ export class HoneySpeaker {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
-              stroke-width="5" stroke-linejoin="round"
+              stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             <path
@@ -349,7 +349,7 @@ export class HoneySpeaker {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
               stroke-linejoin="round"
