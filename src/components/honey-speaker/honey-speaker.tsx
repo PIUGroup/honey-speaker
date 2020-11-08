@@ -1,7 +1,7 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
-import {Fileloader, ResponseInfo} from "../../libs/fileloader";
+import {Fileloader} from "../../libs/fileloader";
 
 
 @Component({
@@ -54,18 +54,18 @@ export class HoneySpeaker {
   /**
    * use pure speaker symbol for silence state
    */
-  @Prop() pure: boolean =false;
+  @Prop() pure: boolean = false;
 
   /**
    * An comma separated list  with ids of DOM elements
    * which inner text should be speech.
    */
-  @Prop() textids: string;
+  @Prop({mutable: true}) textids: string;
 
   /**
    * An url to download an text file to speech.
    */
-  @Prop() texturl: string;
+  @Prop({mutable: true}) texturl: string;
 
   /**
    * enable console logging
@@ -145,7 +145,7 @@ export class HoneySpeaker {
   }
 
 
-  public componentWillLoad() {
+  public async componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
@@ -179,8 +179,7 @@ export class HoneySpeaker {
       this.voicename
     );
 
-    this.loadDOMElementTexte();
-    this.loadAudioUrlContent();
+    await this.updateTexte();
   }
 
   protected createNewTitleText(): string {
@@ -215,40 +214,40 @@ export class HoneySpeaker {
     }
   }
 
-
-  protected async loadAudioUrlContent() {
-    if(this.texturl) {
-      const audioURL: URL = new URL(this.texturl);
-      Logger.debugMessage("audioURL: " + audioURL);
-      const audioLoader: Fileloader = new Fileloader(audioURL);
-      await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
-        if (audioInfo.status === 200) {
-          this.texts.push(audioInfo.content);
-          Logger.debugMessage('###Texte###'+this.texts);
+  protected loadDOMElementTexte(): void {
+    if (this.textids) {
+      const refIds: string[] = this.textids.split(",");
+      refIds.forEach(elementId => {
+        const element: HTMLElement = document.getElementById(elementId);
+        if (element) {
+          this.texts.push(element.innerText);
+        } else {
+          Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
       });
     }
   }
 
-  protected loadDOMElementTexte():void{
-    if (this.textids) {
-      const refIds: string[] = this.textids.split(",");
-      refIds.forEach(elementId => {
-          const element: HTMLElement = document.getElementById(elementId);
-          if (element) {
-            this.texts.push(element.innerText);
-          } else {
-            Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
-          }
-        }
-      );
+  protected async loadAudioUrlText() {
+    if (this.texturl) {
+      Logger.debugMessage("audioURL: " + this.texturl);
+      const audioData:string = await Fileloader.loadData(this.texturl);
+      this.texts.push(audioData);
+      Logger.debugMessage('###Texte###' + this.texts);
+    }else{
+      // TODO disable Button
     }
   }
 
+  protected async updateTexte() {
+    this.loadDOMElementTexte();
+    await this.loadAudioUrlText()
+  }
+
   protected getTexte(): string[] {
-    if(this.texts) {
+    if (this.texts) {
       return this.texts;
-    }else{
+    } else {
       return [];
     }
   }
@@ -330,7 +329,7 @@ export class HoneySpeaker {
             </path>
             {this.pure ? (
               <text id="eins" x="60%" y="55%">OFF</text>
-            ):(
+            ) : (
               <path
                 id="air"
                 stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"

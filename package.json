@@ -45,8 +45,7 @@
     "node": "14.15.0"
   },
   "dependencies": {
-    "@stencil/core": "2.2.0",
-    "rxjs": "6.5.5"
+    "@stencil/core": "2.2.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.15",
