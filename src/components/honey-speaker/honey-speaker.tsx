@@ -234,14 +234,6 @@ export class HoneySpeaker {
       const audioData:string = await Fileloader.loadData(this.texturl);
       this.texts.push(audioData);
       Logger.debugMessage('###Texte###' + this.texts);
-
-      // const audioLoader: Fileloader = new Fileloader(audioURL);
-      // await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
-      //   if (audioInfo.status === 200) {
-      //     this.texts.push(audioInfo.content);
-      //
-      //   }
-      // });
     }else{
       // TODO disable Button
     }
