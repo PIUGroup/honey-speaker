@@ -1,4 +1,4 @@
-import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
 import {Fileloader} from "../../libs/fileloader";
@@ -231,17 +231,30 @@ export class HoneySpeaker {
   protected async loadAudioUrlText() {
     if (this.texturl) {
       Logger.debugMessage("audioURL: " + this.texturl);
-      const audioData:string = await Fileloader.loadData(this.texturl);
+      const audioData: string = await Fileloader.loadData(this.texturl);
       this.texts.push(audioData);
       Logger.debugMessage('###Texte###' + this.texts);
-    }else{
+    } else {
       // TODO disable Button
     }
   }
 
   protected async updateTexte() {
+    this.texts = [];
     this.loadDOMElementTexte();
     await this.loadAudioUrlText()
+  }
+
+  @Watch('textids')
+  textidsChanged(newValue: string, oldValue: string) {
+    Logger.debugMessage("textids changed from" + oldValue + " to " + newValue);
+    this.updateTexte();
+  }
+
+  @Watch('texturl')
+  texturlChanged(newValue: string, oldValue: string) {
+    Logger.debugMessage("texturl changed from" + oldValue + " to " + newValue);
+    this.updateTexte();
   }
 
   protected getTexte(): string[] {
