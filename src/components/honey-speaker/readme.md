@@ -31,6 +31,29 @@
 | `honeySpeakerStarted`  | Fired if the voice is speaking.                           | `CustomEvent<string>` |
 
 
+## Methods
+
+### `pauseSpeaker() => Promise<void>`
+
+paused the speaker
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `resumeSpeaker() => Promise<void>`
+
+continue speaker after paused
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)* by Huluvu424242

@@ -32,9 +32,17 @@ export namespace Components {
          */
         "iconwidth": string;
         /**
+          * paused the speaker
+         */
+        "pauseSpeaker": () => Promise<void>;
+        /**
           * use pure speaker symbol for silence state
          */
         "pure": boolean;
+        /**
+          * continue speaker after paused
+         */
+        "resumeSpeaker": () => Promise<void>;
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */

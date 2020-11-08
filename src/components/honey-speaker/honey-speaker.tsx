@@ -187,11 +187,17 @@ export class HoneySpeaker {
   //
   // }
 
+  /**
+   * paused the speaker
+   */
   @Method()
   public async pauseSpeaker(){
       this.sprachAusgabe.pause();
   }
 
+  /**
+   * continue speaker after paused
+   */
   @Method()
   public async resumeSpeaker(){
     this.sprachAusgabe.resume();
