@@ -43,7 +43,7 @@ export class HoneySpeaker {
   /**
    * texte to speech out
    */
-  texts: string[] = [];
+  @State() texts: string[] = [];
 
 
   /**
@@ -230,7 +230,7 @@ export class HoneySpeaker {
       refIds.forEach(elementId => {
         const element: HTMLElement = document.getElementById(elementId);
         if (element) {
-          this.texts.push(element.innerText);
+          this.texts=[ ...this.texts,element.innerText];
         } else {
           Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
@@ -243,7 +243,7 @@ export class HoneySpeaker {
       Logger.debugMessage("audioURL: " + this.texturl);
       const audioData: string = await Fileloader.loadData(this.texturl);
       if (audioData) {
-        this.texts.push(audioData);
+        this.texts=[ ...this.texts,audioData];
       }
       Logger.debugMessage('###Texte###' + this.texts);
     }
@@ -262,9 +262,10 @@ export class HoneySpeaker {
   }
 
   @Watch('texturl')
-  texturlChanged(newValue: string, oldValue: string) {
+  async texturlChanged(newValue: string, oldValue: string) {
+    this.texturl=newValue;
     Logger.debugMessage("texturl changed from" + oldValue + " to " + newValue);
-    this.updateTexte();
+    await this.updateTexte();
   }
 
   protected getTexte(): string[] {

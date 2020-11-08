@@ -12,7 +12,7 @@ export class Fileloader {
     if (fileLoader) {
       return fileLoader.loadFileContent();
     } else {
-      return null;
+      return new Promise((resolve)=>{resolve(null);});
     }
   }
 
@@ -44,7 +44,7 @@ export class Fileloader {
     if (response.ok) {
       return response.text();
     } else {
-      return null;
+      return new Promise((resolve)=>{resolve(null);});
     }
   }
 }
