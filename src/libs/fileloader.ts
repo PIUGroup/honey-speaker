@@ -7,6 +7,13 @@ export interface ResponseInfo {
 
 export class Fileloader {
 
+  static async loadData(dataUrl: string): Promise<string> {
+    return await new Promise<string>(resolve =>
+      Fileloader.of(dataUrl).loadFile().subscribe((indexInfo: ResponseInfo) => {
+        resolve(indexInfo.content);
+      }));
+  }
+
   url: URL;
   responseInfo: ResponseInfo ={ content: null, status: null};
 
@@ -20,7 +27,7 @@ export class Fileloader {
 
   public loadFile(): Subject<ResponseInfo> {
     const responseInfo = this.responseInfo;
-    const subject: Subject<ResponseInfo> = new Subject<ResponseInfo>()
+    const subject: Subject<ResponseInfo> = new Subject<ResponseInfo>();
 
     const client = new XMLHttpRequest();
     client.addEventListener("load", (event) => {

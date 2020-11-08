@@ -1,7 +1,7 @@
 import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
-import {Fileloader, ResponseInfo} from "../../libs/fileloader";
+import {Fileloader} from "../../libs/fileloader";
 
 
 @Component({
@@ -145,7 +145,7 @@ export class HoneySpeaker {
   }
 
 
-  public componentWillLoad() {
+  public async componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
@@ -179,8 +179,7 @@ export class HoneySpeaker {
       this.voicename
     );
 
-    this.loadDOMElementTexte();
-    this.loadAudioUrlContent();
+    await this.updateTexte();
   }
 
   protected createNewTitleText(): string {
@@ -215,21 +214,6 @@ export class HoneySpeaker {
     }
   }
 
-
-  protected async loadAudioUrlContent() {
-    if (this.texturl) {
-      const audioURL: URL = new URL(this.texturl);
-      Logger.debugMessage("audioURL: " + audioURL);
-      const audioLoader: Fileloader = new Fileloader(audioURL);
-      await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
-        if (audioInfo.status === 200) {
-          this.texts.push(audioInfo.content);
-          Logger.debugMessage('###Texte###' + this.texts);
-        }
-      });
-    }
-  }
-
   protected loadDOMElementTexte(): void {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
@@ -242,6 +226,30 @@ export class HoneySpeaker {
         }
       });
     }
+  }
+
+  protected async loadAudioUrlText() {
+    if (this.texturl) {
+      Logger.debugMessage("audioURL: " + this.texturl);
+      const audioData:string = await Fileloader.loadData(this.texturl);
+      this.texts.push(audioData);
+      Logger.debugMessage('###Texte###' + this.texts);
+
+      // const audioLoader: Fileloader = new Fileloader(audioURL);
+      // await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
+      //   if (audioInfo.status === 200) {
+      //     this.texts.push(audioInfo.content);
+      //
+      //   }
+      // });
+    }else{
+      // TODO disable Button
+    }
+  }
+
+  protected async updateTexte() {
+    this.loadDOMElementTexte();
+    await this.loadAudioUrlText()
   }
 
   protected getTexte(): string[] {
