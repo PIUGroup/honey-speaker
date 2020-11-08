@@ -54,18 +54,18 @@ export class HoneySpeaker {
   /**
    * use pure speaker symbol for silence state
    */
-  @Prop() pure: boolean =false;
+  @Prop() pure: boolean = false;
 
   /**
    * An comma separated list  with ids of DOM elements
    * which inner text should be speech.
    */
-  @Prop() textids: string;
+  @Prop({mutable: true}) textids: string;
 
   /**
    * An url to download an text file to speech.
    */
-  @Prop() texturl: string;
+  @Prop({mutable: true}) texturl: string;
 
   /**
    * enable console logging
@@ -217,38 +217,37 @@ export class HoneySpeaker {
 
 
   protected async loadAudioUrlContent() {
-    if(this.texturl) {
+    if (this.texturl) {
       const audioURL: URL = new URL(this.texturl);
       Logger.debugMessage("audioURL: " + audioURL);
       const audioLoader: Fileloader = new Fileloader(audioURL);
       await audioLoader.loadFile().subscribe((audioInfo: ResponseInfo) => {
         if (audioInfo.status === 200) {
           this.texts.push(audioInfo.content);
-          Logger.debugMessage('###Texte###'+this.texts);
+          Logger.debugMessage('###Texte###' + this.texts);
         }
       });
     }
   }
 
-  protected loadDOMElementTexte():void{
+  protected loadDOMElementTexte(): void {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
       refIds.forEach(elementId => {
-          const element: HTMLElement = document.getElementById(elementId);
-          if (element) {
-            this.texts.push(element.innerText);
-          } else {
-            Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
-          }
+        const element: HTMLElement = document.getElementById(elementId);
+        if (element) {
+          this.texts.push(element.innerText);
+        } else {
+          Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
-      );
+      });
     }
   }
 
   protected getTexte(): string[] {
-    if(this.texts) {
+    if (this.texts) {
       return this.texts;
-    }else{
+    } else {
       return [];
     }
   }
@@ -330,7 +329,7 @@ export class HoneySpeaker {
             </path>
             {this.pure ? (
               <text id="eins" x="60%" y="55%">OFF</text>
-            ):(
+            ) : (
               <path
                 id="air"
                 stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
