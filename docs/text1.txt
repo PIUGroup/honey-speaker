@@ -1,0 +1,3 @@
+Das ist der Text aus der zweiten Datei die aus dem Netzt geladen wurde.
+
+Diese wurde referenziert vom neuen URL auf den gewechselt wurde.
