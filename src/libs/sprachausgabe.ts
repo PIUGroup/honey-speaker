@@ -141,6 +141,15 @@ export class Sprachausgabe {
     }
   }
 
+
+  public pause():void{
+    Sprachausgabe.synthese.sprachSynthese.pause();
+  }
+
+  public resume():void{
+    Sprachausgabe.synthese.sprachSynthese.resume();
+  }
+
   public cancel():void{
     Sprachausgabe.synthese.sprachSynthese.cancel();
   }

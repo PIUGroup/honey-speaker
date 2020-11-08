@@ -1,4 +1,4 @@
-import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
 import {Fileloader} from "../../libs/fileloader";
@@ -181,6 +181,32 @@ export class HoneySpeaker {
 
     await this.updateTexte();
   }
+
+  // @Method()
+  // public async startSpeaker(){
+  //
+  // }
+
+  /**
+   * paused the speaker
+   */
+  @Method()
+  public async pauseSpeaker(){
+      this.sprachAusgabe.pause();
+  }
+
+  /**
+   * continue speaker after paused
+   */
+  @Method()
+  public async resumeSpeaker(){
+    this.sprachAusgabe.resume();
+  }
+
+  // @Method()
+  // public async cancelSpeaker(){
+  //   this.sprachAusgabe.cancel();
+  // }
 
   protected hasNoTexts(): boolean {
     return (!this.texts

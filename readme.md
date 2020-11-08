@@ -55,6 +55,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ### v0.0.15 published at 
 
+* [issue 26](https://github.com/Huluvu424242/honey-speaker/issues/26) method pause and resume added
 * [issue 25](https://github.com/Huluvu424242/honey-speaker/issues/25) remove dependency of rxjs -> use fetch of es6
 * [issue 24](https://github.com/Huluvu424242/honey-speaker/issues/24) remove subscription and use async/await pairs
 * [issue 23](https://github.com/Huluvu424242/honey-speaker/issues/23) mutable attributes textids and texturl
