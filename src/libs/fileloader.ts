@@ -1,5 +1,3 @@
-import {Subject} from "rxjs";
-
 export interface ResponseInfo {
   content: string;
   status: number;
@@ -7,15 +5,11 @@ export interface ResponseInfo {
 
 export class Fileloader {
 
-  static async loadData(dataUrl: string): Promise<string> {
-    return await new Promise<string>(resolve =>
-      Fileloader.of(dataUrl).loadFile().subscribe((indexInfo: ResponseInfo) => {
-        resolve(indexInfo.content);
-      }));
+  static async loadData(dataUrl: string) {
+    return Fileloader.of(dataUrl).loadFileContent();
   }
 
   url: URL;
-  responseInfo: ResponseInfo ={ content: null, status: null};
 
   constructor(fileURL: URL) {
     this.url = fileURL;
@@ -25,23 +19,20 @@ export class Fileloader {
     return new Fileloader(new URL(fileURL));
   }
 
-  public loadFile(): Subject<ResponseInfo> {
-    const responseInfo = this.responseInfo;
-    const subject: Subject<ResponseInfo> = new Subject<ResponseInfo>();
-
-    const client = new XMLHttpRequest();
-    client.addEventListener("load", (event) => {
-      responseInfo.content=client.responseText;
-      console.log(event.total + " bytes gelesen.\n:"+responseInfo.content);
+  public async loadFileContent() {
+    // const headers: Headers = new Headers();
+    const response = await fetch(this.url.toString(), {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      // mode: 'cors', // no-cors, *cors, same-origin
+      // cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+      // headers: headers,
+      // redirect: 'follow', // manual, *follow, error
+      // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
-    client.onloadend = function(){
-      responseInfo.status = client.status;
-      console.log("Response Status:"+responseInfo.status);
-      subject.next(responseInfo);
-    };
-    client.open("GET", this.url.toString());
-    client.send();
-
-    return subject;
+    if(response.ok){
+      return response.text();
+    }else{
+      return null;
+    }
   }
 }
