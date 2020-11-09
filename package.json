@@ -1,6 +1,6 @@
 {
-  "name": "@huluvu424242/honey-speech",
-  "version": "0.0.13",
+  "name": "@huluvu424242/honey-speaker",
+  "version": "0.0.15",
   "description": "Text to Speech component wich is reading texts from DOM elements.",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
@@ -9,14 +9,14 @@
   "types": "dist/custom-elements/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/honey-speech/honey-speech.js",
+  "unpkg": "dist/honey-speaker/honey-speaker.js",
   "files": [
     "dist/",
     "loader/"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Huluvu424242/honey-speech.git"
+    "url": "https://github.com/Huluvu424242/honey-speaker.git"
   },
   "keywords": [
     "honey",
@@ -29,7 +29,7 @@
   "author": "Huluvu424242 alias FunThomas424242 (Thomas Schubert)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Huluvu424242/honey-speech/issues"
+    "url": "https://github.com/Huluvu424242/honey-speaker/issues"
   },
   "scripts": {
     "build": "stencil build --docs",

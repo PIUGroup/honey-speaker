@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface HoneySpeech {
+    interface HoneySpeaker {
         /**
           * i18n language ident for Web Speech API: de-DE or en or de ...
          */
@@ -32,13 +32,25 @@ export namespace Components {
          */
         "iconwidth": string;
         /**
+          * paused the speaker
+         */
+        "pauseSpeaker": () => Promise<void>;
+        /**
           * use pure speaker symbol for silence state
          */
         "pure": boolean;
         /**
+          * continue speaker after paused
+         */
+        "resumeSpeaker": () => Promise<void>;
+        /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
+        /**
+          * An url to download an text file to speech.
+         */
+        "texturl": string;
         /**
           * enable console logging
          */
@@ -50,18 +62,18 @@ export namespace Components {
     }
 }
 declare global {
-    interface HTMLHoneySpeechElement extends Components.HoneySpeech, HTMLStencilElement {
+    interface HTMLHoneySpeakerElement extends Components.HoneySpeaker, HTMLStencilElement {
     }
-    var HTMLHoneySpeechElement: {
-        prototype: HTMLHoneySpeechElement;
-        new (): HTMLHoneySpeechElement;
+    var HTMLHoneySpeakerElement: {
+        prototype: HTMLHoneySpeakerElement;
+        new (): HTMLHoneySpeakerElement;
     };
     interface HTMLElementTagNameMap {
-        "honey-speech": HTMLHoneySpeechElement;
+        "honey-speaker": HTMLHoneySpeakerElement;
     }
 }
 declare namespace LocalJSX {
-    interface HoneySpeech {
+    interface HoneySpeaker {
         /**
           * i18n language ident for Web Speech API: de-DE or en or de ...
          */
@@ -113,7 +125,11 @@ declare namespace LocalJSX {
         /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
-        "textids": string;
+        "textids"?: string;
+        /**
+          * An url to download an text file to speech.
+         */
+        "texturl"?: string;
         /**
           * enable console logging
          */
@@ -124,14 +140,14 @@ declare namespace LocalJSX {
         "voicename"?: string;
     }
     interface IntrinsicElements {
-        "honey-speech": HoneySpeech;
+        "honey-speaker": HoneySpeaker;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "honey-speech": LocalJSX.HoneySpeech & JSXBase.HTMLAttributes<HTMLHoneySpeechElement>;
+            "honey-speaker": LocalJSX.HoneySpeaker & JSXBase.HTMLAttributes<HTMLHoneySpeakerElement>;
         }
     }
 }

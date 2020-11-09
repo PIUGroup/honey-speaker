@@ -13,8 +13,8 @@ describe('example', () => {
 
   beforeEach(async () => {
     TestLogger.enableLogging();
-    page = await newE2EPage({html: `<honey-speech verbose audiolang="en" textids="3"></honey-speech><p id="3">test</p>`});
-    element = await page.find('honey-speech');
+    page = await newE2EPage({html: `<honey-speaker verbose audiolang="en" textids="3"></honey-speaker><p id="3">test</p>`});
+    element = await page.find('honey-speaker');
   });
 
   it('should render a component', async () => {
@@ -32,7 +32,7 @@ describe('example', () => {
 
   it('has correct audio properties', async () => {
     // Property Wert setzen
-    // await page.$eval('honey-speech', (elm: any) => {
+    // await page.$eval('honey-speaker', (elm: any) => {
     //   elm.audiolang = 'us';
     // });
     const lang = await element.getProperty('audiolang');
@@ -46,7 +46,7 @@ describe('example', () => {
   it('fire event honeySpeakerStarted', async () => {
 
     // Property Wert lesen
-    const stimmenAnzahl  = await page.$eval('honey-speech', () => {
+    const stimmenAnzahl  = await page.$eval('honey-speaker', () => {
      return speechSynthesis.getVoices().length;
     });
     if( stimmenAnzahl <1){
@@ -58,7 +58,7 @@ describe('example', () => {
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
     await element.setProperty('audiolang', 'us');
     await page.waitForChanges();
-    await page.click('honey-speech');
+    await page.click('honey-speaker');
     await page.waitForEvent('honeySpeakerStarted');
     expect(startedEvent).toHaveReceivedEvent();
   });

@@ -1,15 +1,16 @@
-import {Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State} from "@stencil/core";
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch} from "@stencil/core";
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
+import {Fileloader} from "../../libs/fileloader";
 
 
 @Component({
-  tag: "honey-speech",
-  styleUrl: "honey-speech.css",
+  tag: "honey-speaker",
+  styleUrl: "honey-speaker.css",
   assetsDirs: ['assets'],
   shadow: true
 })
-export class HoneySpeech {
+export class HoneySpeaker {
 
   sprachAusgabe: Sprachausgabe;
 
@@ -40,6 +41,12 @@ export class HoneySpeech {
   taborder: string = "0";
 
   /**
+   * texte to speech out
+   */
+  @State() texts: string[] = [];
+
+
+  /**
    * if the toggle button is pressed
    */
   @State() isPressed: boolean = false;
@@ -47,13 +54,18 @@ export class HoneySpeech {
   /**
    * use pure speaker symbol for silence state
    */
-  @Prop() pure: boolean =false;
+  @Prop() pure: boolean = false;
 
   /**
    * An comma separated list  with ids of DOM elements
    * which inner text should be speech.
    */
-  @Prop() textids!: string;
+  @Prop({mutable: true}) textids: string;
+
+  /**
+   * An url to download an text file to speech.
+   */
+  @Prop({mutable: true}) texturl: string;
 
   /**
    * enable console logging
@@ -133,7 +145,7 @@ export class HoneySpeech {
   }
 
 
-  public componentWillLoad() {
+  public async componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
         this.honeySpeakerStarted.emit(this.ident);
@@ -166,9 +178,47 @@ export class HoneySpeech {
       this.audiovolume,
       this.voicename
     );
+
+    await this.updateTexte();
+  }
+
+  // @Method()
+  // public async startSpeaker(){
+  //
+  // }
+
+  /**
+   * paused the speaker
+   */
+  @Method()
+  public async pauseSpeaker(){
+      this.sprachAusgabe.pause();
+  }
+
+  /**
+   * continue speaker after paused
+   */
+  @Method()
+  public async resumeSpeaker(){
+    this.sprachAusgabe.resume();
+  }
+
+  // @Method()
+  // public async cancelSpeaker(){
+  //   this.sprachAusgabe.cancel();
+  // }
+
+  protected hasNoTexts(): boolean {
+    return (!this.texts
+      || this.texts.length < 1
+      || this.texts.filter(item => item.trim().length > 0).length < 1
+    );
   }
 
   protected createNewTitleText(): string {
+    if (this.hasNoTexts()) {
+      return "Vorlesen deaktiviert, da keine Texte verfügbar";
+    }
     if (this.isPressed) {
       return "Liest gerade vor";
     } else {
@@ -200,22 +250,55 @@ export class HoneySpeech {
     }
   }
 
-  protected getTexte(): string[] {
+  protected loadDOMElementTexte(): void {
     if (this.textids) {
       const refIds: string[] = this.textids.split(",");
-      const texte: string[] = [];
       refIds.forEach(elementId => {
-          const element: HTMLElement = document.getElementById(elementId);
-          if (element) {
-            texte.push(element.innerText);
-          } else {
-            Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
-          }
+        const element: HTMLElement = document.getElementById(elementId);
+        if (element) {
+          this.texts=[ ...this.texts,element.innerText];
+        } else {
+          Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
-      );
-      return texte;
+      });
+    }
+  }
+
+  protected async loadAudioUrlText() {
+    if (this.texturl) {
+      Logger.debugMessage("audioURL: " + this.texturl);
+      const audioData: string = await Fileloader.loadData(this.texturl);
+      if (audioData) {
+        this.texts=[ ...this.texts,audioData];
+      }
+      Logger.debugMessage('###Texte###' + this.texts);
+    }
+  }
+
+  protected async updateTexte() {
+    this.texts = [];
+    this.loadDOMElementTexte();
+    await this.loadAudioUrlText()
+  }
+
+  @Watch('textids')
+  textidsChanged(newValue: string, oldValue: string) {
+    Logger.debugMessage("textids changed from" + oldValue + " to " + newValue);
+    this.updateTexte();
+  }
+
+  @Watch('texturl')
+  async texturlChanged(newValue: string, oldValue: string) {
+    this.texturl=newValue;
+    Logger.debugMessage("texturl changed from" + oldValue + " to " + newValue);
+    await this.updateTexte();
+  }
+
+  protected getTexte(): string[] {
+    if (this.texts) {
+      return this.texts;
     } else {
-      return ["Kein Text vorhanden, daher keine Ausgabe möglich."];
+      return [];
     }
   }
 
@@ -240,11 +323,15 @@ export class HoneySpeech {
 
   @Listen('click', {capture: true})
   protected onClick(): void {
+    if (this.hasNoTexts()) return;
+
     this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
   protected onKeyDown(ev: KeyboardEvent): void {
+    if (this.hasNoTexts()) return;
+
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
       this.toggleAction();
@@ -259,23 +346,24 @@ export class HoneySpeech {
         title={this.getTitleText()}
         alt={this.getAltText()}
         role="button"
-        tabindex={this.taborder}
+        tabindex={this.hasNoTexts() ? -1 : this.taborder}
         aria-pressed={this.isPressed ? "true" : "false"}
+        disabled={this.hasNoTexts()}
       >
         {this.isPressed ? (
           <svg id={this.ident + "-svg"} xmlns="http://www.w3.org/2000/svg"
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
-              stroke-width="5" stroke-linejoin="round"
+              stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             <path
               id="air"
-              stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+              fill="none" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
               <animate id="airanimation" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s"
@@ -288,18 +376,18 @@ export class HoneySpeech {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class="speakerimage"
+               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
                viewBox="0 0 75 75">
             <path
-              stroke-width="5" stroke-linejoin="round"
+              stroke-linejoin="round"
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             {this.pure ? (
               <text id="eins" x="60%" y="55%">OFF</text>
-            ):(
+            ) : (
               <path
                 id="air"
-                stroke="var(--honey-speaker-color,black);" fill="none" stroke-width="5" stroke-linecap="round"
+                fill="none" stroke-linecap="round"
                 d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
               </path>
             )}
