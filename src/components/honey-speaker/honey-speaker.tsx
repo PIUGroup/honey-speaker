@@ -148,28 +148,28 @@ export class HoneySpeaker {
   public async componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
-        this.honeySpeakerStarted.emit(this.ident);
         this.isPressed = true;
+        this.honeySpeakerStarted.emit(this.ident);
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
-        this.honeySpeakerFinished.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerFinished.emit(this.ident);
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
-        this.honeySpeakerPaused.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerPaused.emit(this.ident);
         Logger.debugMessage("Pause mit Vorlesen");
       },
       () => {
-        this.honeySpeakerResume.emit(this.ident);
         this.isPressed = true;
+        this.honeySpeakerResume.emit(this.ident);
         Logger.debugMessage("Fortsetzen mit Vorlesen");
       },
       (ev): void => {
-        this.honeySpeakerFailed.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerFailed.emit(this.ident);
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -192,7 +192,8 @@ export class HoneySpeaker {
    */
   @Method()
   public async pauseSpeaker(){
-      this.sprachAusgabe.pause();
+    this.isPressed=true;
+    this.sprachAusgabe.pause();
   }
 
   /**
@@ -200,13 +201,14 @@ export class HoneySpeaker {
    */
   @Method()
   public async resumeSpeaker(){
+    this.isPressed=false;
     this.sprachAusgabe.resume();
   }
 
-  // @Method()
-  // public async cancelSpeaker(){
-  //   this.sprachAusgabe.cancel();
-  // }
+  @Method()
+  public async toggleSpeaker(){
+   this.toggleAction();
+  }
 
   protected hasNoTexts(): boolean {
     return (!this.texts
