@@ -148,28 +148,28 @@ export class HoneySpeaker {
   public async componentWillLoad() {
     this.sprachAusgabe = new Sprachausgabe(
       () => {
-        this.honeySpeakerStarted.emit(this.ident);
         this.isPressed = true;
+        this.honeySpeakerStarted.emit(this.ident);
         Logger.debugMessage("Vorlesen gestartet");
       },
       () => {
-        this.honeySpeakerFinished.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerFinished.emit(this.ident);
         Logger.debugMessage("Vorlesen beendet");
       },
       () => {
-        this.honeySpeakerPaused.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerPaused.emit(this.ident);
         Logger.debugMessage("Pause mit Vorlesen");
       },
       () => {
-        this.honeySpeakerResume.emit(this.ident);
         this.isPressed = true;
+        this.honeySpeakerResume.emit(this.ident);
         Logger.debugMessage("Fortsetzen mit Vorlesen");
       },
       (ev): void => {
-        this.honeySpeakerFailed.emit(this.ident);
         this.isPressed = false;
+        this.honeySpeakerFailed.emit(this.ident);
         Logger.errorMessage("Fehler beim Vorlesen" + JSON.stringify(ev));
       },
       this.audiolang,
@@ -191,22 +191,36 @@ export class HoneySpeaker {
    * paused the speaker
    */
   @Method()
-  public async pauseSpeaker(){
-      this.sprachAusgabe.pause();
+  public async pauseSpeaker() {
+    this.isPressed = true;
+    this.sprachAusgabe.pause();
   }
 
   /**
    * continue speaker after paused
    */
   @Method()
-  public async resumeSpeaker(){
+  public async resumeSpeaker() {
+    this.isPressed = false;
     this.sprachAusgabe.resume();
   }
 
-  // @Method()
-  // public async cancelSpeaker(){
-  //   this.sprachAusgabe.cancel();
-  // }
+  /**
+   * call the toggle speaker action
+   */
+  @Method()
+  public async toggleSpeaker() {
+    this.toggleAction();
+  }
+
+  /**
+   * cancel the speaker
+   */
+  @Method()
+  public async cancelSpeaker() {
+    this.isPressed = false;
+    this.sprachAusgabe.cancel();
+  }
 
   protected hasNoTexts(): boolean {
     return (!this.texts
@@ -256,7 +270,7 @@ export class HoneySpeaker {
       refIds.forEach(elementId => {
         const element: HTMLElement = document.getElementById(elementId);
         if (element) {
-          this.texts=[ ...this.texts,element.innerText];
+          this.texts = [...this.texts, element.innerText];
         } else {
           Logger.errorMessage("text to speak not found of DOM element with id " + elementId);
         }
@@ -269,7 +283,7 @@ export class HoneySpeaker {
       Logger.debugMessage("audioURL: " + this.texturl);
       const audioData: string = await Fileloader.loadData(this.texturl);
       if (audioData) {
-        this.texts=[ ...this.texts,audioData];
+        this.texts = [...this.texts, audioData];
       }
       Logger.debugMessage('###Texte###' + this.texts);
     }
@@ -289,7 +303,7 @@ export class HoneySpeaker {
 
   @Watch('texturl')
   async texturlChanged(newValue: string, oldValue: string) {
-    this.texturl=newValue;
+    this.texturl = newValue;
     Logger.debugMessage("texturl changed from" + oldValue + " to " + newValue);
     await this.updateTexte();
   }
@@ -313,6 +327,7 @@ export class HoneySpeaker {
     if (this.isPressed) {
       const texte: string[] = this.getTexte();
       texte.forEach(async text => {
+          // kein await nutzen, damit das vorlesen unterbrochen werden kann
           this.textVorlesen(text);
         }
       );
@@ -355,7 +370,7 @@ export class HoneySpeaker {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
+               class={this.hasNoTexts() ? "speakerimage-disabled" : "speakerimage"}
                viewBox="0 0 75 75">
             <path
               stroke-linejoin="round"
@@ -376,7 +391,7 @@ export class HoneySpeaker {
                width={this.iconwidth} height={this.iconheight}
                role="img"
                aria-label={this.getAltText()}
-               class={this.hasNoTexts()? "speakerimage-disabled":"speakerimage"}
+               class={this.hasNoTexts() ? "speakerimage-disabled" : "speakerimage"}
                viewBox="0 0 75 75">
             <path
               stroke-linejoin="round"

@@ -49,9 +49,14 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## releaselog
 
-### v0.0.16 unpublished
+### v0.0.17 unpublished
 
 * n/a
+
+### v0.0.16 unpublished
+
+* [issue 32](https://github.com/Huluvu424242/honey-speaker/issues/32) sync method call and symbol fixed
+
 
 ### v0.0.15 published at 
 

@@ -33,6 +33,16 @@
 
 ## Methods
 
+### `cancelSpeaker() => Promise<void>`
+
+cancel the speaker
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `pauseSpeaker() => Promise<void>`
 
 paused the speaker
@@ -46,6 +56,16 @@ Type: `Promise<void>`
 ### `resumeSpeaker() => Promise<void>`
 
 continue speaker after paused
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `toggleSpeaker() => Promise<void>`
+
+call the toggle speaker action
 
 #### Returns
 
