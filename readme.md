@@ -58,7 +58,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 * [issue 32](https://github.com/Huluvu424242/honey-speaker/issues/32) sync method call and symbol fixed
 
 
-### v0.0.15 published at 
+### v0.0.15 published at 2020-11-08 
 
 * [issue 26](https://github.com/Huluvu424242/honey-speaker/issues/26) method pause and resume added
 * [issue 25](https://github.com/Huluvu424242/honey-speaker/issues/25) remove dependency of rxjs -> use fetch of es6
