@@ -24,6 +24,10 @@ export namespace Components {
          */
         "audiovolume": number;
         /**
+          * cancel the speaker
+         */
+        "cancelSpeaker": () => Promise<void>;
+        /**
           * icon height
          */
         "iconheight": string;
@@ -51,6 +55,10 @@ export namespace Components {
           * An url to download an text file to speech.
          */
         "texturl": string;
+        /**
+          * call the toggle speaker action
+         */
+        "toggleSpeaker": () => Promise<void>;
         /**
           * enable console logging
          */

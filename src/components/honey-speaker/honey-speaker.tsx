@@ -205,9 +205,21 @@ export class HoneySpeaker {
     this.sprachAusgabe.resume();
   }
 
+  /**
+   * call the toggle speaker action
+   */
   @Method()
   public async toggleSpeaker(){
    this.toggleAction();
+  }
+
+  /**
+   * cancel the speaker
+   */
+  @Method()
+  public async cancelSpeaker(){
+    this.isPressed=false;
+    this.sprachAusgabe.cancel();
   }
 
   protected hasNoTexts(): boolean {
