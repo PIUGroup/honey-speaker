@@ -2,6 +2,7 @@ import {Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, 
 import {Sprachausgabe} from "../../libs/sprachausgabe"
 import {Logger} from "../../libs/logger";
 import {Fileloader} from "../../libs/fileloader";
+import {SpeakerOptions} from "./speaker-options";
 
 
 @Component({
@@ -14,6 +15,10 @@ export class HoneySpeaker {
 
   sprachAusgabe: Sprachausgabe;
 
+  @State() options: SpeakerOptions = {
+    pressedTitleText: "Liest gerade vor",
+    unpressedTitleText: "Vorlesen"
+  };
 
   /**
    * Host Element
@@ -182,10 +187,19 @@ export class HoneySpeaker {
     await this.updateTexte();
   }
 
-  // @Method()
-  // public async startSpeaker(){
-  //
-  // }
+  /**
+   * Update speaker options
+   * @param options : SpeakerOptions plain object to set the options
+   */
+  @Method()
+  public async updateOptions( options: SpeakerOptions){
+    for (let prop in options) {
+      if( options.hasOwnProperty(prop) ){
+        this.options[prop] = options[prop];
+      }
+    }
+    this.options = {... this.options};
+  }
 
   /**
    * paused the speaker
@@ -206,20 +220,20 @@ export class HoneySpeaker {
   }
 
   /**
-   * call the toggle speaker action
-   */
-  @Method()
-  public async toggleSpeaker() {
-    this.toggleAction();
-  }
-
-  /**
    * cancel the speaker
    */
   @Method()
   public async cancelSpeaker() {
     this.isPressed = false;
     this.sprachAusgabe.cancel();
+  }
+
+  /**
+   * call the toggle speaker action
+   */
+  @Method()
+  public async toggleSpeaker() {
+    this.toggleAction();
   }
 
   protected hasNoTexts(): boolean {
@@ -234,9 +248,9 @@ export class HoneySpeaker {
       return "Vorlesen deaktiviert, da keine Texte verfügbar";
     }
     if (this.isPressed) {
-      return "Liest gerade vor";
+      return this.options.pressedTitleText;
     } else {
-      return "Vorlesen";
+      return this.options.unpressedTitleText;
     }
   }
 

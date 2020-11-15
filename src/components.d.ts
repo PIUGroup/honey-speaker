@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { SpeakerOptions } from "./components/honey-speaker/speaker-options";
 export namespace Components {
     interface HoneySpeaker {
         /**
@@ -59,6 +60,11 @@ export namespace Components {
           * call the toggle speaker action
          */
         "toggleSpeaker": () => Promise<void>;
+        /**
+          * Update speaker options
+          * @param options : SpeakerOptions plain object to set the options
+         */
+        "updateOptions": (options: SpeakerOptions) => Promise<void>;
         /**
           * enable console logging
          */
