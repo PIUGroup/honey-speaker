@@ -15,7 +15,11 @@ export class HoneySpeaker {
 
   sprachAusgabe: Sprachausgabe;
 
+  initialHostClass: string;
+
   @State() options: SpeakerOptions = {
+    disabledHostClass: "speaker-disabled",
+    enabledHostClass: "speaker-enabled",
     disabledTitleText: "Vorlesen deaktiviert, da keine Texte verfügbar",
     pressedTitleText: "Liest gerade vor",
     unpressedTitleText: "Vorlesen",
@@ -145,6 +149,7 @@ export class HoneySpeaker {
   public connectedCallback() {
     // States initialisieren
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
+    this.initialHostClass = this.hostElement.getAttribute("class") || "";
     this.createTitleText = !this.hostElement.title;
     this.createAltText = !this.hostElement["alt"];
     this.taborder = this.hostElement.getAttribute("tabindex") ? (this.hostElement.tabIndex + "") : "0";
@@ -195,13 +200,13 @@ export class HoneySpeaker {
    * @param options : SpeakerOptions plain object to set the options
    */
   @Method()
-  public async updateOptions( options: SpeakerOptions){
+  public async updateOptions(options: SpeakerOptions) {
     for (let prop in options) {
-      if( options.hasOwnProperty(prop) ){
+      if (options.hasOwnProperty(prop)) {
         this.options[prop] = options[prop];
       }
     }
-    this.options = {... this.options};
+    this.options = {...this.options};
   }
 
   /**
@@ -370,6 +375,14 @@ export class HoneySpeaker {
     }
   }
 
+  protected getHostClass(): string {
+    let hostClass = this.initialHostClass;
+    if (this.hasNoTexts()) {
+      return hostClass + " " + this.options.disabledHostClass;
+    } else {
+      return hostClass + " " + this.options.enabledHostClass;
+    }
+  }
 
   public render() {
     Logger.debugMessage('##RENDER##');
@@ -380,6 +393,7 @@ export class HoneySpeaker {
         role="button"
         tabindex={this.hasNoTexts() ? -1 : this.taborder}
         aria-pressed={this.isPressed ? "true" : "false"}
+        class={this.getHostClass()}
         disabled={this.hasNoTexts()}
       >
         {this.isPressed ? (
