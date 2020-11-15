@@ -16,8 +16,11 @@ export class HoneySpeaker {
   sprachAusgabe: Sprachausgabe;
 
   @State() options: SpeakerOptions = {
+    disabledTitleText: "Vorlesen deaktiviert, da keine Texte verfügbar",
     pressedTitleText: "Liest gerade vor",
-    unpressedTitleText: "Vorlesen"
+    unpressedTitleText: "Vorlesen",
+    pressedAltText: "Symbol eines stummen Lautsprechers",
+    unpressedAltText: "Symbol eines tönenden Lautsprechers"
   };
 
   /**
@@ -245,7 +248,7 @@ export class HoneySpeaker {
 
   protected createNewTitleText(): string {
     if (this.hasNoTexts()) {
-      return "Vorlesen deaktiviert, da keine Texte verfügbar";
+      return this.options.disabledTitleText;
     }
     if (this.isPressed) {
       return this.options.pressedTitleText;
@@ -264,9 +267,9 @@ export class HoneySpeaker {
 
   protected createNewAltText(): string {
     if (this.isPressed) {
-      return "Symbol eines stummen Lautsprechers";
+      return this.options.pressedAltText;
     } else {
-      return "Symbol eines tönenden Lautsprechers";
+      return this.options.unpressedAltText;
     }
   }
 
