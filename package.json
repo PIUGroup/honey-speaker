@@ -1,6 +1,6 @@
 {
   "name": "@huluvu424242/honey-speaker",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Text to Speech component wich is reading texts from DOM elements.",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",

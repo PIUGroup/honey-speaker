@@ -13,7 +13,7 @@ npm install --save honey-speaker
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-speaker@0.0.15/dist/honey-speaker/honey-speaker.js'>
+    src='https://unpkg.com/@huluvu424242/honey-speaker@0.0.16/dist/honey-speaker/honey-speaker.js'>
 </script>
 ```
 To the [demo site](https://huluvu424242.github.io/honey-speaker/index.html)
