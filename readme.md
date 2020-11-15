@@ -55,6 +55,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ### v0.0.16 unpublished
 
+* [issue 33](https://github.com/Huluvu424242/honey-speaker/issues/33) A11y config properties added
 * [issue 32](https://github.com/Huluvu424242/honey-speaker/issues/32) sync method call and symbol fixed
 
 
