@@ -53,7 +53,7 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 * n/a
 
-### v0.0.16 unpublished
+### v0.0.16 published at 2020-11-15
 
 * [issue 35](https://github.com/Huluvu424242/honey-speaker/issues/35) change host classes depends of disabled or enabled
 * [issue 33](https://github.com/Huluvu424242/honey-speaker/issues/33) A11y config properties added
