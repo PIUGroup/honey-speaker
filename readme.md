@@ -49,9 +49,15 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## releaselog
 
-### v0.0.17 unpublished
+### v0.0.18 unpublished
 
 * n/a
+
+
+### v0.0.17 published at 2020-11-16
+
+* [issue 39](https://github.com/Huluvu424242/honey-speaker/issues/39) text splitting removed
+
 
 ### v0.0.16 published at 2020-11-15
 
