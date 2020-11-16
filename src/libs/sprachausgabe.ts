@@ -123,7 +123,9 @@ export class Sprachausgabe {
       Logger.infoMessage("set default voice to " + this.stimme);
     }
     if (zuLesenderText) {
-      const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
+      // Auftrennung in Textblöcken nach Sprachen.
+      // const texte: string[] = zuLesenderText.match(/(\S+[\s.]){1,20}/g);
+      const texte: string[] = [zuLesenderText];
 
       texte.forEach(text => {
           const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
