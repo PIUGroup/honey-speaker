@@ -123,34 +123,31 @@ export class Sprachausgabe {
       Logger.infoMessage("set default voice to " + this.stimme);
     }
     if (zuLesenderText) {
-      const texte: string[] = zuLesenderText.match(/(\S+\s){1,20}/g);
+      // Auftrennung in Textblöcken nach Sprachen.
+      // const texte: string[] = zuLesenderText.match(/(\S+[\s.]){1,20}/g);
 
-      texte.forEach(text => {
-          const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(text);
-          Logger.infoMessage("speaker lang used:" + vorleser.lang);
-          if (vorleser.voice) {
-            Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
-            Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
-          } else {
-            Logger.infoMessage("no voice matched for text: " + zuLesenderText);
-          }
-          Sprachausgabe.synthese.sprachSynthese.speak(vorleser);
-        }
-      );
-
+      const vorleser: SpeechSynthesisUtterance = this.erzeugeVorleser(zuLesenderText);
+      Logger.infoMessage("speaker lang used:" + vorleser.lang);
+      if (vorleser.voice) {
+        Logger.infoMessage("speaker voice used:" + vorleser.voice.name);
+        Logger.infoMessage("speaker voice lang:" + vorleser.voice.lang);
+      } else {
+        Logger.infoMessage("no voice matched for text: " + zuLesenderText);
+      }
+      Sprachausgabe.synthese.sprachSynthese.speak(vorleser);
     }
   }
 
 
-  public pause():void{
+  public pause(): void {
     Sprachausgabe.synthese.sprachSynthese.pause();
   }
 
-  public resume():void{
+  public resume(): void {
     Sprachausgabe.synthese.sprachSynthese.resume();
   }
 
-  public cancel():void{
+  public cancel(): void {
     Sprachausgabe.synthese.sprachSynthese.cancel();
   }
 

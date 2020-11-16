@@ -13,7 +13,7 @@ npm install --save honey-speaker
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-speaker@0.0.15/dist/honey-speaker/honey-speaker.js'>
+    src='https://unpkg.com/@huluvu424242/honey-speaker@0.0.17/dist/honey-speaker/honey-speaker.js'>
 </script>
 ```
 To the [demo site](https://huluvu424242.github.io/honey-speaker/index.html)
@@ -49,11 +49,24 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ## releaselog
 
-### v0.0.16 unpublished
+### v0.0.18 unpublished
 
 * n/a
 
-### v0.0.15 published at 
+
+### v0.0.17 published at 2020-11-16
+
+* [issue 39](https://github.com/Huluvu424242/honey-speaker/issues/39) text splitting removed
+
+
+### v0.0.16 published at 2020-11-15
+
+* [issue 35](https://github.com/Huluvu424242/honey-speaker/issues/35) change host classes depends of disabled or enabled
+* [issue 33](https://github.com/Huluvu424242/honey-speaker/issues/33) A11y config properties added
+* [issue 32](https://github.com/Huluvu424242/honey-speaker/issues/32) sync method call and symbol fixed
+
+
+### v0.0.15 published at 2020-11-08 
 
 * [issue 26](https://github.com/Huluvu424242/honey-speaker/issues/26) method pause and resume added
 * [issue 25](https://github.com/Huluvu424242/honey-speaker/issues/25) remove dependency of rxjs -> use fetch of es6
