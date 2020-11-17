@@ -348,11 +348,8 @@ export class HoneySpeaker {
     this.isPressed = !this.isPressed;
     if (this.isPressed) {
       const texte: string[] = this.getTexte();
-      texte.forEach(async text => {
-          // kein await nutzen, damit das vorlesen unterbrochen werden kann
-          this.textVorlesen(text);
-        }
-      );
+      const vorzulesenderText = texte.join('');
+      this.textVorlesen(vorzulesenderText);
     } else {
       this.sprachAusgabe.cancel();
     }
