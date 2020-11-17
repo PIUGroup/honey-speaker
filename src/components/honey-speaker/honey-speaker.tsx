@@ -210,6 +210,18 @@ export class HoneySpeaker {
   }
 
   /**
+   * bricht laufende oder pausierende Ausgaben ab und startet dia Ausgabe von vorn
+   */
+  @Method()
+  public async startSpeaker() {
+    // init für toggleAction
+    this.isPressed=false;
+    // negiert isPressed bricht vorher laufende Ausgaben ab
+    await this.toggleAction();
+  }
+
+
+  /**
    * paused the speaker
    */
   @Method()
@@ -241,7 +253,7 @@ export class HoneySpeaker {
    */
   @Method()
   public async toggleSpeaker() {
-    this.toggleAction();
+    await this.toggleAction();
   }
 
   protected hasNoTexts(): boolean {
@@ -343,33 +355,33 @@ export class HoneySpeaker {
     this.sprachAusgabe.textVorlesen(text + " ")
   }
 
-  protected toggleAction() {
+  protected async toggleAction() {
     Logger.debugMessage("###TOGGLE TO" + this.isPressed);
+    if(!this.isPressed){
+      await this.cancelSpeaker();
+    }
     this.isPressed = !this.isPressed;
     const texte: string[] = this.getTexte();
     if (this.isPressed && texte.length > 0) {
       const vorzulesenderText = texte.join('');
       this.textVorlesen(vorzulesenderText);
     } else {
-      this.isPressed=false;
-      this.sprachAusgabe.cancel();
+      await this.cancelSpeaker();
     }
   }
 
   @Listen('click', {capture: true})
-  protected onClick(): void {
+  protected async onClick() {
     if (this.hasNoTexts()) return;
-
-    this.toggleAction();
+    await this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
-  protected onKeyDown(ev: KeyboardEvent): void {
+  protected async onKeyDown(ev: KeyboardEvent) {
     if (this.hasNoTexts()) return;
-
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
-      this.toggleAction();
+      await this.toggleAction();
     }
   }
 
