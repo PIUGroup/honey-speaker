@@ -214,7 +214,7 @@ export class HoneySpeaker {
    */
   @Method()
   public async pauseSpeaker() {
-    this.isPressed = true;
+    this.isPressed = false;
     this.sprachAusgabe.pause();
   }
 
@@ -223,7 +223,7 @@ export class HoneySpeaker {
    */
   @Method()
   public async resumeSpeaker() {
-    this.isPressed = false;
+    this.isPressed = true;
     this.sprachAusgabe.resume();
   }
 
