@@ -338,19 +338,20 @@ export class HoneySpeaker {
     }
   }
 
-  protected async textVorlesen(text: string) {
+  protected textVorlesen(text: string) {
     this.isPressed = true;
-    await this.sprachAusgabe.textVorlesen(text + " ")
+    this.sprachAusgabe.textVorlesen(text + " ")
   }
 
   protected toggleAction() {
     Logger.debugMessage("###TOGGLE TO" + this.isPressed);
     this.isPressed = !this.isPressed;
-    if (this.isPressed) {
-      const texte: string[] = this.getTexte();
+    const texte: string[] = this.getTexte();
+    if (this.isPressed && texte.length > 0) {
       const vorzulesenderText = texte.join('');
       this.textVorlesen(vorzulesenderText);
     } else {
+      this.isPressed=false;
       this.sprachAusgabe.cancel();
     }
   }
