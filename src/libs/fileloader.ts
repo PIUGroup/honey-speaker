@@ -10,7 +10,7 @@ export class Fileloader {
   static async loadData(dataUrl: string): Promise<string> {
     const fileLoader: Fileloader = Fileloader.of(dataUrl);
     if (fileLoader) {
-      return fileLoader.loadFileContent();
+      return await fileLoader.loadFileContent();
     } else {
       return new Promise((resolve)=>{resolve(null);});
     }
