@@ -6,5 +6,6 @@ export interface SpeakerOptions {
   unpressedTitleText?: string;
   pressedAltText?: string;
   unpressedAltText?: string;
-
+  pressedPureAltText?: string;
+  unpressedPureAltText?: string;
 }
