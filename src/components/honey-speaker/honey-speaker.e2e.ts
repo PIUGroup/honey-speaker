@@ -6,10 +6,8 @@ class TestLogger extends Logger {
 
 }
 
-describe('E2E: voice tests of speaker', () => {
+describe('E2E Wrapper: voice tests of speaker', () => {
 
-  let page: E2EPage;
-  let element: E2EElement;
 
   const skippen = async () => {
     // Property Wert lesen
@@ -18,31 +16,35 @@ describe('E2E: voice tests of speaker', () => {
       return speechSynthesis.getVoices().length;
     });
     // return true || stimmenAnzahl < 1;
-    return stimmenAnzahl ? stimmenAnzahl < 1 : false;
+    return stimmenAnzahl ? stimmenAnzahl < 1 : true;
   }
 
   let raus: boolean;
   beforeAll(async () => {
     raus = await skippen();
-  })
-
-
-  beforeEach(async () => {
-    TestLogger.enableLogging();
-    page = await newE2EPage({html: `<honey-speaker verbose audiolang="en" textids="3"></honey-speaker><p id="3">test</p>`});
-    element = await page.find('honey-speaker');
   });
 
-  it('fire event honeySpeakerStarted', async () => {
-    if (raus) return;
 
-    const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
-    await element.setProperty('audiolang', 'us');
-    await page.waitForChanges();
-    await page.click('honey-speaker');
-    await page.waitForEvent('honeySpeakerStarted');
-    expect(startedEvent).toHaveReceivedEvent();
+  (raus ? xdescribe : describe)('E2E: voice tests of speaker', () => {
+
+    let page: E2EPage;
+    let element: E2EElement;
+
+    beforeEach(async () => {
+      TestLogger.enableLogging();
+      page = await newE2EPage({html: `<honey-speaker verbose audiolang="en" textids="3"></honey-speaker><p id="3">test</p>`});
+      element = await page.find('honey-speaker');
+    });
+
+    it('fire event honeySpeakerStarted', async () => {
+      const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
+      await element.setProperty('audiolang', 'us');
+      await page.waitForChanges();
+      await page.click('honey-speaker');
+      await page.waitForEvent('honeySpeakerStarted');
+      expect(startedEvent).toHaveReceivedEvent();
+    });
+
   });
-
 });
 
