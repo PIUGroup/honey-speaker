@@ -25,7 +25,8 @@ describe('E2E Wrapper: voice tests of speaker', () => {
   });
 
 
-  (skipTests ? describe.skip : describe)('E2E: voice tests of speaker', () => {
+  // (skipTests ? describe.skip : describe)('E2E: voice tests of speaker', () => {
+  describe('E2E: voice tests of speaker', () => {
 
     let page: E2EPage;
     let element: E2EElement;
