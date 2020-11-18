@@ -6,10 +6,26 @@ class TestLogger extends Logger {
 
 }
 
-describe('example', () => {
+describe('E2E: voice tests of speaker', () => {
 
   let page: E2EPage;
   let element: E2EElement;
+
+  const skippen = async () => {
+    // Property Wert lesen
+    const page = await newE2EPage({html: `<honey-speaker verbose audiolang="en" textids="3"></honey-speaker><p id="3">test</p>`});
+    const stimmenAnzahl = await page.$eval('honey-speaker', () => {
+      return speechSynthesis.getVoices().length;
+    });
+    // return true || stimmenAnzahl < 1;
+    return stimmenAnzahl ? stimmenAnzahl < 1 : false;
+  }
+
+  let raus: boolean;
+  beforeAll(async () => {
+    raus = await skippen();
+  })
+
 
   beforeEach(async () => {
     TestLogger.enableLogging();
@@ -17,44 +33,9 @@ describe('example', () => {
     element = await page.find('honey-speaker');
   });
 
-  it('should render a component', async () => {
-    expect(element).not.toBeNull();
-  });
-
-  it('renders correct styles', async () => {
-    expect(element).toHaveClass('hydrated');
-  });
-
-  it('has a11y attributes', async () => {
-    expect(element).toEqualAttribute('title', 'Vorlesen');
-    expect(element).toEqualAttribute('alt', 'Symbol eines tönenden Lautsprechers');
-  });
-
-  it('has correct audio properties', async () => {
-    // Property Wert setzen
-    // await page.$eval('honey-speaker', (elm: any) => {
-    //   elm.audiolang = 'us';
-    // });
-    const lang = await element.getProperty('audiolang');
-    expect(lang).toEqual('en');
-    await element.setProperty('audiolang', 'us');
-    await page.waitForChanges();
-    const value = await element.getProperty("audiolang")
-    expect(value).toEqual( 'us');
-  });
-
   it('fire event honeySpeakerStarted', async () => {
+    if (raus) return;
 
-    // Property Wert lesen
-    const stimmenAnzahl  = await page.$eval('honey-speaker', () => {
-     return speechSynthesis.getVoices().length;
-    });
-    if( stimmenAnzahl <1){
-      TestLogger.logMessage("Keine Stimmen im Browser verfügbar -> Test übersprungen");
-      return;
-    }else{
-      TestLogger.logMessage("Stimmen gefunden - Test wird ausgeführt");
-    }
     const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
     await element.setProperty('audiolang', 'us');
     await page.waitForChanges();
@@ -64,6 +45,4 @@ describe('example', () => {
   });
 
 });
-
-
 
