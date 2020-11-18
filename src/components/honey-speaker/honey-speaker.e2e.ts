@@ -19,13 +19,13 @@ describe('E2E Wrapper: voice tests of speaker', () => {
     return stimmenAnzahl ? stimmenAnzahl < 1 : true;
   }
 
-  let raus: boolean;
+  let skipTests: boolean;
   beforeAll(async () => {
-    raus = await skippen();
+    skipTests = await skippen();
   });
 
 
-  (raus ? xdescribe : describe)('E2E: voice tests of speaker', () => {
+  (skipTests ? xdescribe : describe)('E2E: voice tests of speaker', () => {
 
     let page: E2EPage;
     let element: E2EElement;
