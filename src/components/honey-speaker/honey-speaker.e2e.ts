@@ -37,6 +37,8 @@ describe('E2E Wrapper: voice tests of speaker', () => {
     });
 
     it('fire event honeySpeakerStarted', async () => {
+      if(skipTests) return;
+
       const startedEvent = await page.spyOnEvent('honeySpeakerStarted');
       await element.setProperty('audiolang', 'us');
       await page.waitForChanges();
