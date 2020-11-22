@@ -56,12 +56,6 @@ describe('E2E: voiceless tests of speaker', () => {
     expect(element).toEqualAttribute('title', "Liest gerade vor");
     expect(element).toEqualAttribute('alt', "Symbol eines tönenden Lautsprechers");
 
-
-
-
-
-
-
   });
 
   it('has correct audio properties', async () => {
