@@ -26,8 +26,42 @@ describe('E2E: voiceless tests of speaker', () => {
   });
 
   it('Has default a11y attributes', async () => {
-    expect(element).toEqualAttribute('title', 'Vorlesen');
-    expect(element).toEqualAttribute('alt', 'Symbol eines angehaltenen, tönenden Lautsprechers');
+    // check unpressed, rich version
+    expect(element).toEqualAttribute('title', "Vorlesen");
+    expect(element).toEqualAttribute('alt', "Symbol eines angehaltenen, tönenden Lautsprechers");
+
+    // set to press, rich version
+    await element.click();
+    await page.waitForChanges();
+
+    // check pressed, rich version
+    expect(element).toEqualAttribute('title', "Liest gerade vor");
+    expect(element).toEqualAttribute('alt', "Symbol eines tönenden Lautsprechers");
+
+    // set to pure version
+    element.setAttribute("pure",true);
+    // set to unpressed
+    await element.click();
+    await page.waitForChanges();
+
+    // check unpressed, pure version
+    expect(element).toEqualAttribute('title', "Vorlesen");
+    expect(element).toEqualAttribute('alt', "Symbol eines ausgeschaltenen Lautsprechers");
+
+    // set to pressed, pure version
+    await element.click();
+    await page.waitForChanges();
+
+    // check pressed, pure version
+    expect(element).toEqualAttribute('title', "Liest gerade vor");
+    expect(element).toEqualAttribute('alt', "Symbol eines tönenden Lautsprechers");
+
+
+
+
+
+
+
   });
 
   it('has correct audio properties', async () => {
