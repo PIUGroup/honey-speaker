@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Huluvu424242/honey-speaker.svg?branch=master)](https://travis-ci.org/Huluvu424242/honey-speaker)
+![Github CI](https://github.com/Huluvu424242/honey-speaker/workflows/Node.js%20CI/badge.svg)
 [![npm](https://img.shields.io/npm/v/@huluvu424242/honey-speaker.svg)](https://www.npmjs.com/package/@huluvu424242/honey-speaker)
 [![npm](https://img.shields.io/npm/dm/@huluvu424242/honey-speaker.svg)](https://www.npmjs.com/package/@huluvu424242/honey-speaker)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@huluvu424242/honey-speaker)
