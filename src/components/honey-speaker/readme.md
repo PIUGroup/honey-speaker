@@ -63,6 +63,16 @@ Type: `Promise<void>`
 
 
 
+### `startSpeaker() => Promise<void>`
+
+bricht laufende oder pausierende Ausgaben ab und startet dia Ausgabe von vorn
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `toggleSpeaker() => Promise<void>`
 
 call the toggle speaker action
