@@ -51,7 +51,11 @@ To the [live demo](https://huluvu424242.github.io/honey-speaker/index.html)
 
 ### v0.0.18 unpublished
 
-* n/a
+* bug and feature description
+
+### v0.0.18 published at 2020-11-22
+
+* [issue 43](https://github.com/Huluvu424242/honey-speaker/issues/42) minor bugfixing and refactoring
 
 
 ### v0.0.17 published at 2020-11-16
