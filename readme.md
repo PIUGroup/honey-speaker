@@ -1,7 +1,8 @@
 [![npm](https://img.shields.io/npm/v/@huluvu424242/honey-speaker.svg)](https://www.npmjs.com/package/@huluvu424242/honey-speaker)
 [![npm](https://img.shields.io/npm/dm/@huluvu424242/honey-speaker.svg)](https://www.npmjs.com/package/@huluvu424242/honey-speaker)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@huluvu424242/honey-speaker)
-
+[![Donate with paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](paypal.me/huluvu424242)
+[![Donate with crypto currency](https://img.shields.io/badge/btc-3DcUPU5fFJkN5uKqdLFYBd7mccmM66wvy9-informational)](https://www.bitwala.com/de/)
 # honey-speaker 
 This component realize an speaker symbol button. Its can read a text of
 DOM elements referenced by an list of ids via voice.
