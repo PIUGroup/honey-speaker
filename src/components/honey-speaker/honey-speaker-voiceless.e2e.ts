@@ -25,38 +25,7 @@ describe('E2E: voiceless tests of speaker', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-  it('Has default a11y attributes', async () => {
-    // check unpressed, rich version
-    expect(element).toEqualAttribute('title', "Vorlesen");
-    expect(element).toEqualAttribute('alt', "Symbol eines angehaltenen, tönenden Lautsprechers");
 
-    // set to press, rich version
-    await page.click('honey-speaker');
-    await page.waitForChanges();
-
-    // check pressed, rich version
-    expect(element).toEqualAttribute('title', "Liest gerade vor");
-    expect(element).toEqualAttribute('alt', "Symbol eines tönenden Lautsprechers");
-
-    // set to pure version
-    element.setAttribute("pure",true);
-    // set to unpressed
-    await page.click('honey-speaker');
-    await page.waitForChanges();
-
-    // check unpressed, pure version
-    expect(element).toEqualAttribute('title', "Vorlesen");
-    expect(element).toEqualAttribute('alt', "Symbol eines ausgeschaltenen Lautsprechers");
-
-    // set to pressed, pure version
-    await page.click('honey-speaker');
-    await page.waitForChanges();
-
-    // check pressed, pure version
-    expect(element).toEqualAttribute('title', "Liest gerade vor");
-    expect(element).toEqualAttribute('alt', "Symbol eines tönenden Lautsprechers");
-
-  });
 
   it('has correct audio properties', async () => {
     // Property Wert setzen
