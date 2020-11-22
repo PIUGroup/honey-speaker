@@ -13,8 +13,14 @@ import {SpeakerOptions} from "./speaker-options";
 })
 export class HoneySpeaker {
 
+  /**
+   * Modul zur Sprachausgabe
+   */
   sprachAusgabe: Sprachausgabe;
 
+  /**
+   * initiale class from host tag
+   */
   initialHostClass: string;
 
   @State() options: SpeakerOptions = {
@@ -23,8 +29,10 @@ export class HoneySpeaker {
     disabledTitleText: "Vorlesen deaktiviert, da keine Texte verfügbar",
     pressedTitleText: "Liest gerade vor",
     unpressedTitleText: "Vorlesen",
-    pressedAltText: "Symbol eines stummen Lautsprechers",
-    unpressedAltText: "Symbol eines tönenden Lautsprechers"
+    pressedAltText: "Symbol eines tönenden Lautsprechers",
+    unpressedAltText: "Symbol eines angehaltenen, tönenden Lautsprechers",
+    pressedPureAltText: "Symbol eines tönenden Lautsprechers",
+    unpressedPureAltText: "Symbol eines ausgeschaltenen Lautsprechers"
   };
 
   /**
@@ -48,7 +56,7 @@ export class HoneySpeaker {
   createTitleText: boolean = false;
 
   /**
-   * taborder
+   * initial computed taborder
    */
   taborder: string = "0";
 
@@ -210,11 +218,23 @@ export class HoneySpeaker {
   }
 
   /**
+   * bricht laufende oder pausierende Ausgaben ab und startet dia Ausgabe von vorn
+   */
+  @Method()
+  public async startSpeaker() {
+    // init für toggleAction
+    this.isPressed = false;
+    // negiert isPressed bricht vorher laufende Ausgaben ab
+    await this.toggleAction();
+  }
+
+
+  /**
    * paused the speaker
    */
   @Method()
   public async pauseSpeaker() {
-    this.isPressed = true;
+    this.isPressed = false;
     this.sprachAusgabe.pause();
   }
 
@@ -223,7 +243,7 @@ export class HoneySpeaker {
    */
   @Method()
   public async resumeSpeaker() {
-    this.isPressed = false;
+    this.isPressed = true;
     this.sprachAusgabe.resume();
   }
 
@@ -241,7 +261,7 @@ export class HoneySpeaker {
    */
   @Method()
   public async toggleSpeaker() {
-    this.toggleAction();
+    await this.toggleAction();
   }
 
   protected hasNoTexts(): boolean {
@@ -272,9 +292,9 @@ export class HoneySpeaker {
 
   protected createNewAltText(): string {
     if (this.isPressed) {
-      return this.options.pressedAltText;
+      return this.pure ? this.options.pressedPureAltText : this.options.pressedAltText;
     } else {
-      return this.options.unpressedAltText;
+      return this.pure ? this.options.unpressedPureAltText : this.options.unpressedAltText;
     }
   }
 
@@ -338,40 +358,38 @@ export class HoneySpeaker {
     }
   }
 
-  protected async textVorlesen(text: string) {
+  protected textVorlesen(text: string) {
     this.isPressed = true;
-    await this.sprachAusgabe.textVorlesen(text + " ")
+    this.sprachAusgabe.textVorlesen(text + " ")
   }
 
-  protected toggleAction() {
+  protected async toggleAction() {
     Logger.debugMessage("###TOGGLE TO" + this.isPressed);
+    if (!this.isPressed) {
+      await this.cancelSpeaker();
+    }
     this.isPressed = !this.isPressed;
-    if (this.isPressed) {
-      const texte: string[] = this.getTexte();
-      texte.forEach(async text => {
-          // kein await nutzen, damit das vorlesen unterbrochen werden kann
-          this.textVorlesen(text);
-        }
-      );
+    const texte: string[] = this.getTexte();
+    if (this.isPressed && texte.length > 0) {
+      const vorzulesenderText = texte.join('');
+      this.textVorlesen(vorzulesenderText);
     } else {
-      this.sprachAusgabe.cancel();
+      await this.cancelSpeaker();
     }
   }
 
   @Listen('click', {capture: true})
-  protected onClick(): void {
+  protected async onClick() {
     if (this.hasNoTexts()) return;
-
-    this.toggleAction();
+    await this.toggleAction();
   }
 
   @Listen('keydown', {capture: true})
-  protected onKeyDown(ev: KeyboardEvent): void {
+  protected async onKeyDown(ev: KeyboardEvent) {
     if (this.hasNoTexts()) return;
-
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
-      this.toggleAction();
+      await this.toggleAction();
     }
   }
 
@@ -408,7 +426,7 @@ export class HoneySpeaker {
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             <path
-              id="air"
+              id={this.ident + "-air"}
               fill="none" stroke-linecap="round"
               d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
 
@@ -429,10 +447,10 @@ export class HoneySpeaker {
               d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z">
             </path>
             {this.pure ? (
-              <text id="eins" x="60%" y="55%">OFF</text>
+              <text id={this.ident+"-text"} x="60%" y="55%">OFF</text>
             ) : (
               <path
-                id="air"
+                id={this.ident+"-air"}
                 fill="none" stroke-linecap="round"
                 d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6">
               </path>

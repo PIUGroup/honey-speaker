@@ -22,8 +22,4 @@ export class Synthese {
   public getVoices(): SpeechSynthesisVoice[] {
     return this.voices;
   }
-
-  public cancel(): void {
-    this.sprachSynthese.cancel();
-  }
 }
