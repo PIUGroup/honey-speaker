@@ -31,7 +31,7 @@ describe('E2E: voiceless tests of speaker', () => {
     expect(element).toEqualAttribute('alt', "Symbol eines angehaltenen, tönenden Lautsprechers");
 
     // set to press, rich version
-    await element.click();
+    await page.click('honey-speaker');
     await page.waitForChanges();
 
     // check pressed, rich version
@@ -42,7 +42,7 @@ describe('E2E: voiceless tests of speaker', () => {
     element.setAttribute("pure",true);
     // set to unpressed
     await element.click();
-    await page.waitForChanges();
+    // await page.waitForChanges();
 
     // check unpressed, pure version
     expect(element).toEqualAttribute('title', "Vorlesen");
@@ -50,7 +50,7 @@ describe('E2E: voiceless tests of speaker', () => {
 
     // set to pressed, pure version
     await element.click();
-    await page.waitForChanges();
+    // await page.waitForChanges();
 
     // check pressed, pure version
     expect(element).toEqualAttribute('title', "Liest gerade vor");
