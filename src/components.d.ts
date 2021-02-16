@@ -49,6 +49,10 @@ export namespace Components {
          */
         "resumeSpeaker": () => Promise<void>;
         /**
+          * bricht laufende oder pausierende Ausgaben ab und startet dia Ausgabe von vorn
+         */
+        "startSpeaker": () => Promise<void>;
+        /**
           * An comma separated list  with ids of DOM elements which inner text should be speech.
          */
         "textids": string;
